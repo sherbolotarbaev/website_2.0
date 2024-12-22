@@ -14,7 +14,7 @@ export const socialMedia: SocialMedia[] = [
 	},
 	{
 		name: 'Telegram',
-		href: 'https://t.me/sherbolotarbaev1',
+		href: 'https://t.me/sherbolotarbaev',
 	},
 	{
 		name: 'Instagram',
