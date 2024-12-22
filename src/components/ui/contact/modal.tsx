@@ -8,6 +8,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Dialog, DialogContent, DialogTitle } from 'ui/dialog'
 import ContactForm from './form'
 
+import { euclidSemiBold } from 'fonts'
+
 const ContactModal: React.FC = () => {
 	const dispatch = useDispatch()
 	const { isOpen, modalType } = useSelector((state: RootState) => state.modal)
@@ -42,7 +44,9 @@ const ContactModal: React.FC = () => {
 	return (
 		<Dialog open={isOpen} onOpenChange={handleClose}>
 			<DialogContent className='sm:max-w-[425px]'>
-				<DialogTitle>Contact me</DialogTitle>
+				<DialogTitle style={euclidSemiBold.style}>
+					Contact me<span className='text-[#6A61FF]'>.</span>
+				</DialogTitle>
 				<ContactForm />
 			</DialogContent>
 		</Dialog>
