@@ -3,6 +3,9 @@ import '../globals.css'
 import { siteConfig } from 'config/site'
 import type { Metadata, Viewport } from 'next'
 
+import { Analytics } from '@vercel/analytics/react'
+import { SpeedInsights } from '@vercel/speed-insights/next'
+import TopLoadingBar from 'nextjs-toploader'
 import Providers from 'providers'
 
 export const metadata: Metadata = {
@@ -47,7 +50,10 @@ export default function RootLayout({
 		<>
 			<html lang='en'>
 				<body className='min-h-screen antialiased'>
+					<TopLoadingBar color='#6A61FF' showSpinner={false} height={3} />
 					<Providers>{children}</Providers>
+					<Analytics />
+					<SpeedInsights />
 				</body>
 			</html>
 		</>
