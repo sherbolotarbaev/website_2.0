@@ -6,8 +6,6 @@ import { Button } from 'ui/button'
 
 import { ImSpinner3 } from 'react-icons/im'
 
-import { cn } from 'utils'
-
 interface SubmitButtonProps
 	extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 	isLoading: boolean
@@ -27,7 +25,7 @@ const SubmitButton: React.FC<SubmitButtonProps> = ({
 		<Button
 			type='submit'
 			disabled={isLoading || disabled}
-			className={cn(className, 'w-full')}
+			className={className}
 			size={size}
 		>
 			{isLoading ? (

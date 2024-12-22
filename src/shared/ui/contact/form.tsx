@@ -6,17 +6,24 @@ import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
 import SubmitButton from 'shared/ui/button/submit'
+import { Button } from 'ui/button'
 import { Form, FormControl, FormField, FormItem, FormMessage } from 'ui/form'
 import { Input } from 'ui/input'
 import { Textarea } from 'ui/textarea'
 
+import { closeModal } from 'features/modal-slice'
 import { euclidSemiBold } from 'fonts'
+import { useMediaQuery } from 'hooks/use-media-query'
 import { ContactFormSchema } from 'lib/schema'
 import { cn } from 'utils'
 
 import { Mail } from 'lucide-react'
+import { useDispatch } from 'react-redux'
 
 const ContactForm: React.FC = ({}) => {
+	const isDesktop = useMediaQuery('(min-width: 768px)')
+	const dispatch = useDispatch()
+
 	const form = useForm<z.infer<typeof ContactFormSchema>>({
 		resolver: zodResolver(ContactFormSchema),
 	})
@@ -100,16 +107,27 @@ const ContactForm: React.FC = ({}) => {
 					)}
 				/>
 
-				<SubmitButton
-					// isLoading={isLoading}
-					// disabled={isSuccess}
-					isLoading={false}
-					disabled={!form.formState.isDirty || !form.formState.isValid}
-					loadingText='Sending...'
-					className='max-w-[6.5rem] ml-auto'
-				>
-					<Mail className='size-4' /> Send
-				</SubmitButton>
+				<div className='flex items-center justify-end gap-2'>
+					{!isDesktop && (
+						<Button
+							type='button'
+							variant='outline'
+							onClick={() => dispatch(closeModal())}
+						>
+							Cancel
+						</Button>
+					)}
+
+					<SubmitButton
+						// isLoading={isLoading}
+						// disabled={isSuccess}
+						isLoading={false}
+						disabled={!form.formState.isDirty || !form.formState.isValid}
+						loadingText='Sending...'
+					>
+						<Mail className='size-4' /> Send
+					</SubmitButton>
+				</div>
 			</form>
 		</Form>
 	)
