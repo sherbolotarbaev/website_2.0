@@ -10,6 +10,7 @@ import { Form, FormControl, FormField, FormItem, FormMessage } from 'ui/form'
 import { Input } from 'ui/input'
 import { Textarea } from 'ui/textarea'
 
+import { euclidSemiBold } from 'fonts'
 import { cn } from 'utils'
 import { ContactFormSchema } from '../sections/hero/lib/schema'
 
@@ -30,8 +31,15 @@ const ContactForm: React.FC = ({}) => {
 		<Form {...form}>
 			<form
 				onSubmit={form.handleSubmit(onSubmit)}
-				className='flex flex-col gap-3'
+				className='w-full flex flex-col gap-3'
 			>
+				<h1
+					className='text-xl font-semibold tracking-tight'
+					style={euclidSemiBold.style}
+				>
+					Contact me<span className='text-[#6A61FF]'>.</span>
+				</h1>
+
 				<FormField
 					control={form.control}
 					name='email'

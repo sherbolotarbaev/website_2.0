@@ -5,10 +5,8 @@ import { closeModal, ModalTypesEnum, openModal } from 'features/modal-slice'
 import { RootState } from 'lib/store'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { Dialog, DialogContent, DialogTitle } from 'ui/dialog'
+import { Dialog, DialogContent } from 'ui/dialog'
 import ContactForm from './form'
-
-import { euclidSemiBold } from 'fonts'
 
 const ContactModal: React.FC = () => {
 	const dispatch = useDispatch()
@@ -43,10 +41,7 @@ const ContactModal: React.FC = () => {
 
 	return (
 		<Dialog open={isOpen} onOpenChange={handleClose}>
-			<DialogContent className='sm:max-w-[425px]'>
-				<DialogTitle style={euclidSemiBold.style}>
-					Contact me<span className='text-[#6A61FF]'>.</span>
-				</DialogTitle>
+			<DialogContent className='sm:max-w-[425px] flex items-center justify-center'>
 				<ContactForm />
 			</DialogContent>
 		</Dialog>
