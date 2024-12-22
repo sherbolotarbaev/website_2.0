@@ -56,7 +56,7 @@ const BlogPosts: React.FC<BlogPostsProps> = ({ blogPosts, allViews }) => (
 				return (
 					<li key={slug}>
 						<Link href={`/blog/${slug}`} passHref>
-							<Card className='shadow-none transition-shadow hover:shadow-md hover:border-blue-500'>
+							<Card className='shadow-none transition-shadow hover:shadow-md hover:border-[#6A61FF]'>
 								{image && (
 									<CardHeader className='p-4'>
 										<ImageWrapper
