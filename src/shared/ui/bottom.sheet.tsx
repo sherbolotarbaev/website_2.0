@@ -19,7 +19,7 @@ const BottomSheet: React.FC<BottomSheetProps> = ({
 	onOpenChange,
 	children,
 }) => {
-	const [height, setHeight] = React.useState(400) // Default height
+	const [height, setHeight] = React.useState(500) // Default height
 	const isDesktop = useMediaQuery('(min-width: 768px)')
 	const contentRef = React.useRef<HTMLDivElement>(null)
 
