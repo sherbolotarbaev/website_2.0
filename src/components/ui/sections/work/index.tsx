@@ -93,13 +93,14 @@ const Experience: React.FC<TExperience> = ({
 							/>
 
 							{covers && covers.length > 0 && (
-								<div className='mt-4 flex flex-col gap-3'>
+								<div className='mt-4 flex flex-wrap gap-3'>
 									{covers.map((cover, index) => (
 										<ImageWrapper
 											key={index}
 											src={cover}
 											alt={`${title} - ${company} (cover ${index + 1})`}
 											aspectRatio={2 / 1.1}
+											className='md:max-w-64 shadow-lg'
 										/>
 									))}
 								</div>

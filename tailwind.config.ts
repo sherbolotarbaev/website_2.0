@@ -82,8 +82,6 @@ export default {
           linear-gradient(185deg, #b3f9d8, #e3f5b0),
           linear-gradient(58deg, #ffe7b8 30.98%, #ffe2b8 66.98%, #ffbfb8 100.57%)
         `,
-				'custom-gradient':
-					'linear-gradient(34deg, #7affef 22.88%, #70c3ff 45.57%, #8d7aff 78.85%)',
 			},
 		},
 	},

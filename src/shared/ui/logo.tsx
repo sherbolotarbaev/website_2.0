@@ -14,14 +14,14 @@ interface LogoProps {
 	className?: string
 }
 
-const Logo: React.FC<LogoProps> = ({ size = 6, className }) => {
+const Logo: React.FC<LogoProps> = ({ size = 6.5, className }) => {
 	return (
 		<Link href='/' passHref>
 			<Image
 				src='/images/logo.png'
 				alt={siteConfig.title}
-				width={33}
-				height={33}
+				width={38}
+				height={38}
 				className={cn(`size-${size} max-w-${size}`, className)}
 				loading='lazy'
 				placeholder='blur'

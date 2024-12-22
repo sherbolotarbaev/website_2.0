@@ -29,7 +29,7 @@ const ContactModal: React.FC = () => {
 		dispatch(closeModal())
 		// Remove the hash from the URL when closing the modal
 		history.pushState(
-			'',
+			null,
 			document.title,
 			window.location.pathname + window.location.search
 		)

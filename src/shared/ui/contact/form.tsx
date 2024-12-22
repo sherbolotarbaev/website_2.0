@@ -38,32 +38,42 @@ const ContactForm: React.FC = ({}) => {
 		<Form {...form}>
 			<form
 				onSubmit={form.handleSubmit(onSubmit)}
-				className='w-full flex flex-col gap-3'
+				className='w-full flex flex-col gap-5'
 			>
-				<h1
-					className='text-xl font-semibold tracking-tight'
-					style={euclidSemiBold.style}
-				>
-					Contact me<span className='text-[#6A61FF]'>.</span>
-				</h1>
+				<div className='space-y-2'>
+					<h1
+						className='text-xl font-semibold tracking-tight'
+						style={euclidSemiBold.style}
+					>
+						Contact me<span className='text-[#6A61FF]'>.</span>
+					</h1>
 
-				<FormField
-					control={form.control}
-					name='email'
-					render={({ field }) => (
-						<FormItem>
-							<FormControl>
-								<Input
-									type='email'
-									className={cn(form.formState.errors.email && 'border-error')}
-									placeholder='Email Address'
-									// disabled={isLoading || isSuccess}
-									autoComplete='email'
-									{...field}
-								/>
-							</FormControl>
+					<p className='text-sm text-muted-foreground'>
+						Have a question, a project idea, or just want to say hello? Drop me
+						a message below, and I'll get back to you as soon as possible.
+					</p>
+				</div>
 
-							{/* {error ? (
+				<div className='space-y-3'>
+					<FormField
+						control={form.control}
+						name='email'
+						render={({ field }) => (
+							<FormItem>
+								<FormControl>
+									<Input
+										type='email'
+										className={cn(
+											form.formState.errors.email && 'border-error'
+										)}
+										placeholder='Email Address'
+										// disabled={isLoading || isSuccess}
+										autoComplete='email'
+										{...field}
+									/>
+								</FormControl>
+
+								{/* {error ? (
 								<FormMessage className='text-error text-center flex items-center gap-1'>
 									<CircleAlert className='size-4' /> {error}
 								</FormMessage>
@@ -71,30 +81,29 @@ const ContactForm: React.FC = ({}) => {
 								
 							)} */}
 
-							<FormMessage className='text-error' />
-						</FormItem>
-					)}
-				/>
+								<FormMessage className='text-error' />
+							</FormItem>
+						)}
+					/>
+					<FormField
+						control={form.control}
+						name='message'
+						render={({ field }) => (
+							<FormItem>
+								<FormControl>
+									<Textarea
+										className={cn(
+											form.formState.errors.email && 'border-error',
+											'max-h-72'
+										)}
+										placeholder='Message'
+										// disabled={isLoading || isSuccess}
+										autoComplete='email'
+										{...field}
+									/>
+								</FormControl>
 
-				<FormField
-					control={form.control}
-					name='message'
-					render={({ field }) => (
-						<FormItem>
-							<FormControl>
-								<Textarea
-									className={cn(
-										form.formState.errors.email && 'border-error',
-										'max-h-72'
-									)}
-									placeholder='Message'
-									// disabled={isLoading || isSuccess}
-									autoComplete='email'
-									{...field}
-								/>
-							</FormControl>
-
-							{/* {error ? (
+								{/* {error ? (
 								<FormMessage className='text-error text-center flex items-center gap-1'>
 									<CircleAlert className='size-4' /> {error}
 								</FormMessage>
@@ -102,10 +111,11 @@ const ContactForm: React.FC = ({}) => {
 								
 							)} */}
 
-							<FormMessage className='text-error' />
-						</FormItem>
-					)}
-				/>
+								<FormMessage className='text-error' />
+							</FormItem>
+						)}
+					/>
+				</div>
 
 				<div className='flex items-center justify-end gap-2'>
 					{!isDesktop && (
