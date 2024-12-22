@@ -11,8 +11,8 @@ import { isMobileDevice } from 'lib/is-mobile-device'
 import { CalendarIcon, ClockIcon } from 'lucide-react'
 import Script from 'next/script'
 import { BlogPostBreadcrumb } from 'shared/ui/blog-posts'
+import ShareButton from 'shared/ui/button/share'
 import ImageWrapper from 'shared/ui/image.wrapper'
-import ShareButton from 'shared/ui/share.button'
 import MDXContent from 'ui/mdx-content'
 
 async function getViewsCount(allViews: PostView[], slug: string) {

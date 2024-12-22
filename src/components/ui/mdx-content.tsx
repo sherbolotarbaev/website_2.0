@@ -8,10 +8,9 @@ import remarkGfm from 'remark-gfm'
 import { visit } from 'unist-util-visit'
 
 import Link from 'next/link'
-import CopyButton from 'shared/ui/copy.button'
+import CopyButton from 'shared/ui/button/copy'
+import ImageWrapper from 'shared/ui/image.wrapper'
 import { Card } from 'ui/card'
-
-import ImageWrapper from '~/shared/ui/image.wrapper'
 
 const slugify = (str: string) => {
 	return str

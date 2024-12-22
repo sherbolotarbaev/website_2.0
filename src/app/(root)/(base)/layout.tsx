@@ -1,7 +1,7 @@
 import Footer from 'widgets/footer'
 import Header from 'widgets/header'
 
-import ContactModal from 'ui/contact/modal'
+import ContactModal from 'shared/ui/contact/modal'
 
 interface BaseLayoutProps {
 	children: React.ReactNode

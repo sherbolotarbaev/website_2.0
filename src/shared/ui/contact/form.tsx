@@ -5,14 +5,14 @@ import React from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
-import SubmitButton from 'shared/ui/submit.button'
+import SubmitButton from 'shared/ui/button/submit'
 import { Form, FormControl, FormField, FormItem, FormMessage } from 'ui/form'
 import { Input } from 'ui/input'
 import { Textarea } from 'ui/textarea'
 
 import { euclidSemiBold } from 'fonts'
+import { ContactFormSchema } from 'lib/schema'
 import { cn } from 'utils'
-import { ContactFormSchema } from '../sections/hero/lib/schema'
 
 import { Mail } from 'lucide-react'
 

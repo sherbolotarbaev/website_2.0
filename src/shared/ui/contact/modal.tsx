@@ -5,7 +5,7 @@ import { closeModal, ModalTypesEnum, openModal } from 'features/modal-slice'
 import { RootState } from 'lib/store'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { Dialog, DialogContent } from 'ui/dialog'
+import BottomSheet from '../bottom.sheet'
 import ContactForm from './form'
 
 const ContactModal: React.FC = () => {
@@ -40,11 +40,9 @@ const ContactModal: React.FC = () => {
 	}
 
 	return (
-		<Dialog open={isOpen} onOpenChange={handleClose}>
-			<DialogContent className='sm:max-w-[425px] flex items-center justify-center'>
-				<ContactForm />
-			</DialogContent>
-		</Dialog>
+		<BottomSheet open={isOpen} onOpenChange={handleClose}>
+			<ContactForm />
+		</BottomSheet>
 	)
 }
 

@@ -1,6 +1,6 @@
 import Link from 'next/link'
+import ContactButton from 'shared/ui/contact/button'
 import { Button } from 'ui/button'
-import ContactButton from 'ui/contact/button'
 
 import { ContactEnum } from 'config/contact'
 import { euclidSemiBold } from 'fonts'
