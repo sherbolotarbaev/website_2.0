@@ -19,7 +19,7 @@ const BottomSheet: React.FC<BottomSheetProps> = ({
 	onOpenChange,
 	children,
 }) => {
-	const [height, setHeight] = React.useState(500) // Default height
+	const [height, setHeight] = React.useState(400) // Default height
 	const isDesktop = useMediaQuery('(min-width: 768px)')
 	const contentRef = React.useRef<HTMLDivElement>(null)
 
@@ -43,7 +43,7 @@ const BottomSheet: React.FC<BottomSheetProps> = ({
 	return (
 		<Drawer open={open} onOpenChange={onOpenChange}>
 			<DrawerTitle></DrawerTitle>
-			<DrawerContent className='h-[80vh] max-h-[80vh]'>
+			<DrawerContent className='h-[70vh] max-h-[70vh]'>
 				<div
 					ref={contentRef}
 					className='h-full flex flex-col items-center justify-center overflow-hidden'

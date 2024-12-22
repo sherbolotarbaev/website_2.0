@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import ContactButton from 'shared/ui/contact/button'
+import RotatingTextAnimation from 'shared/ui/rotating-text-animation'
 import { Button } from 'ui/button'
 
 import { ContactEnum } from 'config/contact'
@@ -13,14 +14,24 @@ const Hero: React.FC = () => {
 		<section className='space-y-6'>
 			<div className='space-y-3'>
 				<h1
-					className='text-2xl font-semibold tracking-tight'
+					className='text-[1.35rem] sm:text-2xl font-semibold tracking-tight'
 					style={euclidSemiBold.style}
 				>
-					Sher Arbaev<span className='text-[#6A61FF]'>.</span>
+					<span className='flex items-center gap-1'>
+						Sher Arbaev |
+						<RotatingTextAnimation
+							words={[
+								'NodeJS Developer',
+								'Development Lead',
+								'Software Engineer',
+								'Software Strategist',
+							]}
+						/>
+					</span>
 				</h1>
 
 				<p className='leading-relaxed'>
-					I'm a software engineer, problem solver, and optimist. I work at{' '}
+					I'm a software engineer 🇰🇬, problem solver, and optimist 😎. I work at{' '}
 					<HeroLink href={links.wedevx}>WEDEVX</HeroLink>, where I design and
 					build backend infrastructures and microservices using{' '}
 					<HeroLink href={links.nextjs}>Nest.js</HeroLink> and{' '}

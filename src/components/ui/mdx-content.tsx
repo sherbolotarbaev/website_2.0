@@ -30,7 +30,7 @@ const components: MDXComponents = {
 	a: ({ children, href }) =>
 		href ? (
 			<Link
-				className='font-medium text-[#6A61FF] hover:underline'
+				className='font-semibold underline decoration-muted-foreground/50 hover:decoration-muted-foreground underline-offset-2'
 				href={href}
 				target='_blank'
 			>
