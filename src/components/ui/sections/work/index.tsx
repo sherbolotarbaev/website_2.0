@@ -98,7 +98,7 @@ const Experience: React.FC<TExperience> = ({
 										<ImageWrapper
 											key={index}
 											src={cover}
-											alt={title}
+											alt={`${title} - ${company} (cover ${index + 1})`}
 											aspectRatio={2 / 1.1}
 										/>
 									))}
