@@ -70,7 +70,7 @@ const ContactForm: React.FC = ({}) => {
 								<Textarea
 									className={cn(
 										form.formState.errors.email && 'border-error',
-										'max-h-64'
+										'max-h-72'
 									)}
 									placeholder='Message'
 									// disabled={isLoading || isSuccess}
