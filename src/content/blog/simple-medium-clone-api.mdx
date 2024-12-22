@@ -504,10 +504,7 @@ bootstrap()
 
 While the application is running, open your browser and navigate to [`http://localhost:3000/api`](http://localhost:3000/api/). You should see the Swagger UI.
 
-<Image
-	src='https://www.sherbolotarbaev.co/images/swagger-ui-example.png'
-	alt='Swagger UI'
-/>
+<Image src='/images/swagger-ui-example.png' alt='Swagger UI' />
 
 # Implement CRUD operations for Article model
 
@@ -531,10 +528,7 @@ You should now find a new `src/articles` directory with all the boilerplate for 
 
 If you open the Swagger [API page](http://localhost:3000/api) again, you should see something like this:
 
-<Image
-	src='https://www.sherbolotarbaev.co/images/swagger-ui-example2.png'
-	alt='Swagger UI'
-/>
+<Image src='/images/swagger-ui-example2.png' alt='Swagger UI 2' />
 
 The `SwaggerModule` searches for all `@Body()`, `@Query()`, and `@Param()` decorators on the route handlers to generate this API page.
 
@@ -608,10 +602,7 @@ The `findMany` query will return all `article` records that match the `where` co
 
 You can test out the endpoint by going to [`http://localhost:3000/api`](http://localhost:3000/api) and clicking on the **GET/articles** dropdown menu. Press **Try it** out and then **Execute** to see the result.
 
-<Image
-	src='https://www.sherbolotarbaev.co/images/swagger-ui-example3.png'
-	alt='Swagger UI'
-/>
+<Image src='/images/swagger-ui-example3.png' alt='Swagger UI 3' />
 
 > Note: You can also run all requests in the browser directly or through a REST client (like [Postman](https://www.postman.com/)). Swagger also generates the curl commands for each request in case you want to run the HTTP requests in the terminal.
 
@@ -701,10 +692,7 @@ export class ArticlesService {
 
 Once again, test out the endpoint by going to [http://localhost:3000/api](http://localhost:3000/api). Click on the dropdown menu. Press **Try it** out, add a valid value to the **id** parameter, and press **Execute** to see the result.
 
-<Image
-	src='https://www.sherbolotarbaev.co/images/swagger-ui-example4.png'
-	alt='Swagger UI'
-/>
+<Image src='/images/swagger-ui-example4.png' alt='Swagger UI 4' />
 
 #### Define `POST /articles` endpoint
 
@@ -743,10 +731,7 @@ The `@ApiProperty` decorators are required to make the class properties visible 
 
 The `CreateArticleDto` should now be defined in the Swagger API page under **Schemas**. The shape of `UpdateArticleDto` is automatically inferred from the `CreateArticleDto` definition. So `UpdateArticleDto` is also defined inside Swagger.
 
-<Image
-	src='https://www.sherbolotarbaev.co/images/swagger-ui-example5.png'
-	alt='Swagger UI'
-/>
+<Image src='/images/swagger-ui-example5.png' alt='Swagger UI 5' />
 
 Now update the `create` method in the `ArticlesService` to create a new article in the database:
 
@@ -854,10 +839,7 @@ export class ArticlesController {
 
 The [API page](http://localhost:3000/api/) now has the `articles` endpoints grouped together.
 
-<Image
-	src='https://www.sherbolotarbaev.co/images/swagger-ui-example6.png'
-	alt='Swagger UI'
-/>
+<Image src='/images/swagger-ui-example6.png' alt='Swagger UI 6' />
 
 # Update Swagger response types
 
@@ -950,10 +932,7 @@ You added the `@ApiOkResponse` for `GET`, `PATCH` and `PATCH` endpoints and `@Ap
 
 Now, Swagger should properly define the response type for all endpoints on the API page.
 
-<Image
-	src='https://www.sherbolotarbaev.co/images/swagger-ui-example7.png'
-	alt='Swagger UI'
-/>
+<Image src='/images/swagger-ui-example7.png' alt='Swagger UI 7' />
 
 # Summary and final remarks
 

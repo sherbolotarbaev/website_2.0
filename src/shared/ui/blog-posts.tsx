@@ -2,7 +2,6 @@
 
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
 
-import Image from 'next/image'
 import Link from 'next/link'
 import {
 	Breadcrumb,
@@ -20,6 +19,7 @@ import {
 	CardTitle,
 } from 'ui/card'
 import { Separator } from 'ui/separator'
+import ImageWrapper from './image.wrapper'
 
 import { formatDate } from 'date-fns'
 import { useGetPostViewsCount } from 'hooks/use-post-views-count'
@@ -58,39 +58,15 @@ const BlogPosts: React.FC<BlogPostsProps> = ({ blogPosts, allViews }) => (
 						<Link href={`/blog/${slug}`} passHref>
 							<Card className='shadow-none transition-shadow hover:shadow-md hover:border-blue-500'>
 								{image && (
-									<CardHeader
-										className='p-4'
-										style={
-											{
-												'--aspect-ratio': '2 / 0.9',
-												'--height': '205px',
-											} as React.CSSProperties
-										}
-									>
-										<div className='relative border-[0.06rem] border-muted/80 rounded-xl overflow-hidden aspect-[--aspect-ratio] w-full text-sm has-[:focus-visible]:outline-none has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-blue-600 has-[:focus-visible]:ring-offset-1'>
-											<Image
-												key={slug}
-												src={image}
-												alt={title}
-												fill
-												sizes='100vw'
-												loading='lazy'
-												decoding='async'
-												placeholder='blur'
-												blurDataURL={blurDataUrl}
-												className='aspect-[--aspect-ratio] object-cover'
-												style={{
-													position: 'absolute',
-													height: '100%',
-													width: '100%',
-													left: 0,
-													top: 0,
-													right: 0,
-													bottom: 0,
-													color: 'transparent',
-												}}
-											/>
-										</div>
+									<CardHeader className='p-4'>
+										<ImageWrapper
+											key={slug}
+											src={image}
+											alt={title}
+											placeholder='blur'
+											blurDataURL={blurDataUrl}
+											className='rounded-lg'
+										/>
 									</CardHeader>
 								)}
 

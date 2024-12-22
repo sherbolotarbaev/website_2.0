@@ -1,6 +1,7 @@
 import React from 'react'
 
 import Link from 'next/link'
+import ImageWrapper from 'shared/ui/image.wrapper'
 import { Badge } from 'ui/badge'
 import { Separator } from 'ui/separator'
 
@@ -11,7 +12,6 @@ import {
 } from './lib/experiences'
 
 import { euclidMedium, euclidSemiBold } from 'fonts'
-import Image from 'next/image'
 
 const Work: React.FC = () => {
 	return (
@@ -95,19 +95,12 @@ const Experience: React.FC<TExperience> = ({
 							{covers && covers.length > 0 && (
 								<div className='mt-4 flex flex-col gap-3'>
 									{covers.map((cover, index) => (
-										<div
+										<ImageWrapper
 											key={index}
-											className='w-full h-72 bg-secondary rounded-xl overflow-hidden relative shadow-sm border border-muted'
-										>
-											<Image
-												src={cover}
-												alt={title}
-												fill
-												sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
-												loading='lazy'
-												className='object-cover'
-											/>
-										</div>
+											src={cover}
+											alt={title}
+											aspectRatio={2 / 1.1}
+										/>
 									))}
 								</div>
 							)}

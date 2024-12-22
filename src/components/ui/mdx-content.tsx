@@ -7,12 +7,11 @@ import rehypePrism from 'rehype-prism-plus'
 import remarkGfm from 'remark-gfm'
 import { visit } from 'unist-util-visit'
 
-import Image from 'next/image'
 import Link from 'next/link'
 import CopyButton from 'shared/ui/copy.button'
 import { Card } from 'ui/card'
 
-import { cn } from 'utils'
+import ImageWrapper from '~/shared/ui/image.wrapper'
 
 const slugify = (str: string) => {
 	return str
@@ -26,22 +25,13 @@ const slugify = (str: string) => {
 }
 
 const components: MDXComponents = {
-	Image: ({ alt, className, ...props }) => (
-		<div className='my-6 w-full overflow-hidden rounded-lg'>
-			<Image
-				className={cn('w-full', className)}
-				width={700}
-				height={350}
-				alt={alt}
-				loading='lazy'
-				{...props}
-			/>
-		</div>
+	Image: ({ src, alt }) => (
+		<ImageWrapper src={src} alt={alt} aspectRatio={2 / 1} />
 	),
 	a: ({ children, href }) =>
 		href ? (
 			<Link
-				className='font-medium text-blue-500 hover:underline'
+				className='font-medium text-[#6A61FF] hover:underline'
 				href={href}
 				target='_blank'
 			>
@@ -97,7 +87,7 @@ const components: MDXComponents = {
 			<Link href={`#${slug}`} className='no-underline'>
 				<h1
 					id={slug}
-					className='scroll-m-20 text-4xl font-extrabold tracking-tight mt-12 mb-4'
+					className='scroll-m-20 text-3xl font-extrabold tracking-tight mt-12 mb-4'
 				>
 					{children}
 				</h1>
@@ -110,7 +100,7 @@ const components: MDXComponents = {
 			<Link href={`#${slug}`} className='no-underline'>
 				<h2
 					id={slug}
-					className='scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0 mb-4'
+					className='scroll-m-20 border-b pb-2 text-2xl font-semibold tracking-tight first:mt-0 mb-4'
 				>
 					{children}
 				</h2>
@@ -123,7 +113,7 @@ const components: MDXComponents = {
 			<Link href={`#${slug}`} className='no-underline'>
 				<h3
 					id={slug}
-					className='scroll-m-20 text-2xl font-semibold tracking-tight'
+					className='scroll-m-20 text-xl font-semibold tracking-tight'
 				>
 					{children}
 				</h3>
@@ -136,7 +126,7 @@ const components: MDXComponents = {
 			<Link href={`#${slug}`} className='no-underline'>
 				<h4
 					id={slug}
-					className='scroll-m-20 text-xl font-semibold tracking-tight'
+					className='scroll-m-20 text-lg font-semibold tracking-tight'
 				>
 					{children}
 				</h4>
