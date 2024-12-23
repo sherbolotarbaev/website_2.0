@@ -100,7 +100,7 @@ const Experience: React.FC<TExperience> = ({
 											src={cover}
 											alt={`${title} - ${company} (cover ${index + 1})`}
 											aspectRatio={2 / 1.1}
-											className='md:max-w-6 shadow-lg'
+											className='md:max-w-64 shadow-lg'
 										/>
 									))}
 								</div>
