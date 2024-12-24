@@ -35,7 +35,7 @@ const BottomSheet: React.FC<BottomSheetProps> = ({
 	return (
 		<Drawer open={open} onOpenChange={onOpenChange}>
 			<DrawerTitle></DrawerTitle>
-			<DrawerContent className='min-h-[70vh] max-h-[90vh]'>
+			<DrawerContent className='h-[90vh] max-h-[90vh]'>
 				<div className='w-full flex-1 p-4'>{children}</div>
 			</DrawerContent>
 		</Drawer>
