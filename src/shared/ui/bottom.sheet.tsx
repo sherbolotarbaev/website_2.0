@@ -19,15 +19,7 @@ const BottomSheet: React.FC<BottomSheetProps> = ({
 	onOpenChange,
 	children,
 }) => {
-	const [height, setHeight] = React.useState(800) // Default height
 	const isDesktop = useMediaQuery('(min-width: 768px)')
-	const contentRef = React.useRef<HTMLDivElement>(null)
-
-	React.useEffect(() => {
-		if (open && contentRef.current) {
-			setHeight(contentRef.current.scrollHeight)
-		}
-	}, [open])
 
 	if (isDesktop) {
 		return (
@@ -44,11 +36,7 @@ const BottomSheet: React.FC<BottomSheetProps> = ({
 		<Drawer open={open} onOpenChange={onOpenChange}>
 			<DrawerTitle></DrawerTitle>
 			<DrawerContent className='h-[70vh] max-h-[70vh]'>
-				<div
-					ref={contentRef}
-					className='h-full flex flex-col items-center justify-center overflow-hidden'
-					style={{ height: `${height}px` }}
-				>
+				<div className='h-full flex flex-col items-center justify-center overflow-hidden'>
 					<div className='w-full flex-1 overflow-y-auto p-4'>{children}</div>
 				</div>
 			</DrawerContent>
