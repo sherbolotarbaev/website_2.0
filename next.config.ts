@@ -1,6 +1,6 @@
 import type { NextConfig } from 'next'
 
-const imageDomains: string[] = []
+const imageDomains: string[] = ['wallpapercave.com']
 
 const nextConfig: NextConfig = {
 	/* config options here */

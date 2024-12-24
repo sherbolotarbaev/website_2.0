@@ -5,7 +5,7 @@ import Image from 'next/image'
 
 import { cn } from 'utils'
 
-type ImageProps = Omit<
+type ImageThumbnailProps = Omit<
 	React.DetailedHTMLProps<
 		React.ImgHTMLAttributes<HTMLImageElement>,
 		HTMLImageElement
@@ -19,7 +19,7 @@ type ImageProps = Omit<
 	blurDataURL?: string
 }
 
-const ImageWrapper: React.FC<ImageProps> = ({
+const ImageThumbnail: React.FC<ImageThumbnailProps> = ({
 	src,
 	alt,
 	aspectRatio = 2 / 0.9,
@@ -29,7 +29,7 @@ const ImageWrapper: React.FC<ImageProps> = ({
 	return (
 		<div
 			className={cn(
-				'relative border-[0.06rem] border-muted/80 rounded-2xl overflow-hidden aspect-[--aspect-ratio] w-full text-sm has-[:focus-visible]:outline-none has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-blue-600 has-[:focus-visible]:ring-offset-1',
+				'relative border-[0.08rem] border-muted/80 rounded-2xl overflow-hidden aspect-[--aspect-ratio] w-full text-sm has-[:focus-visible]:outline-none has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-blue-600 has-[:focus-visible]:ring-offset-1',
 				className
 			)}
 			style={
@@ -63,4 +63,4 @@ const ImageWrapper: React.FC<ImageProps> = ({
 	)
 }
 
-export default ImageWrapper
+export default ImageThumbnail

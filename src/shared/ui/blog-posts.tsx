@@ -18,13 +18,12 @@ import {
 	CardHeader,
 	CardTitle,
 } from 'ui/card'
-import { Separator } from 'ui/separator'
-import ImageWrapper from './image.wrapper'
+import ImageThumbnail from './image.thumbnail'
 
 import { formatDate } from 'date-fns'
-import { useGetPostViewsCount } from 'hooks/use-post-views-count'
 import type { Post } from 'lib/blog'
 
+import { useGetPostViewsCount } from 'lib/hooks/use-post-views-count'
 import { cn } from 'utils'
 
 import {
@@ -41,61 +40,64 @@ interface BlogPostsProps {
 	allViews: PostView[]
 }
 
-const BlogPosts: React.FC<BlogPostsProps> = ({ blogPosts, allViews }) => (
-	<ul className='space-y-6'>
-		{blogPosts.map(
-			({
-				slug,
-				metadata: { title, image, summary, publishedAt },
-				content,
-				blurDataUrl,
-			}) => {
-				const formattedDate = formatDate(new Date(publishedAt), 'MMM dd, yyyy')
-				const readingTime = Math.ceil(content.split(' ').length / 200)
+const BlogPosts: React.FC<BlogPostsProps> = ({ blogPosts, allViews }) => {
+	return (
+		<div className='grid grid-cols-1 md:grid-cols-2 gap-8'>
+			{blogPosts.map(
+				({
+					slug,
+					metadata: { title, image, summary, publishedAt },
+					content,
+					blurDataUrl,
+				}) => {
+					const formattedDate = formatDate(
+						new Date(publishedAt),
+						'MMM dd, yyyy'
+					)
+					const readingTime = Math.ceil(content.split(' ').length / 200)
 
-				return (
-					<li key={slug}>
-						<Link href={`/blog/${slug}`} passHref>
-							<Card className='shadow-none transition-shadow hover:shadow-md hover:border-[#6A61FF]'>
-								{image && (
-									<CardHeader className='p-4'>
-										<ImageWrapper
+					return (
+						<div className='w-full'>
+							<Link href={`/blog/${slug}`} passHref className='h-full block'>
+								<Card className='md:h-full border-0 shadow-none hover:bg-secondary'>
+									<CardHeader className='p-2 pb-0'>
+										<ImageThumbnail
 											key={slug}
-											src={image}
+											src={image || `/og?title=${title}`}
 											alt={title}
-											placeholder='blur'
-											blurDataURL={blurDataUrl}
-											className='rounded-lg'
+											placeholder={image ? 'blur' : 'empty'}
+											blurDataURL={image && blurDataUrl}
+											aspectRatio={2 / 1.1}
 										/>
 									</CardHeader>
-								)}
 
-								<CardContent className='p-4'>
-									<CardTitle className='text-xl'>{title}</CardTitle>
+									<CardContent className='py-4 px-2 pb-2'>
+										<CardTitle className='text-xl font-semibold line-clamp-2'>
+											{title}
+										</CardTitle>
 
-									<CardDescription>
-										{summary.substring(0, 90) + '...'}
-									</CardDescription>
-								</CardContent>
+										<BlogPostMeta
+											formattedDate={formattedDate}
+											readingTime={readingTime}
+											slug={slug}
+											allViews={allViews}
+										/>
+									</CardContent>
 
-								<Separator />
-
-								<CardFooter className='px-4 py-3'>
-									<BlogPostMeta
-										formattedDate={formattedDate}
-										readingTime={readingTime}
-										allViews={allViews}
-										slug={slug}
-									/>
-								</CardFooter>
-							</Card>
-						</Link>
-					</li>
-				)
-			}
-		)}
-	</ul>
-)
+									<CardFooter className='px-2 py-2 line-clamp-2'>
+										<CardDescription>
+											{summary.substring(0, 70) + '...'}
+										</CardDescription>
+									</CardFooter>
+								</Card>
+							</Link>
+						</div>
+					)
+				}
+			)}
+		</div>
+	)
+}
 
 export default BlogPosts
 
@@ -115,7 +117,7 @@ type MetaItem = {
 }
 
 export const BlogPostMeta: React.FC<BlogPostMetaProps> = React.memo(
-	({ formattedDate, distance, readingTime, allViews, slug }) => {
+	({ formattedDate, distance, readingTime, slug, allViews }) => {
 		const { views } = useGetPostViewsCount(allViews, slug)
 
 		const metaItems: MetaItem[] = [
@@ -134,7 +136,7 @@ export const BlogPostMeta: React.FC<BlogPostMetaProps> = React.memo(
 		]
 
 		return (
-			<span className='text-sm text-muted-foreground'>
+			<span className='text-xs text-muted-foreground'>
 				{metaItems.map(item => item.text).join(' • ')}
 			</span>
 		)

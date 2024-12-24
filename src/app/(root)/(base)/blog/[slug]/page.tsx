@@ -6,13 +6,12 @@ import { formatDate, formatDistanceToNow } from 'date-fns'
 import { getBlogPosts } from 'lib/blog'
 import { getBase64 } from 'lib/blur-data-url'
 import { addView, getViews } from 'lib/db'
-import { isMobileDevice } from 'lib/is-mobile-device'
 
 import { CalendarIcon, ClockIcon } from 'lucide-react'
 import Script from 'next/script'
 import { BlogPostBreadcrumb } from 'shared/ui/blog-posts'
 import ShareButton from 'shared/ui/button/share'
-import ImageWrapper from 'shared/ui/image.wrapper'
+import ImageThumbnail from 'shared/ui/image.thumbnail'
 import MDXContent from 'ui/mdx-content'
 
 async function getViewsCount(allViews: PostView[], slug: string) {
@@ -84,7 +83,6 @@ export default async function BlogPost({ params }: Readonly<BlogPostProps>) {
 		content,
 	} = post
 
-	const imageBlurData = image ? await getBase64(image) : undefined
 	const allViews = await getViews()
 
 	const formattedDate = formatDate(new Date(publishedAt), 'MMM dd, yyyy')
@@ -92,7 +90,7 @@ export default async function BlogPost({ params }: Readonly<BlogPostProps>) {
 		addSuffix: true,
 	})
 	const readingTime = Math.ceil(content.split(' ').length / 200)
-	const isMobile = await isMobileDevice()
+	// const isMobile = await isMobileDevice()
 	const blurDataURL = image && (await getBase64(image))
 
 	const jsonLd = {
@@ -160,7 +158,7 @@ export default async function BlogPost({ params }: Readonly<BlogPostProps>) {
 							</div>
 
 							{image && (
-								<ImageWrapper
+								<ImageThumbnail
 									key={slug}
 									src={image}
 									alt={title}

@@ -1,4 +1,5 @@
 import Hero from 'ui/sections/hero'
+import Projects from 'ui/sections/projects'
 import Work from 'ui/sections/work'
 
 export default function Home() {
@@ -8,6 +9,8 @@ export default function Home() {
 				<Hero />
 
 				<Work />
+
+				<Projects />
 			</div>
 		</>
 	)

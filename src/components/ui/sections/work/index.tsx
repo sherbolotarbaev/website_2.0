@@ -1,7 +1,7 @@
 import React from 'react'
 
 import Link from 'next/link'
-import ImageWrapper from 'shared/ui/image.wrapper'
+import ImageThumbnail from 'shared/ui/image.thumbnail'
 import { Badge } from 'ui/badge'
 import { Separator } from 'ui/separator'
 
@@ -95,12 +95,12 @@ const Experience: React.FC<TExperience> = ({
 							{covers && covers.length > 0 && (
 								<div className='mt-4 flex flex-wrap gap-3'>
 									{covers.map((cover, index) => (
-										<ImageWrapper
+										<ImageThumbnail
 											key={index}
 											src={cover}
 											alt={`${title} - ${company} (cover ${index + 1})`}
 											aspectRatio={2 / 1.1}
-											className='md:max-w-64 shadow-lg'
+											className='md:max-w-72 shadow-lg'
 										/>
 									))}
 								</div>

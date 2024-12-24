@@ -9,7 +9,7 @@ import { visit } from 'unist-util-visit'
 
 import Link from 'next/link'
 import CopyButton from 'shared/ui/button/copy'
-import ImageWrapper from 'shared/ui/image.wrapper'
+import ImageThumbnail from 'shared/ui/image.thumbnail'
 import { Card } from 'ui/card'
 
 const slugify = (str: string) => {
@@ -25,7 +25,7 @@ const slugify = (str: string) => {
 
 const components: MDXComponents = {
 	Image: ({ src, alt }) => (
-		<ImageWrapper src={src} alt={alt} aspectRatio={2 / 1} />
+		<ImageThumbnail src={src} alt={alt} aspectRatio={2 / 1} />
 	),
 	a: ({ children, href }) =>
 		href ? (

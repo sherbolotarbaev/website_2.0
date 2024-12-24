@@ -20,8 +20,8 @@ const Logo: React.FC<LogoProps> = ({ size = 6.5, className }) => {
 			<Image
 				src='/images/logo.png'
 				alt={siteConfig.title}
-				width={38}
-				height={38}
+				width={35}
+				height={35}
 				className={cn(`size-${size} max-w-${size}`, className)}
 				loading='lazy'
 				placeholder='blur'

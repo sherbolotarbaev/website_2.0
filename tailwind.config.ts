@@ -13,15 +13,15 @@ export default {
 			center: true,
 			padding: '1.5rem',
 			screens: {
-				sm: '500px',
-				md: '550px',
-				lg: '600px',
+				sm: '600px',
+				md: '650px',
+				lg: '700px',
 			},
 		},
 		screens: {
-			sm: '500px',
-			md: '550px',
-			lg: '600px',
+			sm: '550px',
+			md: '650px',
+			lg: '700px',
 		},
 		extend: {
 			colors: {

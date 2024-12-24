@@ -17,8 +17,9 @@ const Hero: React.FC = () => {
 					className='text-[1.35rem] sm:text-2xl font-semibold tracking-tight'
 					style={euclidSemiBold.style}
 				>
-					<span className='flex items-center gap-1'>
-						Sher Arbaev |
+					<span className='flex items-center gap-2'>
+						Sher Arbaev
+						<b>|</b>
 						<RotatingTextAnimation
 							words={[
 								'NodeJS Developer',

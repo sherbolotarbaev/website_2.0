@@ -19,7 +19,7 @@ export default async function Blog() {
 	return (
 		<>
 			<div className='container space-y-6'>
-				<div className='space-y-3'>
+				<div className='ml-2 space-y-3'>
 					<h1
 						className='text-2xl font-semibold tracking-tight'
 						style={euclidSemiBold.style}
