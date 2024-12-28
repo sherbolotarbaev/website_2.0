@@ -68,7 +68,7 @@ const ProjectCard: React.FC<TProject> = ({
 
 			<CardContent className='p-0'>
 				<CardTitle
-					className='leading-relaxed font-medium'
+					className='text-xl leading-relaxed font-medium'
 					style={euclidMedium.style}
 				>
 					{title}
