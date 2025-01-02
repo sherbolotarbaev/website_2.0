@@ -18,6 +18,7 @@ import {
 	DrawerHeader,
 	DrawerTitle,
 } from 'ui/drawer'
+import { ScrollArea } from 'ui/scroll-area'
 
 interface BottomSheetProps {
 	open?: boolean
@@ -73,7 +74,8 @@ const BottomSheet: React.FC<BottomSheetProps> = ({
 						)}
 					</DrawerHeader>
 				)}
-				<div className='w-full flex-1 overflow-y-auto p-4'>{children}</div>
+
+				<ScrollArea className='overflow-y-auto'>{children}</ScrollArea>
 			</DrawerContent>
 		</Drawer>
 	)
