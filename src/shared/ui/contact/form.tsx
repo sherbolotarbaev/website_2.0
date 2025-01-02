@@ -102,12 +102,13 @@ const ContactForm: React.FC = ({}) => {
 					/>
 				</div>
 
-				<div className='flex items-center justify-end gap-2'>
+				<div className='flex items-center justify-end flex-col-reverse gap-2 sm:flex-row'>
 					{!isDesktop && (
 						<Button
 							type='button'
 							variant='outline'
 							onClick={() => dispatch(closeModal())}
+							className='w-full sm:w-auto'
 						>
 							Cancel
 						</Button>
@@ -119,6 +120,7 @@ const ContactForm: React.FC = ({}) => {
 						isLoading={false}
 						disabled={!form.formState.isDirty || !form.formState.isValid}
 						loadingText='Sending...'
+						className='w-full sm:w-auto'
 					>
 						<Mail className='size-4' /> Send
 					</SubmitButton>
