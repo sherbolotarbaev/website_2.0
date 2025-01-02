@@ -17,6 +17,7 @@ type ImageThumbnailProps = Omit<
 	aspectRatio?: number
 	placeholder?: PlaceholderValue
 	blurDataURL?: string
+	height?: number | string
 }
 
 const ImageThumbnail: React.FC<ImageThumbnailProps> = ({
@@ -24,18 +25,19 @@ const ImageThumbnail: React.FC<ImageThumbnailProps> = ({
 	alt,
 	aspectRatio = 2 / 0.9,
 	className,
+	height = 205,
 	...props
 }) => {
 	return (
 		<div
 			className={cn(
-				'relative border-[0.08rem] border-muted/80 rounded-2xl overflow-hidden aspect-[--aspect-ratio] w-full text-sm has-[:focus-visible]:outline-none has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-blue-600 has-[:focus-visible]:ring-offset-1',
+				'relative border-[0.08rem] border-muted/80 rounded-2xl overflow-hidden aspect-[--aspect-ratio] w-full text-sm has-[:focus-visible]:outline-none has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-blue-600 has-[:focus-visible]:ring-offset-1 bg-secondary',
 				className
 			)}
 			style={
 				{
 					'--aspect-ratio': aspectRatio,
-					'--height': '205px',
+					'--height': typeof height === 'string' ? height : `${height}px`,
 				} as React.CSSProperties
 			}
 		>
@@ -46,7 +48,7 @@ const ImageThumbnail: React.FC<ImageThumbnailProps> = ({
 				sizes='100vw'
 				loading='lazy'
 				decoding='async'
-				className='aspect-[--aspect-ratio] object-cover'
+				className='aspect-[--aspect-ratio] h-[--height] object-cover'
 				style={{
 					position: 'absolute',
 					height: '100%',

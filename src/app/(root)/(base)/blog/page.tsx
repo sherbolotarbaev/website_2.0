@@ -1,5 +1,4 @@
 import { getBlogPosts } from 'lib/blog'
-import { getViews } from 'lib/db'
 
 import BlogPosts from 'shared/ui/blog-posts'
 
@@ -14,12 +13,11 @@ export default async function Blog() {
 				blogPost.metadata.image && (await getBase64(blogPost.metadata.image)),
 		}))
 	)
-	const allViews = await getViews()
 
 	return (
 		<>
 			<div className='container space-y-6'>
-				<div className='ml-2 space-y-3'>
+				<div className='space-y-3'>
 					<h1
 						className='text-2xl font-semibold tracking-tight'
 						style={euclidSemiBold.style}
@@ -30,7 +28,7 @@ export default async function Blog() {
 					<p className='leading-relaxed'>Thoughts, ideas, and experiences.</p>
 				</div>
 
-				<BlogPosts blogPosts={blogPosts} allViews={allViews} />
+				<BlogPosts blogPosts={blogPosts} />
 			</div>
 		</>
 	)

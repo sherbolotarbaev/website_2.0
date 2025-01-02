@@ -23,6 +23,7 @@ export const projects: TProject[] = [
 			'Prisma',
 			'PostgreSQL',
 			'Redis',
+			'Tailwind CSS',
 		],
 	},
 	{

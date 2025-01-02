@@ -12,7 +12,6 @@ import { Input } from 'ui/input'
 import { Textarea } from 'ui/textarea'
 
 import { closeModal } from 'features/modal-slice'
-import { euclidSemiBold } from 'fonts'
 import { useMediaQuery } from 'hooks/use-media-query'
 import { ContactFormSchema } from 'lib/schema'
 import { cn } from 'utils'
@@ -40,20 +39,6 @@ const ContactForm: React.FC = ({}) => {
 				onSubmit={form.handleSubmit(onSubmit)}
 				className='w-full h-full flex flex-col gap-5'
 			>
-				<div className='space-y-2'>
-					<h1
-						className='text-xl font-semibold tracking-tight'
-						style={euclidSemiBold.style}
-					>
-						Contact me<span className='text-[#6A61FF]'>.</span>
-					</h1>
-
-					<p className='text-sm text-muted-foreground'>
-						Have a question, a project idea, or just want to say hello? Drop me
-						a message below, and I'll get back to you as soon as possible.
-					</p>
-				</div>
-
 				<div className='space-y-3'>
 					<FormField
 						control={form.control}

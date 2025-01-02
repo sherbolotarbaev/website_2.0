@@ -5,7 +5,6 @@ import { notFound } from 'next/navigation'
 import { formatDate, formatDistanceToNow } from 'date-fns'
 import { getBlogPosts } from 'lib/blog'
 import { getBase64 } from 'lib/blur-data-url'
-import { addView, getViews } from 'lib/db'
 
 import { CalendarIcon, ClockIcon } from 'lucide-react'
 import Script from 'next/script'
@@ -13,13 +12,6 @@ import { BlogPostBreadcrumb } from 'shared/ui/blog-posts'
 import ShareButton from 'shared/ui/button/share'
 import ImageThumbnail from 'shared/ui/image.thumbnail'
 import MDXContent from 'ui/mdx-content'
-
-async function getViewsCount(allViews: PostView[], slug: string) {
-	const fetchedViews = await addView(slug)
-	const viewsForPost = allViews.find(view => view.slug === slug)
-	const count = fetchedViews ?? viewsForPost?.viewsCount ?? 0
-	return count.toLocaleString()
-}
 
 interface GenerateMetadataProps {
 	params: Promise<{ slug: string }>
@@ -83,14 +75,11 @@ export default async function BlogPost({ params }: Readonly<BlogPostProps>) {
 		content,
 	} = post
 
-	const allViews = await getViews()
-
 	const formattedDate = formatDate(new Date(publishedAt), 'MMM dd, yyyy')
 	const distance = formatDistanceToNow(new Date(publishedAt), {
 		addSuffix: true,
 	})
 	const readingTime = Math.ceil(content.split(' ').length / 200)
-	// const isMobile = await isMobileDevice()
 	const blurDataURL = image && (await getBase64(image))
 
 	const jsonLd = {
@@ -110,8 +99,6 @@ export default async function BlogPost({ params }: Readonly<BlogPostProps>) {
 		},
 		timeRequired: `PT${readingTime}M`,
 	}
-
-	const views = await getViewsCount(allViews, slug)
 
 	return (
 		<>
@@ -139,19 +126,10 @@ export default async function BlogPost({ params }: Readonly<BlogPostProps>) {
 										</span>
 									</div>
 
-									<div className='flex items-center gap-2'>
-										<span className='flex items-center gap-1'>
-											<ClockIcon className='size-4' />
-											{readingTime} min read
-										</span>
-
-										<span aria-hidden='true'>•</span>
-
-										<span className='flex items-center gap-1'>
-											<ClockIcon className='size-4' />
-											{views} views
-										</span>
-									</div>
+									<span className='flex items-center gap-1'>
+										<ClockIcon className='size-4' />
+										{readingTime} min read
+									</span>
 								</div>
 
 								<ShareButton />

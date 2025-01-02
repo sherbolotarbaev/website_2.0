@@ -40,7 +40,12 @@ const ContactModal: React.FC = () => {
 	}
 
 	return (
-		<BottomSheet open={isOpen} onOpenChange={handleClose}>
+		<BottomSheet
+			open={isOpen}
+			onOpenChange={handleClose}
+			title='Contact me'
+			description="Have a question, a project idea, or just want to say hello? Drop me a message below, and I'll get back to you as soon as possible."
+		>
 			<ContactForm />
 		</BottomSheet>
 	)

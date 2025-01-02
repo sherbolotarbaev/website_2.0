@@ -3,6 +3,7 @@
 import React from 'react'
 import { Drawer as DrawerPrimitive } from 'vaul'
 
+import { euclidSemiBold } from 'fonts'
 import { cn } from 'utils'
 
 const Drawer = ({
@@ -48,7 +49,7 @@ const DrawerContent = React.forwardRef<
 			)}
 			{...props}
 		>
-			<div className='mx-auto mt-4 h-2 w-[100px] rounded-full bg-muted' />
+			<div className='mx-auto mt-4 h-2 w-[80px] rounded-full bg-accent' />
 			{children}
 		</DrawerPrimitive.Content>
 	</DrawerPortal>
@@ -84,9 +85,10 @@ const DrawerTitle = React.forwardRef<
 	<DrawerPrimitive.Title
 		ref={ref}
 		className={cn(
-			'text-lg font-semibold leading-none tracking-tight',
+			'text-xl font-semibold leading-none tracking-tight',
 			className
 		)}
+		style={euclidSemiBold.style}
 		{...props}
 	/>
 ))

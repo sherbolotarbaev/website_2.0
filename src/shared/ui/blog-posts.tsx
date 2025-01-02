@@ -23,24 +23,17 @@ import ImageThumbnail from './image.thumbnail'
 import { formatDate } from 'date-fns'
 import type { Post } from 'lib/blog'
 
-import { useGetPostViewsCount } from 'lib/hooks/use-post-views-count'
 import { cn } from 'utils'
 
-import {
-	type LucideProps,
-	CalendarIcon,
-	ClockIcon,
-	EyeIcon,
-} from 'lucide-react'
+import { type LucideProps, CalendarIcon, ClockIcon } from 'lucide-react'
 
 type TBlogPost = Post & { blurDataUrl: string | undefined }
 
 interface BlogPostsProps {
 	blogPosts: TBlogPost[]
-	allViews: PostView[]
 }
 
-const BlogPosts: React.FC<BlogPostsProps> = ({ blogPosts, allViews }) => {
+const BlogPosts: React.FC<BlogPostsProps> = ({ blogPosts }) => {
 	return (
 		<div className='grid grid-cols-1 md:grid-cols-2 gap-8'>
 			{blogPosts.map(
@@ -57,10 +50,10 @@ const BlogPosts: React.FC<BlogPostsProps> = ({ blogPosts, allViews }) => {
 					const readingTime = Math.ceil(content.split(' ').length / 200)
 
 					return (
-						<div className='w-full'>
+						<div key={slug} className='w-full'>
 							<Link href={`/blog/${slug}`} passHref className='h-full block'>
-								<Card className='md:h-full border-0 shadow-none hover:bg-secondary'>
-									<CardHeader className='p-2 pb-0'>
+								<Card className='md:h-full border-0 shadow-none hover:bg-accent rounded-3xl'>
+									<CardHeader className='p-4 pb-0'>
 										<ImageThumbnail
 											key={slug}
 											src={image || `/og?title=${title}`}
@@ -71,7 +64,7 @@ const BlogPosts: React.FC<BlogPostsProps> = ({ blogPosts, allViews }) => {
 										/>
 									</CardHeader>
 
-									<CardContent className='py-4 px-2 pb-2'>
+									<CardContent className='p-4 pb-2'>
 										<CardTitle className='text-xl font-semibold line-clamp-2'>
 											{title}
 										</CardTitle>
@@ -80,11 +73,10 @@ const BlogPosts: React.FC<BlogPostsProps> = ({ blogPosts, allViews }) => {
 											formattedDate={formattedDate}
 											readingTime={readingTime}
 											slug={slug}
-											allViews={allViews}
 										/>
 									</CardContent>
 
-									<CardFooter className='px-2 py-2 line-clamp-2'>
+									<CardFooter className='px-4 py-2 line-clamp-2'>
 										<CardDescription>
 											{summary.substring(0, 70) + '...'}
 										</CardDescription>
@@ -105,7 +97,6 @@ interface BlogPostMetaProps {
 	formattedDate: string
 	distance?: string
 	readingTime: number
-	allViews: PostView[]
 	slug: string
 }
 
@@ -117,9 +108,7 @@ type MetaItem = {
 }
 
 export const BlogPostMeta: React.FC<BlogPostMetaProps> = React.memo(
-	({ formattedDate, distance, readingTime, slug, allViews }) => {
-		const { views } = useGetPostViewsCount(allViews, slug)
-
+	({ formattedDate, distance, readingTime, slug }) => {
 		const metaItems: MetaItem[] = [
 			{
 				icon: CalendarIcon,
@@ -128,10 +117,6 @@ export const BlogPostMeta: React.FC<BlogPostMetaProps> = React.memo(
 			{
 				icon: ClockIcon,
 				text: `${readingTime} min read`,
-			},
-			{
-				icon: EyeIcon,
-				text: `${views} views`,
 			},
 		]
 

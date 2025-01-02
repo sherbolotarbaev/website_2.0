@@ -1,5 +1,8 @@
 'use client'
 
+import React, { useEffect, useRef } from 'react'
+
+import { motion, useAnimation, useInView } from 'framer-motion'
 import Link from 'next/link'
 import ImageThumbnail from 'shared/ui/image.thumbnail'
 import { Badge } from 'ui/badge'
@@ -9,17 +12,28 @@ import {
 	CardContent,
 	CardDescription,
 	CardFooter,
+	CardHeader,
 	CardTitle,
 } from 'ui/card'
 
-import { euclidMedium, euclidSemiBold } from 'fonts'
+import { euclidSemiBold } from 'fonts'
 import { projects, TProject } from './lib/projects'
 
 import { ExternalLink, Github } from 'lucide-react'
 
 const Projects: React.FC = () => {
+	const controls = useAnimation()
+	const ref = useRef(null)
+	const inView = useInView(ref, { once: true })
+
+	useEffect(() => {
+		if (inView) {
+			controls.start('visible')
+		}
+	}, [controls, inView])
+
 	return (
-		<section className='space-y-8'>
+		<section className='space-y-8' ref={ref}>
 			<h1
 				className='text-2xl font-semibold tracking-tight'
 				style={euclidSemiBold.style}
@@ -27,63 +41,107 @@ const Projects: React.FC = () => {
 				Projects<span className='text-[#6A61FF]'>.</span>
 			</h1>
 
-			<div className='grid grid-cols-1 md:grid-cols-2 gap-8'>
+			<motion.div
+				className='grid grid-cols-1 md:grid-cols-2 gap-8'
+				initial='hidden'
+				animate={controls}
+				variants={{
+					hidden: { opacity: 0 },
+					visible: {
+						opacity: 1,
+						transition: {
+							staggerChildren: 0.1,
+						},
+					},
+				}}
+			>
 				{projects.map((project, index) => (
-					<ProjectCard key={index} {...project} />
+					<ProjectCard key={index} {...project} index={index} />
 				))}
-			</div>
+			</motion.div>
 		</section>
 	)
 }
 
 export default Projects
 
-const ProjectCard: React.FC<TProject> = ({
+const ProjectCard: React.FC<TProject & { index: number }> = ({
 	image,
 	title,
 	description,
 	technologies,
 	repo,
 	demo,
+	index,
 }) => {
+	const controls = useAnimation()
+	const ref = useRef(null)
+	const inView = useInView(ref, { once: true })
+
+	useEffect(() => {
+		if (inView) {
+			controls.start('visible')
+		}
+	}, [controls, inView])
+
 	return (
-		<Card className='group space-y-2.5 border-0 shadow-none'>
-			<div className='relative'>
-				<ImageThumbnail src={image || '/placeholder.svg'} alt={title} />
+		<motion.div
+			ref={ref}
+			initial='hidden'
+			animate={controls}
+			variants={{
+				hidden: { opacity: 0, y: 50 },
+				visible: { opacity: 1, y: 0 },
+			}}
+			transition={{ duration: 0.5, delay: index * 0.2 }}
+		>
+			<Card className='rounded-3xl shadow-xl md:shadow hover:shadow-xl transition-shadow duration-300'>
+				<CardHeader className='p-0'>
+					<div className='relative'>
+						<ImageThumbnail
+							src={image || '/placeholder.svg'}
+							alt={title}
+							className='rounded-3xl'
+							aspectRatio={2 / 1}
+						/>
 
-				<div className='absolute top-2 right-2 flex gap-2 md:opacity-0 transition-opacity group-hover:opacity-100'>
-					{repo && (
-						<ProjectButton href={repo} ariaLabel='View repository'>
-							<Github /> Repo
-						</ProjectButton>
-					)}
+						<div className='p-4 absolute inset-0 bg-black bg-opacity-20 md:bg-opacity-50 flex items-start justify-start md:items-center md:justify-center md:opacity-0 md:hover:opacity-100 transition-opacity duration-300 rounded-3xl'>
+							<div className='flex gap-2'>
+								{repo && (
+									<ProjectButton href={repo} ariaLabel='View repository'>
+										<Github className='w-5 h-5' /> Repo
+									</ProjectButton>
+								)}
+								{demo && (
+									<ProjectButton href={demo} ariaLabel='View live demo'>
+										<ExternalLink className='w-5 h-5' /> Demo
+									</ProjectButton>
+								)}
+							</div>
+						</div>
+					</div>
+				</CardHeader>
 
-					{demo && (
-						<ProjectButton href={demo} ariaLabel='View live demo'>
-							<ExternalLink /> Demo
-						</ProjectButton>
-					)}
-				</div>
-			</div>
+				<CardContent className='p-4'>
+					<CardTitle
+						className='text-xl leading-relaxed font-medium mb-2'
+						style={euclidSemiBold.style}
+					>
+						{title}
+					</CardTitle>
 
-			<CardContent className='p-0'>
-				<CardTitle
-					className='text-xl leading-relaxed font-medium'
-					style={euclidMedium.style}
-				>
-					{title}
-				</CardTitle>
-				<CardDescription>{description}</CardDescription>
-			</CardContent>
+					<CardDescription>{description}</CardDescription>
+				</CardContent>
 
-			<CardFooter className='p-0 flex-wrap gap-2'>
-				{technologies.map((tech, techIndex) => (
-					<Badge key={techIndex} variant='secondary'>
-						{tech}
-					</Badge>
-				))}
-			</CardFooter>
-		</Card>
+				<CardFooter className='flex-wrap gap-2 p-4 pt-0'>
+					{technologies.map((tech, techIndex) => (
+						<Badge key={techIndex} variant='secondary'>
+							{tech}
+						</Badge>
+					))}
+				</CardFooter>
+			</Card>
+		</motion.div>
 	)
 }
 
@@ -102,7 +160,7 @@ const ProjectButton: React.FC<ProjectButtonProps> = ({
 		<Button
 			variant='cool'
 			size='sm'
-			className='px-1.5 gap-1 h-7 rounded-lg'
+			className='px-3 py-2 gap-2 rounded-full bg-white text-gray-800 hover:bg-gray-100 transition-colors duration-300'
 			asChild
 		>
 			<Link
