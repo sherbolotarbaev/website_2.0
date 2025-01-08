@@ -10,14 +10,7 @@ import {
 	BreadcrumbList,
 	BreadcrumbSeparator,
 } from 'ui/breadcrumb'
-import {
-	Card,
-	CardContent,
-	CardDescription,
-	CardFooter,
-	CardHeader,
-	CardTitle,
-} from 'ui/card'
+import { Card, CardContent, CardHeader, CardTitle } from 'ui/card'
 import ImageThumbnail from './image.thumbnail'
 
 import { formatDate } from 'date-fns'
@@ -51,7 +44,7 @@ const BlogPosts: React.FC<BlogPostsProps> = ({ blogPosts }) => {
 
 					return (
 						<div key={slug} className='w-full'>
-							<Link href={`/blog/${slug}`} passHref className='h-full block'>
+							<Link href={`/blog/${slug}`} passHref>
 								<Card className='md:h-full border-0 shadow-none hover:bg-accent rounded-3xl'>
 									<CardHeader className='p-4 pb-0'>
 										<ImageThumbnail
@@ -75,12 +68,6 @@ const BlogPosts: React.FC<BlogPostsProps> = ({ blogPosts }) => {
 											slug={slug}
 										/>
 									</CardContent>
-
-									<CardFooter className='px-4 py-2 line-clamp-2'>
-										<CardDescription>
-											{summary.substring(0, 70) + '...'}
-										</CardDescription>
-									</CardFooter>
 								</Card>
 							</Link>
 						</div>

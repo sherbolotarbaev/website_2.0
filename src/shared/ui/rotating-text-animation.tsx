@@ -2,6 +2,8 @@
 
 import React, { useEffect, useState } from 'react'
 
+import IndigoDot from './indigo-dot'
+
 interface RotatingTextAnimationProps {
 	words: string[]
 	duration?: number
@@ -55,7 +57,7 @@ const RotatingTextAnimation: React.FC<RotatingTextAnimationProps> = ({
 					}}
 				>
 					{word}
-					<span className='text-[#6A61FF]'>.</span>
+					<IndigoDot />
 				</div>
 			))}
 		</div>

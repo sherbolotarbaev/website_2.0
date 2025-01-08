@@ -6,11 +6,11 @@ import { formatDate, formatDistanceToNow } from 'date-fns'
 import { getBlogPosts } from 'lib/blog'
 import { getBase64 } from 'lib/blur-data-url'
 
-import { CalendarIcon, ClockIcon } from 'lucide-react'
 import Script from 'next/script'
 import { BlogPostBreadcrumb } from 'shared/ui/blog-posts'
 import ShareButton from 'shared/ui/button/share'
 import ImageThumbnail from 'shared/ui/image.thumbnail'
+import { Avatar, AvatarFallback, AvatarImage } from 'ui/avatar'
 import MDXContent from 'ui/mdx-content'
 
 interface GenerateMetadataProps {
@@ -112,49 +112,58 @@ export default async function BlogPost({ params }: Readonly<BlogPostProps>) {
 
 				<BlogPostBreadcrumb title={title} slug={slug} />
 
-				<div className='w-full flex flex-col lg:flex-row lg:gap-6'>
-					<article className='max-w-[34.5rem]'>
-						<header className='mb-8 flex flex-col gap-4'>
-							<h1 className='text-3xl font-bold'>{title}</h1>
+				<article>
+					<header className='mb-8 flex flex-col gap-5'>
+						<h1 className='text-2xl sm:3xl md:text-4xl font-bold'>{title}</h1>
 
-							<div className='flex justify-between md:items-center'>
-								<div className='flex flex-col gap-2 md:flex-row text-sm text-muted-foreground'>
-									<div className='flex items-center gap-2'>
-										<CalendarIcon className='size-4' />
-										<span>
-											{formattedDate} ({distance})
-										</span>
-									</div>
+						<div className='flex justify-between items-center mb-4'>
+							<AuthorInfo author={author}>
+								{formattedDate} ({distance})
+							</AuthorInfo>
 
-									<span className='flex items-center gap-1'>
-										<ClockIcon className='size-4' />
-										{readingTime} min read
-									</span>
-								</div>
-
-								<ShareButton />
-							</div>
-
-							{image && (
-								<ImageThumbnail
-									key={slug}
-									src={image}
-									alt={title}
-									placeholder='blur'
-									blurDataURL={blurDataURL}
-									aspectRatio={2 / 1}
-								/>
-							)}
-
-							<p>{summary}</p>
-						</header>
-
-						<div className='prose lg:prose-xl'>
-							<MDXContent source={content} />
+							<ShareButton />
 						</div>
-					</article>
-				</div>
+
+						{image && (
+							<ImageThumbnail
+								key={slug}
+								src={image}
+								alt={title}
+								placeholder='blur'
+								blurDataURL={blurDataURL}
+								aspectRatio={2 / 1}
+							/>
+						)}
+
+						<p>{summary}</p>
+					</header>
+
+					<div className='prose lg:prose-xl'>
+						<MDXContent source={content} />
+					</div>
+				</article>
 			</div>
 		</>
+	)
+}
+
+interface AuthorInfoProps {
+	author: string
+	children: React.ReactNode
+}
+
+const AuthorInfo: React.FC<AuthorInfoProps> = ({ author, children }) => {
+	return (
+		<div className='flex items-center gap-2'>
+			<Avatar className='size-8'>
+				<AvatarImage src='/images/sher.png' alt={author} loading='lazy' />
+				<AvatarFallback>{author[0]}</AvatarFallback>
+			</Avatar>
+
+			<div>
+				<h2 className='text-md font-medium tracking-tight'>{author}</h2>
+				<p className='text-sm text-muted-foreground'>{children}</p>
+			</div>
+		</div>
 	)
 }

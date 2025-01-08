@@ -8,11 +8,21 @@ import { euclidSemiBold } from 'fonts'
 import { links } from './lib/links'
 
 import { Mail } from 'lucide-react'
+import SectionBadge from '~/shared/ui/section-badge'
 
 const Hero: React.FC = () => {
 	return (
 		<section className='space-y-6'>
 			<div className='space-y-3'>
+				<Link href='' passHref>
+					<SectionBadge className='w-fit flex items-center gap-1'>
+						Open to Opportunities{' '}
+						<span className='text-indigo-500 font-normal max-sm:hidden'>
+							• Read CV
+						</span>
+					</SectionBadge>
+				</Link>
+
 				<h1
 					className='text-[1.35rem] sm:text-2xl font-semibold tracking-tight'
 					style={euclidSemiBold.style}

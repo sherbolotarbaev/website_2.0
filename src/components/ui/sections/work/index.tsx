@@ -2,6 +2,7 @@ import React from 'react'
 
 import Link from 'next/link'
 import ImageThumbnail from 'shared/ui/image.thumbnail'
+import IndigoDot from 'shared/ui/indigo-dot'
 import { Badge } from 'ui/badge'
 import { Separator } from 'ui/separator'
 
@@ -20,7 +21,8 @@ const Work: React.FC = () => {
 				className='text-2xl font-semibold tracking-tight'
 				style={euclidSemiBold.style}
 			>
-				Experience<span className='text-[#6A61FF]'>.</span>
+				Experience
+				<IndigoDot />
 			</h1>
 
 			<div className='flex flex-col'>

@@ -5,6 +5,7 @@ import React, { useEffect, useRef } from 'react'
 import { motion, useAnimation, useInView } from 'framer-motion'
 import Link from 'next/link'
 import ImageThumbnail from 'shared/ui/image.thumbnail'
+import IndigoDot from 'shared/ui/indigo-dot'
 import { Badge } from 'ui/badge'
 import { Button } from 'ui/button'
 import {
@@ -38,7 +39,8 @@ const Projects: React.FC = () => {
 				className='text-2xl font-semibold tracking-tight'
 				style={euclidSemiBold.style}
 			>
-				Projects<span className='text-[#6A61FF]'>.</span>
+				Projects
+				<IndigoDot />
 			</h1>
 
 			<motion.div

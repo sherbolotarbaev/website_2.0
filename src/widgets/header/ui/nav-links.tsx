@@ -28,7 +28,7 @@ const NavLinks: React.FC<NavLinksProps> = ({ className, onClick }) => {
 					href={route.path}
 					className={cn(
 						'text-sm font-medium transition-colors hover:text-primary',
-						pathname === route.path
+						pathname.startsWith(route.path)
 							? 'text-primary font-semibold'
 							: 'text-muted-foreground',
 						className?.includes('flex-col') ? 'py-2' : 'px-4 py-2'

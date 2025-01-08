@@ -4,6 +4,7 @@ import React from 'react'
 
 import { useMediaQuery } from 'hooks/use-media-query'
 
+import IndigoDot from 'shared/ui/indigo-dot'
 import {
 	Dialog,
 	DialogContent,
@@ -19,6 +20,8 @@ import {
 	DrawerTitle,
 } from 'ui/drawer'
 import { ScrollArea } from 'ui/scroll-area'
+
+import { euclidBold } from 'fonts'
 
 interface BottomSheetProps {
 	open?: boolean
@@ -43,9 +46,9 @@ const BottomSheet: React.FC<BottomSheetProps> = ({
 				<DialogContent className='max-w-[405px]'>
 					{title && (
 						<DialogHeader>
-							<DialogTitle>
+							<DialogTitle style={euclidBold.style}>
 								{title}
-								<span className='text-[#6A61FF]'>.</span>
+								<IndigoDot />
 							</DialogTitle>
 
 							{description && (
@@ -64,9 +67,9 @@ const BottomSheet: React.FC<BottomSheetProps> = ({
 			<DrawerContent>
 				{title && (
 					<DrawerHeader>
-						<DrawerTitle>
+						<DrawerTitle style={euclidBold.style}>
 							{title}
-							<span className='text-[#6A61FF]'>.</span>
+							<IndigoDot />
 						</DrawerTitle>
 
 						{description && (

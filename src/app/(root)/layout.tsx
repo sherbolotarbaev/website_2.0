@@ -50,7 +50,11 @@ export default function RootLayout({
 		<>
 			<html lang='en'>
 				<body className='min-h-screen antialiased'>
-					<TopLoadingBar color='#6A61FF' showSpinner={false} height={3} />
+					<TopLoadingBar
+						color='rgb(79 70 229)'
+						showSpinner={false}
+						height={3}
+					/>
 					<Providers>{children}</Providers>
 					<Analytics />
 					<SpeedInsights />

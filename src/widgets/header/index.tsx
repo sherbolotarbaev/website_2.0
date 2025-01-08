@@ -1,21 +1,31 @@
+'use client'
+
 import Logo from 'shared/ui/logo'
 import ModeToggle from 'ui/mode-toggle'
 import NavLinks from './ui/nav-links'
 
+import { useScrollVisibility } from 'hooks/use-scroll-visibility'
+import { cn } from 'utils'
+
 const Header = () => {
+	const isVisible = useScrollVisibility()
+
 	return (
-		<header className='sticky top-4 left-0 right-0 mx-auto z-40 w-full px-5'>
-			<div className='mx-auto max-w-[560px] md:max-w-[610px] lg:max-w-[660px] bg-background/95 backdrop-blur-md supports-[backdrop-filter]:bg-background/60 border border-border rounded-3xl'>
-				<div className='container flex h-14 items-center px-4'>
-					<Logo />
+		<header
+			className={cn(
+				'sticky top-0 left-0 right-0 z-40 w-full transition-all duration-300',
+				isVisible ? 'translate-y-4' : '-translate-y-full'
+			)}
+		>
+			<div className='h-14 container flex items-center'>
+				<Logo />
 
-					<NavLinks className='ml-4 flex flex-row' />
+				<NavLinks className='ml-4 flex flex-row' />
 
-					<div className='flex flex-1 items-center justify-end'>
-						<nav className='flex items-center gap-4'>
-							<ModeToggle />
-						</nav>
-					</div>
+				<div className='flex flex-1 items-center justify-end'>
+					<nav className='flex items-center gap-4'>
+						<ModeToggle />
+					</nav>
 				</div>
 			</div>
 		</header>

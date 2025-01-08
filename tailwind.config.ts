@@ -1,4 +1,5 @@
 import type { Config } from 'tailwindcss'
+import plugin from 'tailwindcss/plugin'
 
 export default {
 	darkMode: ['class'],
@@ -12,6 +13,15 @@ export default {
 		container: {
 			center: true,
 			padding: '1.5rem',
+			screens: {
+				sm: '600px',
+				md: '650px',
+				lg: '700px',
+			},
+		},
+		containerFluid: {
+			center: true,
+			padding: '0.5rem',
 			screens: {
 				sm: '600px',
 				md: '650px',
@@ -76,6 +86,16 @@ export default {
 				sm: 'calc(var(--radius) - 4px)',
 				custom: '100px 200px',
 			},
+			keyframes: {
+				'border-beam': {
+					'100%': {
+						'offset-distance': '100%',
+					},
+				},
+			},
+			animation: {
+				'border-beam': 'border-beam calc(var(--duration)*1s) infinite linear',
+			},
 			backgroundImage: {
 				'custom-blue-gradient': `
           linear-gradient(65deg, #98c7fe, #a5f6ff 53.48%, #adfff0),
@@ -85,5 +105,28 @@ export default {
 			},
 		},
 	},
-	plugins: [require('tailwindcss-animate')],
+	plugins: [
+		require('tailwindcss-animate'),
+		plugin(function ({ addUtilities, theme }) {
+			const containerFluidUtilities = {
+				'.container-fluid': {
+					width: '100%',
+					marginLeft: 'auto',
+					marginRight: 'auto',
+					paddingLeft: theme('containerFluid.padding', '0.5rem'),
+					paddingRight: theme('containerFluid.padding', '0.5rem'),
+					'@screen sm': {
+						maxWidth: theme('containerFluid.screens.sm', '100%'),
+					},
+					'@screen md': {
+						maxWidth: theme('containerFluid.screens.md', '100%'),
+					},
+					'@screen lg': {
+						maxWidth: theme('containerFluid.screens.lg', '100%'),
+					},
+				},
+			}
+			addUtilities(containerFluidUtilities)
+		}),
+	],
 } satisfies Config
