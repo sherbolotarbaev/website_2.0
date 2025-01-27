@@ -97,12 +97,14 @@ const DrawerContent = React.forwardRef<
 					className
 				)}
 				style={{
+					// @ts-expect-error
 					height: springs.height,
 					touchAction: 'none',
 				}}
 				{...props}
 				{...bind()}
 			>
+				{/* @ts-expect-error */}
 				<animated.div
 					ref={contentRef}
 					className='flex-grow overflow-auto'
