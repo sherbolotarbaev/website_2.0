@@ -16,7 +16,6 @@ import { useMediaQuery } from 'hooks/use-media-query'
 import { ContactFormSchema } from 'lib/schema'
 import { cn } from 'utils'
 
-import { Mail } from 'lucide-react'
 import { useDispatch } from 'react-redux'
 
 const ContactForm: React.FC = ({}) => {
@@ -78,7 +77,7 @@ const ContactForm: React.FC = ({}) => {
 								<FormControl>
 									<Textarea
 										className={cn(
-											form.formState.errors.email && 'border-error',
+											form.formState.errors.message && 'border-error',
 											'max-h-72'
 										)}
 										placeholder='Message'
@@ -106,7 +105,7 @@ const ContactForm: React.FC = ({}) => {
 					{!isDesktop && (
 						<Button
 							type='button'
-							variant='outline'
+							variant='ghost'
 							onClick={() => dispatch(closeModal())}
 							className='w-full sm:w-auto'
 						>
@@ -122,7 +121,7 @@ const ContactForm: React.FC = ({}) => {
 						loadingText='Sending...'
 						className='w-full sm:w-auto'
 					>
-						<Mail className='size-4' /> Send
+						Send
 					</SubmitButton>
 				</div>
 			</form>

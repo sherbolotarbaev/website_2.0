@@ -1,7 +1,6 @@
 'use client'
 
 import React from 'react'
-
 import { Button } from 'ui/button'
 
 import { ImSpinner3 } from 'react-icons/im'
@@ -29,7 +28,7 @@ const SubmitButton: React.FC<SubmitButtonProps> = ({
 			size={size}
 		>
 			{isLoading ? (
-				<div className='flex items-center gap-1.5'>
+				<div className='flex items-center gap-1.5 font-light'>
 					<ImSpinner3 className='animate-spin size-5' /> {loadingText}
 				</div>
 			) : (

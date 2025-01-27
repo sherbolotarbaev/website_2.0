@@ -97,11 +97,7 @@ export default {
 				'border-beam': 'border-beam calc(var(--duration)*1s) infinite linear',
 			},
 			backgroundImage: {
-				'custom-blue-gradient': `
-          linear-gradient(65deg, #98c7fe, #a5f6ff 53.48%, #adfff0),
-          linear-gradient(185deg, #b3f9d8, #e3f5b0),
-          linear-gradient(58deg, #ffe7b8 30.98%, #ffe2b8 66.98%, #ffbfb8 100.57%)
-        `,
+				'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
 			},
 		},
 	},
