@@ -45,7 +45,7 @@ const BlogPosts: React.FC<BlogPostsProps> = ({ blogPosts }) => {
 					return (
 						<div key={slug} className='w-full'>
 							<Link href={`/blog/${slug}`} passHref>
-								<Card className='md:h-full border-0 shadow-none hover:bg-gradient-radial from-[#5e5e5e] to-[#373737] rounded-3xl'>
+								<Card className='md:h-full border-0 shadow-none sm:hover:bg-accent rounded-3xl'>
 									<CardHeader className='p-4 pb-0'>
 										<ImageThumbnail
 											key={slug}

@@ -84,7 +84,6 @@ export default {
 				lg: 'var(--radius)',
 				md: 'calc(var(--radius) - 2px)',
 				sm: 'calc(var(--radius) - 4px)',
-				custom: '100px 200px',
 			},
 			keyframes: {
 				'border-beam': {
@@ -95,9 +94,6 @@ export default {
 			},
 			animation: {
 				'border-beam': 'border-beam calc(var(--duration)*1s) infinite linear',
-			},
-			backgroundImage: {
-				'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
 			},
 		},
 	},

@@ -17,7 +17,7 @@ const Header = () => {
 				isVisible ? 'translate-y-4' : '-translate-y-full'
 			)}
 		>
-			<div className='h-14 container flex items-center'>
+			<div className='h-16 container flex items-center'>
 				<Logo />
 
 				<NavLinks className='ml-4 flex flex-row' />

@@ -29,7 +29,7 @@ const DrawerOverlay = React.forwardRef<
 >(({ className, ...props }, ref) => (
 	<DrawerPrimitive.Overlay
 		ref={ref}
-		className={cn('fixed inset-0 z-50 bg-primary/30', className)}
+		className={cn('fixed inset-0 z-50 bg-primary/40', className)}
 		{...props}
 	/>
 ))
@@ -38,26 +38,27 @@ DrawerOverlay.displayName = DrawerPrimitive.Overlay.displayName
 const DrawerContent = React.forwardRef<
 	React.ElementRef<typeof DrawerPrimitive.Content>,
 	React.ComponentPropsWithoutRef<typeof DrawerPrimitive.Content>
->(({ className, children, ...props }, ref) => (
-	<DrawerPortal>
-		<DrawerOverlay />
-		<DrawerPrimitive.Content
-			ref={ref}
-			className={cn(
-				'fixed inset-x-0 bottom-0 z-50 mt-24 flex flex-col border-t rounded-t-[32px] bg-background',
-				className
-			)}
-			style={{
-				height: 708,
-				touchAction: 'none',
-			}}
-			{...props}
-		>
-			<div className='mx-auto mt-4 h-1 w-12 rounded-full bg-muted-foreground' />
-			{children}
-		</DrawerPrimitive.Content>
-	</DrawerPortal>
-))
+>(({ className, children, ...props }, ref) => {
+	return (
+		<DrawerPortal>
+			<DrawerOverlay />
+			<DrawerPrimitive.Content
+				ref={ref}
+				className={cn(
+					'fixed inset-x-0 bottom-0 z-50 flex flex-col bg-background rounded-t-[32px] touch-none',
+					className
+				)}
+				style={{
+					height: 708,
+				}}
+				{...props}
+			>
+				<div className='mx-auto mt-4 h-1 w-12 rounded-full bg-muted-foreground/50' />
+				{children}
+			</DrawerPrimitive.Content>
+		</DrawerPortal>
+	)
+})
 DrawerContent.displayName = 'DrawerContent'
 
 const DrawerHeader = ({

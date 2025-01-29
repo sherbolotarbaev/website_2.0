@@ -102,7 +102,7 @@ export default async function BlogPost({ params }: Readonly<BlogPostProps>) {
 
 	return (
 		<>
-			<div className='container'>
+			<div className='container py-8 bg-background rounded-[32px]'>
 				<Script
 					id='blog-post-schema'
 					type='application/ld+json'

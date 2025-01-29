@@ -17,22 +17,20 @@ export default async function Blog() {
 
 	return (
 		<>
-			<div className='space-y-6'>
-				<div className='container space-y-3'>
-					<h1
-						className='text-2xl font-semibold tracking-tight'
-						style={euclidSemiBold.style}
-					>
-						Personal blog
-						<IndigoDot />
-					</h1>
+			<div className='container pt-8 pb-6 bg-background rounded-t-[32px] space-y-3'>
+				<h1
+					className='text-2xl font-semibold tracking-tight'
+					style={euclidSemiBold.style}
+				>
+					Personal blog
+					<IndigoDot />
+				</h1>
 
-					<p className='leading-relaxed'>Thoughts, ideas, and experiences.</p>
-				</div>
+				<p className='leading-relaxed'>Thoughts, ideas, and experiences.</p>
+			</div>
 
-				<div className='container-fluid'>
-					<BlogPosts blogPosts={blogPosts} />
-				</div>
+			<div className='container-fluid pb-8 bg-background rounded-b-[32px]'>
+				<BlogPosts blogPosts={blogPosts} />
 			</div>
 		</>
 	)

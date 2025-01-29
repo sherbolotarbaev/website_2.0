@@ -17,9 +17,7 @@ const Hero: React.FC = () => {
 				<Link href='' passHref>
 					<SectionBadge className='w-fit flex items-center gap-1'>
 						Open to Opportunities{' '}
-						<span className='text-indigo-500 font-normal max-sm:hidden'>
-							• Read CV
-						</span>
+						<span className='text-indigo-500 font-normal'>• Read CV</span>
 					</SectionBadge>
 				</Link>
 

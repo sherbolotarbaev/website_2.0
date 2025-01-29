@@ -11,7 +11,7 @@ export default function BaseLayout({ children }: Readonly<BaseLayoutProps>) {
 	return (
 		<>
 			<Header />
-			<main className='my-14'>{children}</main>
+			<main className='mt-4 mb-8'>{children}</main>
 			<Footer />
 
 			<ContactModal />
