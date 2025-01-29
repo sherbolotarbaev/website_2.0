@@ -78,7 +78,7 @@ const BottomSheet: React.FC<BottomSheetProps> = ({
 					</DrawerHeader>
 				)}
 
-				<ScrollArea className='overflow-y-auto p-4'>{children}</ScrollArea>
+				<ScrollArea className='h-full p-4'>{children}</ScrollArea>
 			</DrawerContent>
 		</Drawer>
 	)
