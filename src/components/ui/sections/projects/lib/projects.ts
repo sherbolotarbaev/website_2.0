@@ -11,7 +11,7 @@ export const projects: TProject[] = [
 	{
 		title: 'ChinaTradeX',
 		description:
-			'Your gateway to seamless trade between China and the world. Track orders, manage shipments, and optimize your international business with real-time updates and comprehensive logistics solutions.',
+			'Platform for seamless China-world trade with real-time order tracking and logistics management.',
 		image: '/images/chinatradex.png',
 		repo: 'https://github.com/yourusername/project-one',
 		demo: 'https://www.chinatradex.co',
@@ -29,7 +29,7 @@ export const projects: TProject[] = [
 	{
 		title: 'Personal API',
 		description:
-			'A scalable personal API using NestJS and TypeScript for user authentication, session management, and data storage with Prisma and PostgreSQL. Features OAuth2 via Passport.js and Supabase for real-time updates and storage.',
+			'Scalable NestJS API with auth, session management, and real-time updates using Prisma and Supabase.',
 		image: '/images/nestjs.png',
 		repo: 'https://github.com/sherbolotarbaev/api',
 		technologies: [
@@ -39,7 +39,7 @@ export const projects: TProject[] = [
 			'PostgreSQL',
 			'OAuth2',
 			'Passport.js',
-			'Express session',
+			'Express Session',
 		],
 	},
 ]

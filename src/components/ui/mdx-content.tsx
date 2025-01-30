@@ -86,7 +86,7 @@ const components: MDXComponents = {
 			<Link href={`#${slug}`} className='no-underline'>
 				<h1
 					id={slug}
-					className='scroll-m-20 text-3xl font-extrabold tracking-tight mt-12 mb-4'
+					className='scroll-m-5 text-3xl font-extrabold tracking-tight mt-12 mb-4'
 				>
 					{children}
 				</h1>
@@ -99,7 +99,7 @@ const components: MDXComponents = {
 			<Link href={`#${slug}`} className='no-underline'>
 				<h2
 					id={slug}
-					className='scroll-m-20 border-b pb-2 text-2xl font-semibold tracking-tight first:mt-0 mb-4'
+					className='scroll-m-5 border-b pb-2 text-2xl font-semibold tracking-tight first:mt-0 mb-4'
 				>
 					{children}
 				</h2>
@@ -112,7 +112,7 @@ const components: MDXComponents = {
 			<Link href={`#${slug}`} className='no-underline'>
 				<h3
 					id={slug}
-					className='scroll-m-20 text-xl font-semibold tracking-tight'
+					className='scroll-m-5 text-xl font-semibold tracking-tight'
 				>
 					{children}
 				</h3>
@@ -125,7 +125,7 @@ const components: MDXComponents = {
 			<Link href={`#${slug}`} className='no-underline'>
 				<h4
 					id={slug}
-					className='scroll-m-20 text-lg font-semibold tracking-tight'
+					className='scroll-m-5 text-lg font-semibold tracking-tight'
 				>
 					{children}
 				</h4>

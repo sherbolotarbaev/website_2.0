@@ -14,18 +14,18 @@ export default {
 			center: true,
 			padding: '1.5rem',
 			screens: {
-				sm: '600px',
-				md: '650px',
-				lg: '700px',
+				sm: '700px',
+				md: '750px',
+				lg: '800px',
 			},
 		},
 		containerFluid: {
 			center: true,
 			padding: '0.5rem',
 			screens: {
-				sm: '600px',
-				md: '650px',
-				lg: '700px',
+				sm: '700px',
+				md: '750px',
+				lg: '800px',
 			},
 		},
 		screens: {

@@ -42,8 +42,12 @@ export const experiences: TExperience[] = [
 				
 				<br/><br/>
 				
-				(WEDEVX AI) Built an AI assistant that helps solve exercises, tracks progress, and provides personalized support.`,
-				covers: ['/images/wedevx.png'],
+				(WEDEVX AI) Built an AI assistant that helps solve exercises, tracks progress, and provides personalized support.
+				
+				<br/><br/>
+
+				Contributed to the development of an AI recruitment engine to source, vet, and hire top engineering talent using AI-driven job simulations, streamlining recruitment processes.`,
+				covers: ['/images/wedevx.png', '/images/wedevx-4.png'],
 				skills: [
 					'Systems Design',
 					'Code Review',

@@ -1,8 +1,8 @@
 'use client'
 
-import React, { useCallback, useEffect, useMemo, useState } from 'react'
-
+import { motion, useInView } from 'framer-motion'
 import Link from 'next/link'
+import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import {
 	Breadcrumb,
 	BreadcrumbItem,
@@ -18,7 +18,8 @@ import type { Post } from 'lib/blog'
 
 import { cn } from 'utils'
 
-import { type LucideProps, CalendarIcon, ClockIcon } from 'lucide-react'
+import type { LucideProps } from 'lucide-react'
+import { CalendarIcon, ClockIcon } from 'lucide-react'
 
 type TBlogPost = Post & { blurDataUrl: string | undefined }
 
@@ -29,52 +30,65 @@ interface BlogPostsProps {
 const BlogPosts: React.FC<BlogPostsProps> = ({ blogPosts }) => {
 	return (
 		<div className='grid grid-cols-1 md:grid-cols-2 gap-8'>
-			{blogPosts.map(
-				({
-					slug,
-					metadata: { title, image, summary, publishedAt },
-					content,
-					blurDataUrl,
-				}) => {
-					const formattedDate = formatDate(
-						new Date(publishedAt),
-						'MMM dd, yyyy'
-					)
-					const readingTime = Math.ceil(content.split(' ').length / 200)
-
-					return (
-						<div key={slug} className='w-full'>
-							<Link href={`/blog/${slug}`} passHref>
-								<Card className='md:h-full border-0 shadow-none sm:hover:bg-accent rounded-3xl'>
-									<CardHeader className='p-4 pb-0'>
-										<ImageThumbnail
-											key={slug}
-											src={image || `/og?title=${title}`}
-											alt={title}
-											placeholder={image ? 'blur' : 'empty'}
-											blurDataURL={image && blurDataUrl}
-											aspectRatio={2 / 1.1}
-										/>
-									</CardHeader>
-
-									<CardContent className='p-4 pb-2'>
-										<CardTitle className='text-xl font-semibold line-clamp-2'>
-											{title}
-										</CardTitle>
-
-										<BlogPostMeta
-											formattedDate={formattedDate}
-											readingTime={readingTime}
-											slug={slug}
-										/>
-									</CardContent>
-								</Card>
-							</Link>
-						</div>
-					)
-				}
-			)}
+			{blogPosts.map((post, index) => (
+				<BlogPostCard key={post.slug} post={post} index={index} />
+			))}
 		</div>
+	)
+}
+
+const BlogPostCard: React.FC<{ post: TBlogPost; index: number }> = ({
+	post,
+	index,
+}) => {
+	const ref = React.useRef(null)
+	const isInView = useInView(ref, { once: true, amount: 0.2 })
+
+	const {
+		slug,
+		metadata: { title, image, publishedAt },
+		content,
+		blurDataUrl,
+	} = post
+
+	const formattedDate = formatDate(new Date(publishedAt), 'MMM dd, yyyy')
+	const readingTime = Math.ceil(content.split(' ').length / 200)
+
+	return (
+		<motion.div
+			ref={ref}
+			initial={{ opacity: 0, y: 50 }}
+			animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+			transition={{ duration: 0.5, delay: index * 0.1 }}
+			className='w-full'
+		>
+			<Link href={`/blog/${slug}`} passHref>
+				<Card className='md:h-full border-0 shadow-none sm:hover:bg-accent rounded-3xl'>
+					<CardHeader className='p-4 pb-0'>
+						<ImageThumbnail
+							key={slug}
+							src={image || `/og?title=${title}`}
+							alt={title}
+							placeholder={image ? 'blur' : 'empty'}
+							blurDataURL={image && blurDataUrl}
+							aspectRatio={2 / 1.1}
+						/>
+					</CardHeader>
+
+					<CardContent className='p-4 pb-2'>
+						<CardTitle className='text-xl font-semibold line-clamp-2'>
+							{title}
+						</CardTitle>
+
+						<BlogPostMeta
+							formattedDate={formattedDate}
+							readingTime={readingTime}
+							slug={slug}
+						/>
+					</CardContent>
+				</Card>
+			</Link>
+		</motion.div>
 	)
 }
 
@@ -169,7 +183,7 @@ export const BlogPostContentNavigation = () => {
 			element => ({
 				id: element.id,
 				text: element.textContent || '',
-				level: parseInt(element.tagName[1]),
+				level: Number.parseInt(element.tagName[1]),
 				top: element.getBoundingClientRect().top + window.scrollY,
 			})
 		)
