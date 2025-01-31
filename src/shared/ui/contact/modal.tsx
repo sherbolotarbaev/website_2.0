@@ -5,7 +5,7 @@ import { closeModal, ModalTypesEnum, openModal } from 'features/modal-slice'
 import { RootState } from 'lib/store'
 import { useDispatch, useSelector } from 'react-redux'
 
-import BottomSheet from '../bottom.sheet'
+import BottomSheet from '../test-bottom.sheet'
 import ContactForm from './form'
 
 const ContactModal: React.FC = () => {
