@@ -14,7 +14,7 @@ interface BottomSheetProps {
 	description?: string
 }
 
-const SNAP_POINTS = [100, 60, 60] // percentage of screen height
+const SNAP_POINTS = [100, 80, 80] // percentage of screen height
 
 const BottomSheet: React.FC<BottomSheetProps> = ({
 	open,
@@ -51,8 +51,8 @@ const BottomSheet: React.FC<BottomSheetProps> = ({
 				: prev
 		)
 
-		setCurrentSnapPoint(closestSnapPoint)
 		controls.start({ y: `${100 - closestSnapPoint}%` })
+		setCurrentSnapPoint(closestSnapPoint)
 	}
 
 	const handleOutsideClick = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -76,6 +76,8 @@ const BottomSheet: React.FC<BottomSheetProps> = ({
 				style={{ y }}
 				initial={{ y: '100%' }}
 				animate={controls}
+				exit={{ y: '100%' }}
+				transition={{ type: 'spring', damping: 30, stiffness: 300 }}
 				drag='y'
 				dragConstraints={{ top: 0, bottom: 0 }}
 				dragElastic={0.2}
@@ -93,10 +95,7 @@ const BottomSheet: React.FC<BottomSheetProps> = ({
 					<p className='text-sm text-muted-foreground'>{description}</p>
 				</div>
 
-				<div
-					className='overflow-y-auto p-4'
-					style={{ height: `calc(80vh - 40px)` }}
-				>
+				<div className='overflow-y-auto p-4' style={{ height: '83dvh' }}>
 					{children}
 				</div>
 			</motion.div>
