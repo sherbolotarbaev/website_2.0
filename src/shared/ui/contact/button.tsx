@@ -1,18 +1,26 @@
 'use client'
 
+import { VariantProps } from 'class-variance-authority'
 import { ModalTypesEnum, openModal } from 'features/modal-slice'
 import { useDispatch } from 'react-redux'
 
-import { Button } from 'ui/button'
+import { Button, buttonVariants } from 'ui/button'
 
 import { MessageCircle } from 'lucide-react'
+import Link from 'next/link'
 
-interface ContactButtonProps {
+interface ContactButtonProps
+	extends React.ButtonHTMLAttributes<HTMLButtonElement>,
+		VariantProps<typeof buttonVariants> {
 	text?: string
+	icon?: React.ReactElement
+	link?: string
 }
 
-const ContactButton: React.FC<ContactButtonProps> = ({
+const ContactSubmitButton: React.FC<ContactButtonProps> = ({
 	text = 'Get in touch',
+	icon,
+	...props
 }) => {
 	const dispatch = useDispatch()
 
@@ -25,10 +33,33 @@ const ContactButton: React.FC<ContactButtonProps> = ({
 	}
 
 	return (
-		<Button variant='cool' onClick={handleOpenModal}>
-			<MessageCircle /> {text}
+		<Button variant='cool' onClick={handleOpenModal} {...props}>
+			{icon ? icon : <MessageCircle />} {text}
 		</Button>
 	)
 }
 
-export default ContactButton
+const ContactButton: React.FC<ContactButtonProps> = ({
+	text = 'Email',
+	icon,
+	link,
+	...props
+}) => {
+	if (link) {
+		return (
+			<Link href={link} target='_blank' passHref>
+				<Button size='lg' className='rounded-xl w-full' {...props}>
+					{icon} {text}
+				</Button>
+			</Link>
+		)
+	}
+
+	return (
+		<Button size='lg' className='rounded-xl' {...props}>
+			{icon} {text}
+		</Button>
+	)
+}
+
+export { ContactButton, ContactSubmitButton }

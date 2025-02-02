@@ -36,7 +36,7 @@ const ContactForm: React.FC = ({}) => {
 		<Form {...form}>
 			<form
 				onSubmit={form.handleSubmit(onSubmit)}
-				className='w-full h-full flex flex-col gap-5'
+				className='w-full flex flex-col gap-5'
 			>
 				<div className='space-y-3'>
 					<FormField

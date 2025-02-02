@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import ContactButton from 'shared/ui/contact/button'
+import { ContactSubmitButton as ContactButton } from 'shared/ui/contact/button'
 import RotatingTextAnimation from 'shared/ui/rotating-text-animation'
 import { Button } from 'ui/button'
 
