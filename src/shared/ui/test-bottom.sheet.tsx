@@ -1,10 +1,17 @@
 'use client'
 
-import * as React from 'react'
-
-import { motion, PanInfo, useAnimation, useMotionValue } from 'framer-motion'
+import React from 'react'
 
 import { euclidBold } from 'fonts'
+import {
+	motion,
+	type PanInfo,
+	useAnimation,
+	useMotionValue,
+} from 'framer-motion'
+import { useMediaQuery } from 'hooks/use-media-query'
+
+import { RemoveScroll } from 'react-remove-scroll'
 
 interface BottomSheetProps {
 	open?: boolean
@@ -14,7 +21,7 @@ interface BottomSheetProps {
 	description?: string
 }
 
-const SNAP_POINTS = [100, 80, 80] // percentage of screen height
+const SNAP_POINTS = [100, 80, 50] // percentage of screen height
 
 const BottomSheet: React.FC<BottomSheetProps> = ({
 	open,
@@ -26,6 +33,7 @@ const BottomSheet: React.FC<BottomSheetProps> = ({
 	const controls = useAnimation()
 	const y = useMotionValue(0)
 	const [currentSnapPoint, setCurrentSnapPoint] = React.useState(SNAP_POINTS[1])
+	const isMobile = useMediaQuery('(max-width: 640px)')
 
 	React.useEffect(() => {
 		if (open) {
@@ -64,42 +72,47 @@ const BottomSheet: React.FC<BottomSheetProps> = ({
 	if (!open) return null
 
 	return (
-		<motion.div
-			className='fixed inset-0 bg-primary/40 z-50 overflow-hidden touch-none'
-			initial={{ opacity: 0 }}
-			animate={{ opacity: 1 }}
-			exit={{ opacity: 0 }}
-			onClick={handleOutsideClick}
-		>
+		<RemoveScroll enabled={open}>
 			<motion.div
-				className='absolute inset-x-0 bottom-0 bg-background rounded-t-[32px] touch-none max-w-lg mx-auto'
-				style={{ y }}
-				initial={{ y: '100%' }}
-				animate={controls}
-				exit={{ y: '100%' }}
-				transition={{ type: 'spring', damping: 30, stiffness: 300 }}
-				drag='y'
-				dragConstraints={{ top: 0, bottom: 0 }}
-				dragElastic={0.2}
-				onDragEnd={handleDragEnd}
+				className='fixed inset-0 bg-primary/40 z-50 overflow-hidden'
+				initial={{ opacity: 0 }}
+				animate={{ opacity: 1 }}
+				exit={{ opacity: 0 }}
+				onClick={handleOutsideClick}
 			>
-				<div className='mx-auto mt-4 h-1 w-12 rounded-full bg-muted-foreground/50' />
-				<div className='grid gap-1.5 p-4 text-center sm:text-left'>
-					<h2
-						className='text-xl font-semibold leading-none tracking-tight'
-						style={euclidBold.style}
+				<motion.div
+					className='absolute inset-x-0 bottom-0 bg-background rounded-t-[32px] touch-none max-w-lg mx-auto overflow-hidden'
+					style={{ y, height: isMobile ? '100%' : 'auto' }}
+					initial={{ y: '100%' }}
+					animate={controls}
+					exit={{ y: '100%' }}
+					transition={{ type: 'spring', damping: 30, stiffness: 300 }}
+					drag='y'
+					dragConstraints={{ top: 0, bottom: 0 }}
+					dragElastic={0.2}
+					onDragEnd={handleDragEnd}
+				>
+					<div className='sticky top-0 bg-background z-10 pb-4'>
+						<div className='mx-auto mt-4 h-1 w-12 rounded-full bg-muted-foreground/50' />
+						<div className='grid gap-1.5 p-4 text-center sm:text-left'>
+							<h2
+								className='text-xl font-semibold leading-none tracking-tight'
+								style={euclidBold.style}
+							>
+								{title}
+							</h2>
+							<p className='text-sm text-muted-foreground'>{description}</p>
+						</div>
+					</div>
+					<div
+						className='overflow-y-auto p-4'
+						style={{ height: 'calc(100% - 100px)' }}
 					>
-						{title}
-					</h2>
-
-					<p className='text-sm text-muted-foreground'>{description}</p>
-				</div>
-
-				<div className='overflow-y-auto p-4' style={{ height: '83dvh' }}>
-					{children}
-				</div>
+						{children}
+					</div>
+				</motion.div>
 			</motion.div>
-		</motion.div>
+		</RemoveScroll>
 	)
 }
 
