@@ -48,8 +48,15 @@ const ContactButton: React.FC<ContactButtonProps> = ({
 	if (link) {
 		return (
 			<Link href={link} target='_blank' passHref>
-				<Button size='lg' className='rounded-xl w-full' {...props}>
-					{icon} {text}
+				<Button
+					size='lg'
+					className='w-full py-6 px-4 border-0 justify-start gap-3 text-base rounded-none hover:bg-muted-foreground/10'
+					{...props}
+				>
+					<div className='bg-background dark:bg-muted p-1 rounded-sm'>
+						{icon}
+					</div>
+					{text}
 				</Button>
 			</Link>
 		)

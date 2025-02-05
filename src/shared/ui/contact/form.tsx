@@ -1,9 +1,10 @@
 'use client'
 
 import { zodResolver } from '@hookform/resolvers/zod'
-import React from 'react'
+import type React from 'react'
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { z } from 'zod'
+import type { z } from 'zod'
 
 import SubmitButton from 'shared/ui/button/submit'
 import { Button } from 'ui/button'
@@ -18,27 +19,40 @@ import { cn } from 'utils'
 
 import { useDispatch } from 'react-redux'
 
-const ContactForm: React.FC = ({}) => {
+const ContactForm: React.FC = () => {
 	const isDesktop = useMediaQuery('(min-width: 768px)')
 	const dispatch = useDispatch()
+	const [step, setStep] = useState<'email' | 'message'>('email')
 
 	const form = useForm<z.infer<typeof ContactFormSchema>>({
 		resolver: zodResolver(ContactFormSchema),
+		mode: 'onChange',
 	})
 
 	const onSubmit = async (data: z.infer<typeof ContactFormSchema>) => {
 		try {
 			console.dir(data)
-		} catch (error: any) {}
+			// Handle form submission here
+		} catch (error: any) {
+			console.error('Form submission error:', error)
+		}
+	}
+
+	const handleNextStep = () => {
+		form.trigger('email').then(isValid => {
+			if (isValid) {
+				setStep('message')
+			}
+		})
 	}
 
 	return (
 		<Form {...form}>
 			<form
 				onSubmit={form.handleSubmit(onSubmit)}
-				className='w-full flex flex-col gap-5'
+				className='w-full flex flex-col gap-3'
 			>
-				<div className='space-y-3'>
+				{step === 'email' && (
 					<FormField
 						control={form.control}
 						name='email'
@@ -51,24 +65,16 @@ const ContactForm: React.FC = ({}) => {
 											form.formState.errors.email && 'border-error'
 										)}
 										placeholder='Email Address'
-										// disabled={isLoading || isSuccess}
 										autoComplete='email'
 										{...field}
 									/>
 								</FormControl>
-
-								{/* {error ? (
-								<FormMessage className='text-error text-center flex items-center gap-1'>
-									<CircleAlert className='size-4' /> {error}
-								</FormMessage>
-							) : (
-								
-							)} */}
-
 								<FormMessage className='text-error' />
 							</FormItem>
 						)}
 					/>
+				)}
+				{step === 'message' && (
 					<FormField
 						control={form.control}
 						name='message'
@@ -81,25 +87,15 @@ const ContactForm: React.FC = ({}) => {
 											'max-h-72'
 										)}
 										placeholder='Message'
-										// disabled={isLoading || isSuccess}
-										autoComplete='email'
+										autoComplete='off'
 										{...field}
 									/>
 								</FormControl>
-
-								{/* {error ? (
-								<FormMessage className='text-error text-center flex items-center gap-1'>
-									<CircleAlert className='size-4' /> {error}
-								</FormMessage>
-							) : (
-								
-							)} */}
-
 								<FormMessage className='text-error' />
 							</FormItem>
 						)}
 					/>
-				</div>
+				)}
 
 				<div className='flex items-center justify-end flex-col-reverse gap-2 sm:flex-row'>
 					{!isDesktop && (
@@ -113,16 +109,25 @@ const ContactForm: React.FC = ({}) => {
 						</Button>
 					)}
 
-					<SubmitButton
-						// isLoading={isLoading}
-						// disabled={isSuccess}
-						isLoading={false}
-						disabled={!form.formState.isDirty || !form.formState.isValid}
-						loadingText='Sending...'
-						className='w-full sm:w-auto'
-					>
-						Send
-					</SubmitButton>
+					{step === 'email' ? (
+						<Button
+							type='button'
+							onClick={handleNextStep}
+							// disabled={!form.formState.isValid || !form.formState.isDirty}
+							className='w-full sm:w-auto'
+						>
+							Next
+						</Button>
+					) : (
+						<SubmitButton
+							isLoading={form.formState.isSubmitting}
+							disabled={!form.formState.isValid || !form.formState.isDirty}
+							loadingText='Sending...'
+							className='w-full sm:w-auto'
+						>
+							Send
+						</SubmitButton>
+					)}
 				</div>
 			</form>
 		</Form>

@@ -44,29 +44,40 @@ const BottomSheet: React.FC<BottomSheetProps> = ({
 		return (
 			<Dialog open={open} onOpenChange={onOpenChange}>
 				<DialogContent className='max-w-[405px]'>
-					{title && (
-						<DialogHeader>
-							<DialogTitle style={euclidBold.style}>
-								{title}
-								<IndigoDot />
-							</DialogTitle>
+					<div className='flex flex-col h-[calc(100vh-40rem)] max-h-[405px]'>
+						{title && (
+							<DialogHeader className='flex-shrink-0'>
+								<DialogTitle style={euclidBold.style}>
+									{title}
+									<IndigoDot />
+								</DialogTitle>
+								{description && (
+									<DialogDescription>{description}</DialogDescription>
+								)}
+							</DialogHeader>
+						)}
 
-							{description && (
-								<DialogDescription>{description}</DialogDescription>
-							)}
-						</DialogHeader>
-					)}
-					{children}
+						<ScrollArea className='flex-1'>{children}</ScrollArea>
+					</div>
 				</DialogContent>
 			</Dialog>
 		)
 	}
 
 	return (
-		<Drawer open={open} onOpenChange={onOpenChange}>
+		<Drawer
+			open={open}
+			onOpenChange={onOpenChange}
+			snapPoints={[0.7, 1]}
+			activeSnapPoint={0.7}
+			fixed
+			disablePreventScroll
+			repositionInputs={false}
+			snapToSequentialPoint
+		>
 			<DrawerContent>
 				{title && (
-					<DrawerHeader>
+					<DrawerHeader className='flex-shrink-0'>
 						<DrawerTitle style={euclidBold.style}>
 							{title}
 							<IndigoDot />
@@ -78,7 +89,7 @@ const BottomSheet: React.FC<BottomSheetProps> = ({
 					</DrawerHeader>
 				)}
 
-				<ScrollArea className='h-full p-4'>{children}</ScrollArea>
+				<ScrollArea className='flex-1'>{children}</ScrollArea>
 			</DrawerContent>
 		</Drawer>
 	)

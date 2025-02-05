@@ -7,8 +7,7 @@ import { RootState } from 'lib/store'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { ImLinkedin, ImTelegram } from 'react-icons/im'
-import { Separator } from '~/components/ui/separator'
-import BottomSheet from '../test-bottom.sheet'
+import BottomSheet from '../bottom.sheet'
 import { ContactButton } from './button'
 import ContactForm from './form'
 
@@ -50,18 +49,27 @@ const ContactModal: React.FC = () => {
 			title='Contact me'
 			description="Have a question, a project idea, or just want to say hello? Drop me a message below, and I'll get back to you as soon as possible."
 		>
-			<ContactForm />
-			<Separator className='my-4' />
-			<div className='flex flex-col gap-4'>
+			<div className='flex flex-col pb-4'>
+				<div className='px-4'>
+					<ContactForm />
+				</div>
+
+				<div
+					className='px-4
+				 py-2 text-xs font-medium tracking-wider text-muted-foreground'
+				>
+					SOCIALS
+				</div>
+
 				<ContactButton
 					text='Telegram'
-					icon={<ImTelegram />}
+					icon={<ImTelegram className='text-muted-foreground' />}
 					variant='outline'
 					link='https://t.me/sherbolotarbaev'
 				/>
 				<ContactButton
 					text='Linkedin'
-					icon={<ImLinkedin />}
+					icon={<ImLinkedin className='text-muted-foreground' />}
 					variant='outline'
 					link='https://www.linkedin.com/in/sherbolotarbaev'
 				/>
