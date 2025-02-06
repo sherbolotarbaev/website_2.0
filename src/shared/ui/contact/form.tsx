@@ -12,16 +12,10 @@ import { Form, FormControl, FormField, FormItem, FormMessage } from 'ui/form'
 import { Input } from 'ui/input'
 import { Textarea } from 'ui/textarea'
 
-import { closeModal } from 'features/modal-slice'
-import { useMediaQuery } from 'hooks/use-media-query'
 import { ContactFormSchema } from 'lib/schema'
 import { cn } from 'utils'
 
-import { useDispatch } from 'react-redux'
-
 const ContactForm: React.FC = () => {
-	const isDesktop = useMediaQuery('(min-width: 768px)')
-	const dispatch = useDispatch()
 	const [step, setStep] = useState<'email' | 'message'>('email')
 	const [isSent, setIsSent] = useState(false)
 
@@ -108,17 +102,6 @@ const ContactForm: React.FC = () => {
 				)}
 
 				<div className='flex items-center justify-end flex-col-reverse gap-2 sm:flex-row'>
-					{!isDesktop && (
-						<Button
-							type='button'
-							variant='ghost'
-							onClick={() => dispatch(closeModal())}
-							className='w-full sm:w-auto'
-						>
-							Cancel
-						</Button>
-					)}
-
 					{step === 'email' ? (
 						<Button
 							type='button'

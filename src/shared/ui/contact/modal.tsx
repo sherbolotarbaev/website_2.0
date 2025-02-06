@@ -50,7 +50,7 @@ const ContactModal: React.FC = () => {
 			title='Contact me'
 			// description="Have a question, a project idea, or just want to say hello? Drop me a message below, and I'll get back to you as soon as possible."
 		>
-			<div className='flex flex-col pb-4'>
+			<div className='flex flex-col gap-2.5 py-4'>
 				<div className='px-4'>
 					<ContactForm />
 				</div>

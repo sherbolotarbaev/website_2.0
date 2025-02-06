@@ -2,9 +2,12 @@
 
 import React from 'react'
 
+import { closeModal } from 'features/modal-slice'
 import { useMediaQuery } from 'hooks/use-media-query'
+import { useDispatch } from 'react-redux'
 
 import IndigoDot from 'shared/ui/indigo-dot'
+import { Button } from 'ui/button'
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from 'ui/dialog'
 import { Drawer, DrawerContent, DrawerHeader, DrawerTitle } from 'ui/drawer'
 import { ScrollArea } from 'ui/scroll-area'
@@ -27,6 +30,7 @@ const BottomSheet: React.FC<BottomSheetProps> = ({
 	title,
 }) => {
 	const isDesktop = useMediaQuery('(min-width: 768px)')
+	const dispatch = useDispatch()
 	// const [snap, setSnap] = useState<number | string | null>(snapPoints[0])
 
 	if (isDesktop) {
@@ -73,10 +77,21 @@ const BottomSheet: React.FC<BottomSheetProps> = ({
 				>
 					{title && (
 						<DrawerHeader className='flex-shrink-0'>
+							<Button
+								type='button'
+								variant='ghost'
+								className='p-1.5 w-12 text-md'
+								onClick={() => dispatch(closeModal())}
+							>
+								Cancel
+							</Button>
+
 							<DrawerTitle style={euclidBold.style}>
 								{title}
 								<IndigoDot />
 							</DrawerTitle>
+
+							<div className='w-12' />
 						</DrawerHeader>
 					)}
 
