@@ -7,7 +7,7 @@ import { euclidSemiBold } from 'fonts'
 import { cn } from 'utils'
 
 const Drawer = ({
-	shouldScaleBackground = true,
+	shouldScaleBackground = false,
 	...props
 }: React.ComponentProps<typeof DrawerPrimitive.Root>) => (
 	<DrawerPrimitive.Root
@@ -45,7 +45,7 @@ const DrawerContent = React.forwardRef<
 			<DrawerPrimitive.Content
 				ref={ref}
 				className={cn(
-					'fixed inset-x-0 bottom-0 z-50 flex flex-col bg-background rounded-t-[32px] touch-none h-[calc(100vh-4rem)]',
+					'fixed inset-x-0 bottom-0 z-50 flex flex-col bg-background border-t border-t-input rounded-t-[32px] touch-none min-w-[24rem] h-full max-h-[97%] mx-[-1px]',
 					className
 				)}
 				{...props}
@@ -63,7 +63,10 @@ const DrawerHeader = ({
 	...props
 }: React.HTMLAttributes<HTMLDivElement>) => (
 	<div
-		className={cn('grid gap-1.5 p-4 text-center sm:text-left', className)}
+		className={cn(
+			'grid gap-1.5 py-4 sm:py-6 px-4 text-center sm:text-left',
+			className
+		)}
 		{...props}
 	/>
 )

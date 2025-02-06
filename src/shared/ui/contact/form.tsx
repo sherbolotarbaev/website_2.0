@@ -23,6 +23,7 @@ const ContactForm: React.FC = () => {
 	const isDesktop = useMediaQuery('(min-width: 768px)')
 	const dispatch = useDispatch()
 	const [step, setStep] = useState<'email' | 'message'>('email')
+	const [isSent, setIsSent] = useState(false)
 
 	const form = useForm<z.infer<typeof ContactFormSchema>>({
 		resolver: zodResolver(ContactFormSchema),
@@ -31,6 +32,7 @@ const ContactForm: React.FC = () => {
 
 	const onSubmit = async (data: z.infer<typeof ContactFormSchema>) => {
 		try {
+			setIsSent(true)
 			console.dir(data)
 			// Handle form submission here
 		} catch (error: any) {
@@ -44,6 +46,14 @@ const ContactForm: React.FC = () => {
 				setStep('message')
 			}
 		})
+	}
+
+	if (isSent) {
+		return (
+			<div className='bg-green-500/20 border border-green-500 text-green-800 dark:text-green-400 p-4 rounded-xl mb-2'>
+				Message successfully sent!
+			</div>
+		)
 	}
 
 	return (

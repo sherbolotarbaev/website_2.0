@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux'
 
 import { Button, buttonVariants } from 'ui/button'
 
-import { MessageCircle } from 'lucide-react'
+import { Globe, MessageCircle } from 'lucide-react'
 import Link from 'next/link'
 
 interface ContactButtonProps
@@ -54,7 +54,7 @@ const ContactButton: React.FC<ContactButtonProps> = ({
 					{...props}
 				>
 					<div className='bg-background dark:bg-muted p-1 rounded-sm'>
-						{icon}
+						{icon || <Globe className='text-muted-foreground' />}
 					</div>
 					{text}
 				</Button>

@@ -6,7 +6,6 @@ import { closeModal, ModalTypesEnum, openModal } from 'features/modal-slice'
 import { RootState } from 'lib/store'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { ImLinkedin, ImTelegram } from 'react-icons/im'
 import BottomSheet from '../bottom.sheet'
 import { ContactButton } from './button'
 import ContactForm from './form'
@@ -47,7 +46,7 @@ const ContactModal: React.FC = () => {
 			open={isOpen}
 			onOpenChange={handleClose}
 			title='Contact me'
-			description="Have a question, a project idea, or just want to say hello? Drop me a message below, and I'll get back to you as soon as possible."
+			// description="Have a question, a project idea, or just want to say hello? Drop me a message below, and I'll get back to you as soon as possible."
 		>
 			<div className='flex flex-col pb-4'>
 				<div className='px-4'>
@@ -62,16 +61,21 @@ const ContactModal: React.FC = () => {
 				</div>
 
 				<ContactButton
-					text='Telegram'
-					icon={<ImTelegram className='text-muted-foreground' />}
-					variant='outline'
-					link='https://t.me/sherbolotarbaev'
-				/>
-				<ContactButton
 					text='Linkedin'
-					icon={<ImLinkedin className='text-muted-foreground' />}
 					variant='outline'
 					link='https://www.linkedin.com/in/sherbolotarbaev'
+				/>
+
+				<ContactButton
+					text='Instagram'
+					variant='outline'
+					link='https://www.instagram.com/sherbolotarbaev'
+				/>
+
+				<ContactButton
+					text='Telegram'
+					variant='outline'
+					link='https://t.me/sherbolotarbaev'
 				/>
 			</div>
 		</BottomSheet>
