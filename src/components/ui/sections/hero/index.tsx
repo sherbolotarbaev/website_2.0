@@ -14,7 +14,7 @@ const Hero: React.FC = () => {
 	return (
 		<section className='space-y-6'>
 			<div className='space-y-3'>
-				<Link href='' passHref>
+				<Link href='/cv/sherbolot-arbaev.pdf' target='_blank' passHref>
 					<SectionBadge className='w-fit flex items-center gap-1'>
 						Open to Opportunities{' '}
 						<span className='text-indigo-500 font-normal'>• Read CV</span>
