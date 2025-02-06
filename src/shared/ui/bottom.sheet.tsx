@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState } from 'react'
+import React from 'react'
 
 import { useMediaQuery } from 'hooks/use-media-query'
 
@@ -10,7 +10,6 @@ import { Drawer, DrawerContent, DrawerHeader, DrawerTitle } from 'ui/drawer'
 import { ScrollArea } from 'ui/scroll-area'
 
 import { euclidBold } from 'fonts'
-import { cn } from 'utils'
 
 interface BottomSheetProps {
 	open?: boolean
@@ -19,7 +18,7 @@ interface BottomSheetProps {
 	title?: string
 }
 
-const snapPoints = [0.7, 1]
+// const snapPoints = [0.7, 1]
 
 const BottomSheet: React.FC<BottomSheetProps> = ({
 	open,
@@ -28,7 +27,7 @@ const BottomSheet: React.FC<BottomSheetProps> = ({
 	title,
 }) => {
 	const isDesktop = useMediaQuery('(min-width: 768px)')
-	const [snap, setSnap] = useState<number | string | null>(snapPoints[0])
+	// const [snap, setSnap] = useState<number | string | null>(snapPoints[0])
 
 	if (isDesktop) {
 		return (
@@ -55,21 +54,22 @@ const BottomSheet: React.FC<BottomSheetProps> = ({
 		<Drawer
 			open={open}
 			onOpenChange={onOpenChange}
-			snapPoints={snapPoints}
-			activeSnapPoint={snap}
-			setActiveSnapPoint={setSnap}
+			// snapPoints={snapPoints}
+			// activeSnapPoint={snap}
+			// setActiveSnapPoint={setSnap}
 			fixed
 			disablePreventScroll
 			repositionInputs={false}
-			snapToSequentialPoint
+			// snapToSequentialPoint
 			autoFocus
 		>
 			<DrawerContent>
 				<div
-					className={cn('flex flex-col w-full', {
-						'overflow-y-auto': snap === 1,
-						'overflow-hidden': snap !== 1,
-					})}
+					className='flex flex-col w-full'
+					// className={cn('flex flex-col w-full', {
+					// 	'overflow-y-auto': snap === 1,
+					// 	'overflow-hidden': snap !== 1,
+					// })}
 				>
 					{title && (
 						<DrawerHeader className='flex-shrink-0'>

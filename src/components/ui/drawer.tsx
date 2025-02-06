@@ -7,7 +7,7 @@ import { euclidSemiBold } from 'fonts'
 import { cn } from 'utils'
 
 const Drawer = ({
-	shouldScaleBackground = false,
+	shouldScaleBackground = true,
 	...props
 }: React.ComponentProps<typeof DrawerPrimitive.Root>) => (
 	<DrawerPrimitive.Root
@@ -45,7 +45,7 @@ const DrawerContent = React.forwardRef<
 			<DrawerPrimitive.Content
 				ref={ref}
 				className={cn(
-					'fixed inset-x-0 bottom-0 z-50 flex flex-col bg-background border-t border-t-input rounded-t-[32px] touch-none min-w-[24rem] h-full max-h-[97%] mx-[-1px]',
+					'fixed inset-x-0 bottom-0 z-50 flex flex-col bg-background border-t border-t-input rounded-t-[32px] touch-none min-w-[24rem] h-full max-h-[90%] mx-[-1px]',
 					className
 				)}
 				{...props}
