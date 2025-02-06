@@ -19,7 +19,7 @@ interface BottomSheetProps {
 	title?: string
 }
 
-const snapPoints = [0.5, 0.7, 1]
+const snapPoints = [0.7, 1]
 
 const BottomSheet: React.FC<BottomSheetProps> = ({
 	open,

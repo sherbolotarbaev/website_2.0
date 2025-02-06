@@ -4,7 +4,7 @@ import Link from 'next/link'
 
 import { ArrowTopRightIcon } from '@radix-ui/react-icons'
 
-import { socialMedia } from '../lib/social-media'
+import { socialMedia } from 'config/social-media'
 
 const SocialMediaLinks = () => {
 	return (

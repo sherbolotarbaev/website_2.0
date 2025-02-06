@@ -13,7 +13,6 @@ export const projects: TProject[] = [
 		description:
 			'Platform for seamless China-world trade with real-time order tracking and logistics management.',
 		image: '/images/chinatradex.png',
-		repo: 'https://github.com/yourusername/project-one',
 		demo: 'https://www.chinatradex.co',
 		technologies: [
 			'Next.js',
@@ -41,5 +40,21 @@ export const projects: TProject[] = [
 			'Passport.js',
 			'Express Session',
 		],
+	},
+	{
+		title: 'Nest JS & Fastify Boilerplate',
+		description:
+			'A lightweight and efficient backend starter template built with Nest.js and Fastify, featuring Prisma ORM and TypeScript for scalable and modern server-side development.',
+		image: '/images/nestjs_fastify.png',
+		repo: 'https://github.com/sherbolotarbaev/NestFastifyApp',
+		technologies: ['Nest.js', 'TypeScript', 'Prisma', 'Fastify'],
+	},
+	{
+		title: 'Fastest API with Deno 2.0 & Hono.js',
+		description:
+			'This project showcases a performant API built with Deno 2.0 and Hono.js. It includes message handling, caching, validation, and security features.',
+		image: '/images/deno_honojs.png',
+		repo: 'https://github.com/sherbolotarbaev/deno-hono',
+		technologies: ['Deno 2.0', 'TypeScript', 'Hono.js', 'Zod'],
 	},
 ]

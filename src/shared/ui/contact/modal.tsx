@@ -10,6 +10,8 @@ import BottomSheet from '../bottom.sheet'
 import { ContactButton } from './button'
 import ContactForm from './form'
 
+import { socialMedia } from 'config/social-media'
+
 const ContactModal: React.FC = () => {
 	const dispatch = useDispatch()
 	const { isOpen, modalType } = useSelector((state: RootState) => state.modal)
@@ -60,23 +62,14 @@ const ContactModal: React.FC = () => {
 					SOCIALS
 				</div>
 
-				<ContactButton
-					text='Linkedin'
-					variant='outline'
-					link='https://www.linkedin.com/in/sherbolotarbaev'
-				/>
-
-				<ContactButton
-					text='Instagram'
-					variant='outline'
-					link='https://www.instagram.com/sherbolotarbaev'
-				/>
-
-				<ContactButton
-					text='Telegram'
-					variant='outline'
-					link='https://t.me/sherbolotarbaev'
-				/>
+				{socialMedia.map(({ name, href }, index) => (
+					<ContactButton
+						key={index}
+						text={name}
+						variant='outline'
+						link={href}
+					/>
+				))}
 			</div>
 		</BottomSheet>
 	)

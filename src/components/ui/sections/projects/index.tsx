@@ -11,6 +11,7 @@ import {
 	Card,
 	CardContent,
 	CardDescription,
+	CardFooter,
 	CardHeader,
 	CardTitle,
 } from 'ui/card'
@@ -23,7 +24,7 @@ import { ExternalLink, Github } from 'lucide-react'
 
 const Projects: React.FC = () => {
 	const ref = React.useRef(null)
-	const isInView = useInView(ref, { once: true, amount: 0.5 })
+	const isInView = useInView(ref, { once: true, amount: 0.1 })
 
 	return (
 		<section ref={ref} className='space-y-8'>
@@ -39,12 +40,7 @@ const Projects: React.FC = () => {
 			</motion.h1>
 			<div className='grid grid-cols-1 gap-6 sm:grid-cols-2'>
 				{projects.map((project, index) => (
-					<ProjectCard
-						key={index}
-						{...project}
-						index={index}
-						isInView={isInView}
-					/>
+					<ProjectCard key={index} {...project} index={index} />
 				))}
 			</div>
 		</section>
@@ -53,9 +49,7 @@ const Projects: React.FC = () => {
 
 export default Projects
 
-const ProjectCard: React.FC<
-	TProject & { index: number; isInView: boolean }
-> = ({
+const ProjectCard: React.FC<TProject & { index: number }> = ({
 	image,
 	title,
 	description,
@@ -63,15 +57,18 @@ const ProjectCard: React.FC<
 	repo,
 	demo,
 	index,
-	isInView,
 }) => {
+	const ref = React.useRef(null)
+	const isInView = useInView(ref, { once: true, amount: 0.2 })
+
 	return (
 		<motion.div
+			ref={ref}
 			initial={{ opacity: 0, y: 20 }}
 			animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
 			transition={{ duration: 0.5, delay: index * 0.1 }}
 		>
-			<Card className='rounded-3xl overflow-hidden shadow-sm'>
+			<Card className='rounded-3xl overflow-hidden shadow-none bg-accent/40 flex flex-col group'>
 				<CardHeader className='p-0'>
 					<div className='relative'>
 						<ImageThumbnail
@@ -80,7 +77,7 @@ const ProjectCard: React.FC<
 							className='rounded-t-3xl rounded-b-none border-x-0 border-t-0'
 							aspectRatio={2 / 1}
 						/>
-						<div className='p-4 absolute inset-0 md:bg-black/60 flex md:items-center md:justify-center md:opacity-0 md:hover:opacity-100 md:transition-opacity md:duration-300 rounded-t-3xl rounded-b-none'>
+						<div className='p-4 absolute inset-0 md:bg-black/60 flex md:items-center md:justify-center md:opacity-0 md:group-hover:opacity-100 md:transition-opacity md:duration-300 rounded-t-3xl rounded-b-none'>
 							<div className='flex gap-2'>
 								{repo && (
 									<ProjectButton href={repo} ariaLabel='View repository'>
@@ -98,23 +95,25 @@ const ProjectCard: React.FC<
 						</div>
 					</div>
 				</CardHeader>
-				<CardContent className='p-6'>
+				<CardContent className='p-6 bg-background pb-0 rounded-b-3xl shadow-sm'>
 					<CardTitle className='text-xl font-semibold mb-2'>{title}</CardTitle>
 					<CardDescription className='text-sm text-muted-foreground mb-4'>
 						{description}
 					</CardDescription>
+				</CardContent>
+				<CardFooter className='py-2.5 px-4'>
 					<div className='flex flex-wrap gap-1.5'>
 						{technologies.map((tech, techIndex) => (
 							<Badge
 								key={techIndex}
 								variant='outline'
-								className='px-1.5 py-0.5 text-xs'
+								className='px-1.5 py-0.5 bg-background dark:bg-accent shadow-sm text-xs'
 							>
 								{tech}
 							</Badge>
 						))}
 					</div>
-				</CardContent>
+				</CardFooter>
 			</Card>
 		</motion.div>
 	)
