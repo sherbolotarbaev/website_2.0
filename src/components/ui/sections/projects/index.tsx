@@ -69,12 +69,12 @@ const ProjectCard: React.FC<TProject & { index: number }> = ({
 			transition={{ duration: 0.5, delay: index * 0.1 }}
 		>
 			<Card className='rounded-3xl overflow-hidden shadow-none bg-accent/40 flex flex-col group'>
-				<CardHeader className='p-0'>
+				<CardHeader className='p-0 border-b'>
 					<div className='relative'>
 						<ImageThumbnail
 							src={image || '/placeholder.svg'}
 							alt={title}
-							className='rounded-t-3xl rounded-b-none border-x-0 border-t-0'
+							className='rounded-t-3xl rounded-none border-0'
 							aspectRatio={2 / 1}
 						/>
 						<div className='p-4 absolute inset-0 md:bg-black/60 flex md:items-center md:justify-center md:opacity-0 md:group-hover:opacity-100 md:transition-opacity md:duration-300 rounded-t-3xl rounded-b-none'>

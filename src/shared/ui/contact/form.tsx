@@ -1,23 +1,26 @@
 'use client'
 
+import React, { useState } from 'react'
+
 import { zodResolver } from '@hookform/resolvers/zod'
-import type React from 'react'
-import { useState } from 'react'
+import { closeModal } from 'features/modal-slice'
+import { toast } from 'hooks/use-toast'
+import { useAppDispatch } from 'lib/store'
 import { useForm } from 'react-hook-form'
 import type { z } from 'zod'
 
-import SubmitButton from 'shared/ui/button/submit'
 import { Button } from 'ui/button'
 import { Form, FormControl, FormField, FormItem, FormMessage } from 'ui/form'
 import { Input } from 'ui/input'
 import { Textarea } from 'ui/textarea'
+import SubmitButton from '../button/submit'
 
 import { ContactFormSchema } from 'lib/schema'
 import { cn } from 'utils'
 
 const ContactForm: React.FC = () => {
+	const dispatch = useAppDispatch()
 	const [step, setStep] = useState<'email' | 'message'>('email')
-	const [isSent, setIsSent] = useState(false)
 
 	const form = useForm<z.infer<typeof ContactFormSchema>>({
 		resolver: zodResolver(ContactFormSchema),
@@ -26,9 +29,15 @@ const ContactForm: React.FC = () => {
 
 	const onSubmit = async (data: z.infer<typeof ContactFormSchema>) => {
 		try {
-			setIsSent(true)
 			console.dir(data)
-			// Handle form submission here
+			toast({
+				title: 'Message sent!',
+				description: 'Thank you for reaching out!',
+				className:
+					'bg-green-400/20 backdrop-blur-xl text-green-600 dark:text-green-300 border-green-500/50 rounded-xl',
+				duration: 5000,
+			})
+			dispatch(closeModal())
 		} catch (error: any) {
 			console.error('Form submission error:', error)
 		}
@@ -40,14 +49,6 @@ const ContactForm: React.FC = () => {
 				setStep('message')
 			}
 		})
-	}
-
-	if (isSent) {
-		return (
-			<div className='bg-green-500/20 border border-green-500 text-green-800 dark:text-green-400 p-4 rounded-xl mb-2'>
-				Message successfully sent!
-			</div>
-		)
 	}
 
 	return (
@@ -79,26 +80,37 @@ const ContactForm: React.FC = () => {
 					/>
 				)}
 				{step === 'message' && (
-					<FormField
-						control={form.control}
-						name='message'
-						render={({ field }) => (
-							<FormItem>
-								<FormControl>
-									<Textarea
-										className={cn(
-											form.formState.errors.message && 'border-error',
-											'max-h-72'
-										)}
-										placeholder='Message'
-										autoComplete='off'
-										{...field}
-									/>
-								</FormControl>
-								<FormMessage className='text-error' />
-							</FormItem>
-						)}
-					/>
+					<>
+						<p className='text-sm text-muted-foreground'>
+							From: {form.getValues('email')}{' '}
+							<span
+								className='text-primary underline cursor-pointer'
+								onClick={() => setStep('email')}
+							>
+								edit
+							</span>
+						</p>
+						<FormField
+							control={form.control}
+							name='message'
+							render={({ field }) => (
+								<FormItem>
+									<FormControl>
+										<Textarea
+											className={cn(
+												form.formState.errors.message && 'border-error',
+												'max-h-72'
+											)}
+											placeholder='Message'
+											autoComplete='off'
+											{...field}
+										/>
+									</FormControl>
+									<FormMessage className='text-error' />
+								</FormItem>
+							)}
+						/>
+					</>
 				)}
 
 				<div className='flex items-center justify-end flex-col-reverse gap-2 sm:flex-row'>
