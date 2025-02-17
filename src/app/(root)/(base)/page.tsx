@@ -7,9 +7,7 @@ export default function Home() {
 		<>
 			<div className='container py-8 bg-background rounded-[32px] space-y-16'>
 				<Hero />
-
 				<Work />
-
 				<Projects />
 			</div>
 		</>

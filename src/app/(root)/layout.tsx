@@ -48,8 +48,8 @@ export default function RootLayout({
 }>) {
 	return (
 		<>
-			<html lang='en'>
-				<body className='min-h-screen antialiased bg-muted dark:bg-background'>
+			<html lang='en' suppressHydrationWarning>
+				<body className='min-h-screen antialiased bg-background'>
 					<TopLoadingBar
 						color='rgb(79 70 229)'
 						showSpinner={false}
