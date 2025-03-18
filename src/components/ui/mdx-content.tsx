@@ -194,6 +194,7 @@ type MDXContentProps = Omit<MDXRemoteProps, 'components'>
 
 const MDXContent: React.FC<MDXContentProps> = props => {
 	return (
+		// @ts-ignore
 		<MDXRemote
 			{...props}
 			components={components}
