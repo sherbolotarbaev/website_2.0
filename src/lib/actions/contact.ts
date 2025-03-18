@@ -10,8 +10,8 @@ const BOT_TOKEN = process.env.TELEGRAM_BOT_API_KEY
 const CHAT_ID = process.env.TELEGRAM_BOT_CHAT_ID
 
 async function getLocation(ip: string) {
-	const response = await fetch(`https://ipwho.is/${ip}`)
-	return response.json()
+	const res = await fetch(`https://ipwho.is/${ip}`)
+	return res.json()
 }
 
 const escapeHTML = (str: string) =>
@@ -19,18 +19,30 @@ const escapeHTML = (str: string) =>
 
 export async function newMessage(
 	formData: z.infer<typeof ContactFormSchema>
-): Promise<{ status: 'success' | 'error' }> {
+): Promise<{ status: 'success' | 'error'; reason?: string }> {
 	const headers = await requestHeaders()
-	// const ip =
-	// 	headers.get('x-forwarded-for') ||
-	// 	headers.get('x-real-ip') ||
-	// 	headers.get('x-client-ip')
-	let ip = '213.109.66.118'
+	const ip =
+		headers.get('x-forwarded-for') ||
+		headers.get('x-real-ip') ||
+		headers.get('x-client-ip') ||
+		'127.0.0.1'
+
 	const { os, device } = getUserAgent({ headers })
 	const userAgent = `${os.name || 'Unknown'} ${os.version || 'Unknown'} (${
 		device.vendor || 'Unknown'
 	}, ${device.model || 'Unknown'})`
+
 	const location = await getLocation(ip)
+	if (
+		!location ||
+		!location.timezone ||
+		!location.city ||
+		!location.region ||
+		!location.country
+	) {
+		return { status: 'error', reason: 'Failed to get location' }
+	}
+
 	const time = formatInTimeZone(
 		new Date(),
 		location.timezone.id,
@@ -41,7 +53,7 @@ export async function newMessage(
 		const validatedFields = ContactFormSchema.safeParse(formData)
 
 		if (!validatedFields.success) {
-			return { status: 'error' }
+			return { status: 'error', reason: 'Invalid form data' }
 		}
 
 		const message = `
@@ -80,8 +92,7 @@ export async function newMessage(
 		}
 
 		return { status: 'success' }
-	} catch (error) {
-		console.error('Error processing contact form:', error)
-		return { status: 'error' }
+	} catch (error: any) {
+		return { status: 'error', reason: error.message }
 	}
 }
