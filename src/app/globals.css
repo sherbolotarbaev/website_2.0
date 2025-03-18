@@ -81,8 +81,8 @@ body {
 	}
 }
 
-@layer utilities {
-	.custom-drawer-wrapper[data-aria-hidden='true'] {
+/* @layer utilities { */
+/* .custom-drawer-wrapper[data-aria-hidden='true'] {
 		border-radius: 1rem 1rem 0 0 !important;
-	}
-}
+	} */
+/* } */

@@ -1,8 +1,10 @@
 'use client'
 
 import { motion, useInView } from 'framer-motion'
+import type React from 'react'
+import { useRef } from 'react'
+
 import Link from 'next/link'
-import React from 'react'
 import ImageThumbnail from 'shared/ui/image.thumbnail'
 import IndigoDot from 'shared/ui/indigo-dot'
 import { Badge } from 'ui/badge'
@@ -23,7 +25,7 @@ import { projects, type TProject } from './lib/projects'
 import { ExternalLink, Github } from 'lucide-react'
 
 const Projects: React.FC = () => {
-	const ref = React.useRef(null)
+	const ref = useRef(null)
 	const isInView = useInView(ref, { once: true, amount: 0.1 })
 
 	return (
@@ -38,7 +40,7 @@ const Projects: React.FC = () => {
 				Projects
 				<IndigoDot />
 			</motion.h1>
-			<div className='grid grid-cols-1 gap-6 sm:grid-cols-2'>
+			<div className='grid grid-cols-1 gap-6 md:grid-cols-2'>
 				{projects.map((project, index) => (
 					<ProjectCard key={index} {...project} index={index} />
 				))}
@@ -58,7 +60,7 @@ const ProjectCard: React.FC<TProject & { index: number }> = ({
 	demo,
 	index,
 }) => {
-	const ref = React.useRef(null)
+	const ref = useRef(null)
 	const isInView = useInView(ref, { once: true, amount: 0.2 })
 
 	return (

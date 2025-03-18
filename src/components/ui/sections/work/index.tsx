@@ -1,8 +1,10 @@
 'use client'
 
 import { motion, useInView } from 'framer-motion'
+import type React from 'react'
+import { Fragment, useRef } from 'react'
+
 import Link from 'next/link'
-import React from 'react'
 import ImageThumbnail from 'shared/ui/image.thumbnail'
 import IndigoDot from 'shared/ui/indigo-dot'
 import { Badge } from 'ui/badge'
@@ -17,7 +19,7 @@ import {
 import { euclidMedium, euclidSemiBold } from 'fonts'
 
 const Work: React.FC = () => {
-	const ref = React.useRef(null)
+	const ref = useRef(null)
 	const isInView = useInView(ref, { once: true, amount: 0.1 })
 
 	return (
@@ -35,10 +37,10 @@ const Work: React.FC = () => {
 
 			<div className='flex flex-col'>
 				{formatExperiences(experiences).map((props, index) => (
-					<React.Fragment key={index}>
-						<Experience {...props} index={index} />
+					<Fragment key={index}>
+						<Experience {...props} />
 						{index < experiences.length - 1 && <Separator className='my-8' />}
-					</React.Fragment>
+					</Fragment>
 				))}
 			</div>
 		</section>
@@ -47,15 +49,14 @@ const Work: React.FC = () => {
 
 export default Work
 
-const Experience: React.FC<TExperience & { index: number }> = ({
+const Experience: React.FC<TExperience> = ({
 	company,
 	duration,
 	location,
 	url,
 	positions,
-	index,
 }) => {
-	const ref = React.useRef(null)
+	const ref = useRef(null)
 	const isInView = useInView(ref, { once: true, amount: 0.2 })
 
 	return (

@@ -1,8 +1,18 @@
 'use client'
 
 import { motion, useInView } from 'framer-motion'
+import type React from 'react'
+import {
+	Fragment,
+	memo,
+	useCallback,
+	useEffect,
+	useMemo,
+	useRef,
+	useState,
+} from 'react'
+
 import Link from 'next/link'
-import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import {
 	Breadcrumb,
 	BreadcrumbItem,
@@ -41,7 +51,7 @@ const BlogPostCard: React.FC<{ post: TBlogPost; index: number }> = ({
 	post,
 	index,
 }) => {
-	const ref = React.useRef(null)
+	const ref = useRef(null)
 	const isInView = useInView(ref, { once: true, amount: 0.2 })
 
 	const {
@@ -108,7 +118,7 @@ type MetaItem = {
 	text: string
 }
 
-export const BlogPostMeta: React.FC<BlogPostMetaProps> = React.memo(
+export const BlogPostMeta: React.FC<BlogPostMetaProps> = memo(
 	({ formattedDate, distance, readingTime, slug }) => {
 		const metaItems: MetaItem[] = [
 			{
@@ -153,14 +163,14 @@ export const BlogPostBreadcrumb: React.FC<BlogPostBreadcrumbProps> = ({
 		<Breadcrumb className='mb-8'>
 			<BreadcrumbList>
 				{breadcrumbItems.map((item, index) => (
-					<React.Fragment key={item.href}>
+					<Fragment key={item.href}>
 						{index > 0 && <BreadcrumbSeparator />}
 						<BreadcrumbItem>
 							<BreadcrumbLink asChild>
 								<Link href={item.href}>{item.name}</Link>
 							</BreadcrumbLink>
 						</BreadcrumbItem>
-					</React.Fragment>
+					</Fragment>
 				))}
 			</BreadcrumbList>
 		</Breadcrumb>
@@ -250,7 +260,7 @@ export const BlogPostContentNavigation = () => {
 	)
 }
 
-const HeadingLink = React.memo(
+const HeadingLink = memo(
 	({ heading, isActive }: { heading: Heading; isActive: boolean }) => (
 		<li style={{ marginLeft: `${(heading.level - 1) * 0.5}rem` }}>
 			<Link

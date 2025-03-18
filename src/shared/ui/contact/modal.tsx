@@ -1,6 +1,7 @@
 'use client'
 
-import React, { useEffect } from 'react'
+import type React from 'react'
+import { useEffect } from 'react'
 
 import { closeModal, ModalTypesEnum, openModal } from 'features/modal-slice'
 import { RootState } from 'lib/store'

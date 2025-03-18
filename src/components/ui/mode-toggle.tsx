@@ -33,10 +33,7 @@ const ModeToggle = () => {
 			>
 				<DropdownMenuItem
 					onClick={() => setTheme('light')}
-					className={cn(
-						theme === 'light' && 'text-accent-foreground',
-						'gap-1.5'
-					)}
+					className={cn(theme === 'light' && 'text-accent-foreground', 'gap-2')}
 				>
 					<Sun className='size-[1rem]' />
 					Light
@@ -44,10 +41,7 @@ const ModeToggle = () => {
 
 				<DropdownMenuItem
 					onClick={() => setTheme('dark')}
-					className={cn(
-						theme === 'dark' && 'text-accent-foreground',
-						'gap-1.5'
-					)}
+					className={cn(theme === 'dark' && 'text-accent-foreground', 'gap-2')}
 				>
 					<Moon className='size-[1rem]' />
 					Dark
@@ -57,7 +51,7 @@ const ModeToggle = () => {
 					onClick={() => setTheme('system')}
 					className={cn(
 						theme === 'system' && 'text-accent-foreground',
-						'gap-1.5'
+						'gap-2'
 					)}
 				>
 					<PcCase className='size-[1rem]' />

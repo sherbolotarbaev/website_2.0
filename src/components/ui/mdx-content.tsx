@@ -1,3 +1,5 @@
+import type React from 'react'
+
 import type { MDXComponents } from 'mdx/types'
 import { MDXRemote, type MDXRemoteProps } from 'next-mdx-remote/rsc'
 
@@ -99,7 +101,7 @@ const components: MDXComponents = {
 			<Link href={`#${slug}`} className='no-underline'>
 				<h2
 					id={slug}
-					className='scroll-m-5 border-b pb-2 text-2xl font-semibold tracking-tight first:mt-0 mb-4'
+					className='scroll-m-5 border-b pb-2 text-2xl font-semibold tracking-tight first:mt-0 mb-4 leading-10'
 				>
 					{children}
 				</h2>
@@ -112,7 +114,7 @@ const components: MDXComponents = {
 			<Link href={`#${slug}`} className='no-underline'>
 				<h3
 					id={slug}
-					className='scroll-m-5 text-xl font-semibold tracking-tight'
+					className='scroll-m-5 text-xl font-semibold tracking-tight leading-8'
 				>
 					{children}
 				</h3>
@@ -141,7 +143,7 @@ const components: MDXComponents = {
 	ol: ({ children }) => (
 		<ol className='my-6 ml-6 list-decimal [&>li]:mt-2'>{children}</ol>
 	),
-	li: ({ children }) => <li>{children}</li>,
+	li: ({ children }) => <li className='leading-7'>{children}</li>,
 	blockquote: ({ children }) => (
 		<blockquote className='mt-6 border-l-2 border-l-muted-foreground text-muted-foreground pl-6 italic'>
 			{children}
@@ -192,7 +194,6 @@ type MDXContentProps = Omit<MDXRemoteProps, 'components'>
 
 const MDXContent: React.FC<MDXContentProps> = props => {
 	return (
-		// @ts-expect-error
 		<MDXRemote
 			{...props}
 			components={components}

@@ -135,7 +135,7 @@ export default async function BlogPost({ params }: Readonly<BlogPostProps>) {
 							/>
 						)}
 
-						<p>{summary}</p>
+						<p className='leading-7'>{summary}</p>
 					</header>
 
 					<div className='prose lg:prose-xl'>

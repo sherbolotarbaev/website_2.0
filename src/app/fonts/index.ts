@@ -14,3 +14,8 @@ export const euclidSemiBold = localFont({
 	src: './Euclid Circular B SemiBold.ttf',
 	variable: '--font-euclid-semibold',
 })
+
+export const euclidRegular = localFont({
+	src: './Euclid Circular B Regular.ttf',
+	variable: '--font-euclid-regular',
+})

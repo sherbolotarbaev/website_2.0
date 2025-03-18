@@ -12,7 +12,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from 'ui/dialog'
 import { Drawer, DrawerContent, DrawerHeader, DrawerTitle } from 'ui/drawer'
 import { ScrollArea } from 'ui/scroll-area'
 
-import { euclidBold } from 'fonts'
+import { euclidMedium } from 'fonts'
 
 interface BottomSheetProps {
 	open?: boolean
@@ -37,10 +37,10 @@ const BottomSheet: React.FC<BottomSheetProps> = ({
 		return (
 			<Dialog open={open} onOpenChange={onOpenChange}>
 				<DialogContent className='max-w-[405px]'>
-					<div className='flex flex-col max-h-[405px]'>
+					<div className='flex flex-col max-h-[385px]'>
 						{title && (
 							<DialogHeader className='flex-shrink-0'>
-								<DialogTitle style={euclidBold.style}>
+								<DialogTitle style={euclidMedium.style}>
 									{title}
 									<IndigoDot />
 								</DialogTitle>
@@ -80,13 +80,13 @@ const BottomSheet: React.FC<BottomSheetProps> = ({
 							<Button
 								type='button'
 								variant='ghost'
-								className='p-1.5 w-12 text-md'
+								className='p-1.5 h-0 w-12 text-sm'
 								onClick={() => dispatch(closeModal())}
 							>
 								Cancel
 							</Button>
 
-							<DrawerTitle style={euclidBold.style}>
+							<DrawerTitle style={euclidMedium.style}>
 								{title}
 								<IndigoDot />
 							</DrawerTitle>

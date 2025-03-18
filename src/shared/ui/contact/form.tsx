@@ -1,6 +1,7 @@
 'use client'
 
-import React, { useState } from 'react'
+import type React from 'react'
+import { useState } from 'react'
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { closeModal } from 'features/modal-slice'
@@ -15,6 +16,7 @@ import { Input } from 'ui/input'
 import { Textarea } from 'ui/textarea'
 import SubmitButton from '../button/submit'
 
+import { newMessage } from 'actions/contact'
 import { ContactFormSchema } from 'lib/schema'
 import { cn } from 'utils'
 
@@ -28,8 +30,8 @@ const ContactForm: React.FC = () => {
 	})
 
 	const onSubmit = async (data: z.infer<typeof ContactFormSchema>) => {
-		try {
-			console.dir(data)
+		const result = await newMessage(data)
+		if (result.status === 'success') {
 			toast({
 				title: 'Message sent!',
 				description: 'Thank you for reaching out!',
@@ -38,8 +40,11 @@ const ContactForm: React.FC = () => {
 				duration: 5000,
 			})
 			dispatch(closeModal())
-		} catch (error: any) {
-			console.error('Form submission error:', error)
+		} else {
+			toast({
+				title: 'Message not sent!',
+				description: 'Please try again.',
+			})
 		}
 	}
 

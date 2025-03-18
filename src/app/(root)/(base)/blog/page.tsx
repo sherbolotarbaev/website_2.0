@@ -1,10 +1,31 @@
-import { getBlogPosts } from 'lib/blog'
+import type { Metadata } from 'next'
 
 import BlogPosts from 'shared/ui/blog-posts'
 import IndigoDot from 'shared/ui/indigo-dot'
 
-import { euclidSemiBold } from 'fonts'
+import { getBlogPosts } from 'lib/blog'
 import { getBase64 } from 'lib/blur-data-url'
+
+import { siteConfig } from 'config/site'
+import { euclidSemiBold } from 'fonts'
+
+export const metadata: Metadata = {
+	title: 'Blog',
+	description: 'Thoughts, ideas, and experiences.',
+	openGraph: {
+		title: `Blog | ${siteConfig.title}`,
+		description: 'Thoughts, ideas, and experiences.',
+		url: `${siteConfig.url}/blog`,
+		siteName: siteConfig.title,
+		locale: 'en_US',
+		type: 'website',
+		images: [
+			{
+				url: `${siteConfig.url}/og?title=Personal Blog`,
+			},
+		],
+	},
+}
 
 export default async function Blog() {
 	const blogPosts = await Promise.all(

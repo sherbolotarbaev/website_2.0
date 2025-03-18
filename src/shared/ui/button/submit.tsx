@@ -1,6 +1,7 @@
 'use client'
 
-import React from 'react'
+import type React from 'react'
+
 import { Button } from 'ui/button'
 
 import { ImSpinner3 } from 'react-icons/im'

@@ -1,4 +1,4 @@
-import React from 'react'
+import type React from 'react'
 
 import { Badge } from 'ui/badge'
 import BorderBeam from './border-beam'
@@ -20,7 +20,7 @@ const SectionBadge: React.FC<SectionBadgeProps> = ({ children, className }) => {
 			variant='outline'
 		>
 			{children}
-			<BorderBeam size={40} duration={9} />
+			<BorderBeam size={40} duration={5} />
 		</Badge>
 	)
 }

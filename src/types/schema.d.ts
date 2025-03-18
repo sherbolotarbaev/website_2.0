@@ -21,36 +21,3 @@ type UserMetaData = {
 	lastSeen: Date
 	device?: string
 }
-
-type GuestbookMessageAuthor = {
-	name: string
-	surname: string
-	email: string
-	photo: string
-	isVerified: boolean
-}
-
-type GuestbookMessage = {
-	id: number
-	body: string
-	isEdited: boolean
-	createdAt: string
-	updatedAt: string
-	author: GuestbookMessageAuthor
-	reactions: GuestbookMessageReaction[]
-}
-
-type PostView = {
-	slug: string
-	viewsCount: number
-}
-
-type PostLike = {
-	userId: number
-	slug: string
-}
-
-type GuestbookMessageReaction = {
-	userId: number
-	emoji: string
-}

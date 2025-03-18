@@ -27,6 +27,7 @@
 			"lib/*": ["./src/lib/*"],
 			"utils": ["./src/lib/utils"],
 			"hooks/*": ["./src/lib/hooks/*"],
+			"actions/*": ["./src/lib/actions/*"],
 			"api/*": ["./src/lib/store/api/*"],
 			"features/*": ["./src/lib/store/features/*"],
 			"providers": ["./src/lib/providers"],

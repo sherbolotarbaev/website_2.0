@@ -1,6 +1,8 @@
 'use client'
 
-import React from 'react'
+import type React from 'react'
+import { forwardRef } from 'react'
+
 import { Drawer as DrawerPrimitive } from 'vaul'
 
 import { euclidSemiBold } from 'fonts'
@@ -23,7 +25,7 @@ const DrawerPortal = DrawerPrimitive.Portal
 
 const DrawerClose = DrawerPrimitive.Close
 
-const DrawerOverlay = React.forwardRef<
+const DrawerOverlay = forwardRef<
 	React.ElementRef<typeof DrawerPrimitive.Overlay>,
 	React.ComponentPropsWithoutRef<typeof DrawerPrimitive.Overlay>
 >(({ className, ...props }, ref) => (
@@ -35,7 +37,7 @@ const DrawerOverlay = React.forwardRef<
 ))
 DrawerOverlay.displayName = DrawerPrimitive.Overlay.displayName
 
-const DrawerContent = React.forwardRef<
+const DrawerContent = forwardRef<
 	React.ElementRef<typeof DrawerPrimitive.Content>,
 	React.ComponentPropsWithoutRef<typeof DrawerPrimitive.Content>
 >(({ className, children, ...props }, ref) => {
@@ -45,7 +47,7 @@ const DrawerContent = React.forwardRef<
 			<DrawerPrimitive.Content
 				ref={ref}
 				className={cn(
-					'fixed inset-x-0 bottom-0 z-50 flex flex-col bg-background/90 backdrop-blur-xl rounded-t-2xl touch-none min-w-[24rem] h-full max-h-[97%]',
+					'fixed inset-x-0 bottom-0 z-50 flex flex-col bg-background/90 backdrop-blur-xl rounded-t-lg touch-none min-w-[24rem] h-full max-h-[97%]',
 					className
 				)}
 				{...props}
@@ -64,7 +66,7 @@ const DrawerHeader = ({
 }: React.HTMLAttributes<HTMLDivElement>) => (
 	<div
 		className={cn(
-			'flex items-center justify-between py-3 px-4 border-b rounded-t-2xl',
+			'flex items-center justify-between p-4 border-b rounded-t-2xl',
 			className
 		)}
 		{...props}
@@ -83,7 +85,7 @@ const DrawerFooter = ({
 )
 DrawerFooter.displayName = 'DrawerFooter'
 
-const DrawerTitle = React.forwardRef<
+const DrawerTitle = forwardRef<
 	React.ElementRef<typeof DrawerPrimitive.Title>,
 	React.ComponentPropsWithoutRef<typeof DrawerPrimitive.Title>
 >(({ className, ...props }, ref) => (
@@ -99,7 +101,7 @@ const DrawerTitle = React.forwardRef<
 ))
 DrawerTitle.displayName = DrawerPrimitive.Title.displayName
 
-const DrawerDescription = React.forwardRef<
+const DrawerDescription = forwardRef<
 	React.ElementRef<typeof DrawerPrimitive.Description>,
 	React.ComponentPropsWithoutRef<typeof DrawerPrimitive.Description>
 >(({ className, ...props }, ref) => (

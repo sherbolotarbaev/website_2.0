@@ -1,6 +1,9 @@
+import type React from 'react'
+
 import Link from 'next/link'
 import { ContactSubmitButton as ContactButton } from 'shared/ui/contact/button'
 import RotatingTextAnimation from 'shared/ui/rotating-text-animation'
+import SectionBadge from 'shared/ui/section-badge'
 import { Button } from 'ui/button'
 
 import { ContactEnum } from 'config/contact'
@@ -8,7 +11,6 @@ import { euclidSemiBold } from 'fonts'
 import { links } from './lib/links'
 
 import { Mail } from 'lucide-react'
-import SectionBadge from '~/shared/ui/section-badge'
 
 const Hero: React.FC = () => {
 	return (
@@ -49,10 +51,10 @@ const Hero: React.FC = () => {
 			</div>
 
 			<div className='flex items-center gap-2'>
-				<ContactButton />
+				<ContactButton size='lg' />
 
 				<Link href={ContactEnum.EMAIL} passHref>
-					<Button>
+					<Button size='lg'>
 						<Mail /> Email
 					</Button>
 				</Link>
