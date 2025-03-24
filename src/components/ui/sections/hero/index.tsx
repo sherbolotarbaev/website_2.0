@@ -15,7 +15,7 @@ import { Mail } from 'lucide-react'
 const Hero: React.FC = () => {
 	return (
 		<section className='space-y-6'>
-			<div className='space-y-3'>
+			<div className='space-y-4'>
 				<Link href='/cv/sherbolot-arbaev.pdf' target='_blank' passHref>
 					<SectionBadge className='w-fit flex items-center gap-1'>
 						Open to Opportunities{' '}
@@ -24,21 +24,18 @@ const Hero: React.FC = () => {
 				</Link>
 
 				<h1
-					className='text-[1.35rem] sm:text-2xl font-semibold tracking-tight'
+					className='text-3xl sm:text-4xl md:text-5xl tracking-tighter font-semibold'
 					style={euclidSemiBold.style}
 				>
-					<span className='flex items-center gap-2'>
-						Sher Arbaev
-						<b>|</b>
-						<RotatingTextAnimation
-							words={[
-								'NodeJS Developer',
-								'Development Lead',
-								'Software Engineer',
-								'Software Strategist',
-							]}
-						/>
-					</span>
+					<span>Sher Arbaev</span>
+					<RotatingTextAnimation
+						words={[
+							'NodeJS Developer',
+							'Development Lead',
+							'Software Engineer',
+							'Software Strategist',
+						]}
+					/>
 				</h1>
 
 				<p className='leading-relaxed'>

@@ -12,7 +12,7 @@ export default function HomeClient() {
 	return (
 		<>
 			<div
-				ref={containerRef}
+				// ref={containerRef}
 				className='container py-8 bg-background rounded-[32px] space-y-16'
 			>
 				<Hero />

@@ -48,18 +48,16 @@ const BlogPosts: React.FC<BlogPostsProps> = ({ blogPosts }) => {
 }
 
 const BlogPostCard: React.FC<{ post: TBlogPost; index: number }> = ({
-	post,
-	index,
-}) => {
-	const ref = useRef(null)
-	const isInView = useInView(ref, { once: true, amount: 0.2 })
-
-	const {
+	post: {
 		slug,
 		metadata: { title, image, publishedAt },
 		content,
 		blurDataUrl,
-	} = post
+	},
+	index,
+}) => {
+	const ref = useRef(null)
+	const isInView = useInView(ref, { once: true, amount: 0.2 })
 
 	const formattedDate = formatDate(new Date(publishedAt), 'MMM dd, yyyy')
 	const readingTime = Math.ceil(content.split(' ').length / 200)

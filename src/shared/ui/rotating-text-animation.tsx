@@ -1,5 +1,6 @@
 'use client'
 
+import { motion } from 'framer-motion'
 import type React from 'react'
 import { useEffect, useState } from 'react'
 
@@ -17,51 +18,41 @@ const RotatingTextAnimation: React.FC<RotatingTextAnimationProps> = ({
 	const [currentIndex, setCurrentIndex] = useState(0)
 
 	useEffect(() => {
-		const interval = setInterval(() => {
-			setCurrentIndex(prevIndex => (prevIndex + 1) % words.length)
+		const timeoutId = setTimeout(() => {
+			if (currentIndex === words.length - 1) {
+				setCurrentIndex(0)
+			} else {
+				setCurrentIndex(currentIndex + 1)
+			}
 		}, duration * 1000)
-
-		return () => clearInterval(interval)
-	}, [words, duration])
-
-	const getItemStyle = (index: number) => {
-		const diff = (index - currentIndex + words.length) % words.length
-		let rotateX = 0
-		let opacity = 0
-		let translateZ = 0
-
-		if (diff === 0) {
-			rotateX = 0
-			opacity = 1
-			translateZ = 20
-		} else if (diff === 1 || diff === words.length - 1) {
-			rotateX = diff === 1 ? 40 : -40
-			opacity = 0
-			translateZ = 10
-		}
-
-		return {
-			transform: `rotateX(${rotateX}deg) translateZ(${translateZ}px)`,
-			opacity,
-		}
-	}
+		return () => clearTimeout(timeoutId)
+	}, [currentIndex, words])
 
 	return (
-		<div className='relative h-[1.5em] w-62 text-nowrap perspective-[500px]'>
+		<span className='relative flex justify-start w-full overflow-hidden pt-1 pb-1 md:pb-2 md:pt-2'>
+			&nbsp;
 			{words.map((word, index) => (
-				<div
-					key={word}
-					className='absolute inset-0 flex items-center justify-start transition-all duration-500 ease-in-out backface-hidden'
-					style={{
-						...getItemStyle(index),
-						transformOrigin: 'center bottom',
-					}}
+				<motion.span
+					key={index}
+					className='absolute text-nowrap'
+					initial={{ opacity: 0, y: '-100' }}
+					transition={{ type: 'spring', stiffness: 50 }}
+					animate={
+						currentIndex === index
+							? {
+									y: 0,
+									opacity: 1,
+							  }
+							: {
+									y: currentIndex > index ? -150 : 150,
+									opacity: 0,
+							  }
+					}
 				>
-					{word}
-					<IndigoDot />
-				</div>
+					{word} <IndigoDot />
+				</motion.span>
 			))}
-		</div>
+		</span>
 	)
 }
 

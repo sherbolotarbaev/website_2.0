@@ -79,8 +79,6 @@ export default async function BlogPost({ params }: Readonly<BlogPostProps>) {
 	const distance = formatDistanceToNow(new Date(publishedAt), {
 		addSuffix: true,
 	})
-	const readingTime = Math.ceil(content.split(' ').length / 200)
-	const blurDataURL = image && (await getBase64(image))
 
 	const jsonLd = {
 		'@context': 'https://schema.org',
@@ -97,14 +95,13 @@ export default async function BlogPost({ params }: Readonly<BlogPostProps>) {
 			'@type': 'Person',
 			name: author,
 		},
-		timeRequired: `PT${readingTime}M`,
 	}
 
 	return (
 		<>
 			<div className='container py-8 bg-background rounded-[32px]'>
 				<Script
-					id='blog-post-schema'
+					id={`blog-post-${slug}-schema`}
 					type='application/ld+json'
 					strategy='beforeInteractive'
 					dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -130,7 +127,7 @@ export default async function BlogPost({ params }: Readonly<BlogPostProps>) {
 								src={image}
 								alt={title}
 								placeholder='blur'
-								blurDataURL={blurDataURL}
+								blurDataURL={await getBase64(image)}
 								aspectRatio={2 / 1}
 							/>
 						)}

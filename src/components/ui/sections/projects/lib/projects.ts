@@ -9,6 +9,22 @@ export type TProject = {
 
 export const projects: TProject[] = [
 	{
+		title: 'GIT Ingest (Node.js)',
+		description:
+			'Turn any Git repository into a prompt-friendly text ingest for LLMs.',
+		image: '/images/git_ingest.png',
+		repo: 'https://github.com/sherbolotarbaev/git_ingest',
+		technologies: ['Node.js', 'TypeScript', 'Git'],
+	},
+	{
+		title: 'Fastest API with Deno 2.0 & Hono.js',
+		description:
+			'This project showcases a performant API built with Deno 2.0 and Hono.js.',
+		image: '/images/deno_honojs.png',
+		repo: 'https://github.com/sherbolotarbaev/deno-hono',
+		technologies: ['Deno 2.0', 'TypeScript', 'Hono.js', 'Zod'],
+	},
+	{
 		title: 'ChinaTradeX',
 		description:
 			'Platform for seamless China-world trade with real-time order tracking and logistics management.',
@@ -48,13 +64,5 @@ export const projects: TProject[] = [
 		image: '/images/nestjs_fastify.png',
 		repo: 'https://github.com/sherbolotarbaev/NestFastifyApp',
 		technologies: ['Nest.js', 'TypeScript', 'Prisma', 'Fastify'],
-	},
-	{
-		title: 'Fastest API with Deno 2.0 & Hono.js',
-		description:
-			'This project showcases a performant API built with Deno 2.0 and Hono.js. It includes message handling, caching, validation, and security features.',
-		image: '/images/deno_honojs.png',
-		repo: 'https://github.com/sherbolotarbaev/deno-hono',
-		technologies: ['Deno 2.0', 'TypeScript', 'Hono.js', 'Zod'],
 	},
 ]
