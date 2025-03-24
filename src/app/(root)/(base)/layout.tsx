@@ -14,11 +14,12 @@ export default function BaseLayout({ children }: Readonly<BaseLayoutProps>) {
 			data-vaul-drawer-wrapper=''
 			className='bg-background rounded-t-none custom-drawer-wrapper'
 		>
+			<ContactModal />
+
 			<Header />
-			<main className='mt-4 mb-8'>{children}</main>
+			<main className='mb-8'>{children}</main>
 			<Footer />
 
-			<ContactModal />
 			<Toaster />
 		</div>
 	)

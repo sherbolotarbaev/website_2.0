@@ -1,10 +1,10 @@
 import type React from 'react'
 
 import Link from 'next/link'
+import RainbowButton from 'shared/ui/button/rainbow'
 import { ContactSubmitButton as ContactButton } from 'shared/ui/contact/button'
 import RotatingTextAnimation from 'shared/ui/rotating-text-animation'
 import SectionBadge from 'shared/ui/section-badge'
-import { Button } from 'ui/button'
 
 import { ContactEnum } from 'config/contact'
 import { euclidSemiBold } from 'fonts'
@@ -51,9 +51,9 @@ const Hero: React.FC = () => {
 				<ContactButton size='lg' />
 
 				<Link href={ContactEnum.EMAIL} passHref>
-					<Button size='lg'>
+					<RainbowButton size='lg'>
 						<Mail /> Email
-					</Button>
+					</RainbowButton>
 				</Link>
 			</div>
 		</section>

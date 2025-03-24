@@ -1,13 +1,13 @@
 'use client'
 
-import { useMouseAnimation } from 'hooks/use-mouse-animation'
+// import { useMouseAnimation } from 'hooks/use-mouse-animation'
 
 import Hero from 'ui/sections/hero'
 import Projects from 'ui/sections/projects'
 import Work from 'ui/sections/work'
 
 export default function HomeClient() {
-	const containerRef = useMouseAnimation()
+	// const containerRef = useMouseAnimation()
 
 	return (
 		<>
