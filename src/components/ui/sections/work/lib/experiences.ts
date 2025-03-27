@@ -5,9 +5,9 @@ export type TPosition = {
 		endDate: string | 'Present'
 		duration?: string
 	}
-	description: string
+	description?: string
 	covers?: string[]
-	skills: string[]
+	skills?: string[]
 }
 
 export type TExperience = {
@@ -32,6 +32,13 @@ export const experiences: TExperience[] = [
 		location: 'Chicago, Illinois, United States • Remote',
 		url: 'https://www.wedevx.co',
 		positions: [
+			{
+				title: 'Lead Software Development Engineer',
+				period: {
+					startDate: '2025-02-01',
+					endDate: 'Present',
+				},
+			},
 			{
 				title: 'Software Development Engineer II',
 				period: {

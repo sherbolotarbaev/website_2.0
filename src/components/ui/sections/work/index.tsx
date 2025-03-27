@@ -123,12 +123,14 @@ const Experience: React.FC<TExperience> = ({
 								</span>
 							</div>
 
-							<p
-								className='leading-relaxed'
-								dangerouslySetInnerHTML={{
-									__html: description,
-								}}
-							/>
+							{description && (
+								<p
+									className='leading-relaxed'
+									dangerouslySetInnerHTML={{
+										__html: description,
+									}}
+								/>
+							)}
 
 							{covers && covers.length > 0 && (
 								<motion.div
@@ -151,20 +153,22 @@ const Experience: React.FC<TExperience> = ({
 								</motion.div>
 							)}
 
-							<motion.div
-								className='flex flex-wrap gap-2 mt-4'
-								initial={{ opacity: 0, y: 10 }}
-								animate={
-									isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }
-								}
-								transition={{ duration: 0.5, delay: posIndex * 0.1 + 0.3 }}
-							>
-								{skills.map((skill, skillIndex) => (
-									<Badge key={skillIndex} variant='secondary'>
-										{skill}
-									</Badge>
-								))}
-							</motion.div>
+							{skills && skills.length > 0 && (
+								<motion.div
+									className='flex flex-wrap gap-2 mt-4'
+									initial={{ opacity: 0, y: 10 }}
+									animate={
+										isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }
+									}
+									transition={{ duration: 0.5, delay: posIndex * 0.1 + 0.3 }}
+								>
+									{skills.map((skill, skillIndex) => (
+										<Badge key={skillIndex} variant='secondary'>
+											{skill}
+										</Badge>
+									))}
+								</motion.div>
+							)}
 						</motion.div>
 					)
 				)}
