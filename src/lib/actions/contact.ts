@@ -24,10 +24,17 @@ export async function newMessage(
 	const BOT_TOKEN = process.env.TELEGRAM_BOT_API_KEY
 	const CHAT_ID = process.env.TELEGRAM_BOT_CHAT_ID
 
-	if (!BOT_TOKEN || !CHAT_ID) {
+	if (!BOT_TOKEN) {
 		return {
 			status: 'error',
-			reason: 'Invalid Telegram Bot Token or Chat ID.',
+			reason: '`TELEGRAM_BOT_API_KEY` is not defined in environment variables.',
+		}
+	}
+
+	if (!CHAT_ID) {
+		return {
+			status: 'error',
+			reason: '`TELEGRAM_BOT_CHAT_ID` is not defined in environment variables.',
 		}
 	}
 
