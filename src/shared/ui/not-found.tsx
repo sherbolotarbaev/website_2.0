@@ -2,11 +2,18 @@
 
 import type React from 'react'
 
-import { Player } from '@lottiefiles/react-lottie-player'
+import dynamic from 'next/dynamic'
 import Link from 'next/link'
 import RainbowButton from './button/rainbow'
 
 import { ContactEnum } from 'config/contact'
+
+const Player = dynamic(
+	() => import('@lottiefiles/react-lottie-player').then(mod => mod.Player),
+	{
+		ssr: false,
+	}
+)
 
 const NotFound: React.FC = () => {
 	return (
