@@ -17,8 +17,8 @@ import {
 	CardHeader,
 	CardTitle,
 } from 'ui/card'
+import { GlowingEffect } from 'ui/glowing-effect'
 
-import { euclidSemiBold } from 'fonts'
 import { cn } from 'utils'
 import { projects, type TProject } from './lib/projects'
 
@@ -32,7 +32,6 @@ const Projects: React.FC = () => {
 		<section ref={ref} className='space-y-8'>
 			<motion.h1
 				className='text-2xl font-semibold tracking-tight'
-				style={euclidSemiBold.style}
 				initial={{ opacity: 0, y: 20 }}
 				animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
 				transition={{ duration: 0.5 }}
@@ -69,8 +68,17 @@ const ProjectCard: React.FC<TProject & { index: number }> = ({
 			initial={{ opacity: 0, y: 20 }}
 			animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
 			transition={{ duration: 0.5, delay: index * 0.1 }}
+			className='relative rounded-3xl'
 		>
-			<Card className='rounded-3xl overflow-hidden shadow-none bg-accent/40 flex flex-col group'>
+			<GlowingEffect
+				spread={40}
+				glow={true}
+				disabled={false}
+				proximity={64}
+				inactiveZone={0.01}
+				borderWidth={1.5}
+			/>
+			<Card className='rounded-3xl overflow-hidden shadow-none bg-accent/40 flex flex-col group h-full'>
 				<CardHeader className='p-0 border-b'>
 					<div className='relative'>
 						<ImageThumbnail
@@ -98,7 +106,7 @@ const ProjectCard: React.FC<TProject & { index: number }> = ({
 					</div>
 				</CardHeader>
 				<CardContent className='p-6 bg-background pb-0 rounded-b-3xl shadow-sm'>
-					<CardTitle className='text-xl font-semibold mb-2'>{title}</CardTitle>
+					<CardTitle className='text-lg font-semibold mb-2'>{title}</CardTitle>
 					<CardDescription className='text-sm text-muted-foreground mb-4'>
 						{description}
 					</CardDescription>

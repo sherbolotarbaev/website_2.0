@@ -84,7 +84,7 @@ const BlogPostCard: React.FC<{ post: TBlogPost; index: number }> = ({
 					</CardHeader>
 
 					<CardContent className='p-4 pb-2'>
-						<CardTitle className='text-xl font-semibold line-clamp-2'>
+						<CardTitle className='text-lg font-semibold line-clamp-2'>
 							{title}
 						</CardTitle>
 
@@ -130,7 +130,7 @@ export const BlogPostMeta: React.FC<BlogPostMetaProps> = memo(
 		]
 
 		return (
-			<span className='text-xs text-muted-foreground'>
+			<span className='text-sm text-muted-foreground'>
 				{metaItems.map(item => item.text).join(' • ')}
 			</span>
 		)

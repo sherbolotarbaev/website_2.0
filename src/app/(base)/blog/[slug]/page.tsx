@@ -111,7 +111,9 @@ export default async function BlogPost({ params }: Readonly<BlogPostProps>) {
 
 				<article>
 					<header className='mb-8 flex flex-col gap-5'>
-						<h1 className='text-2xl sm:3xl md:text-4xl font-bold'>{title}</h1>
+						<h1 className='text-xl sm:text-2xl md:text-3xl font-bold'>
+							{title}
+						</h1>
 
 						<div className='flex justify-between items-center mb-4'>
 							<AuthorInfo author={author}>

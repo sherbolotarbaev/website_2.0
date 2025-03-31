@@ -5,7 +5,6 @@ import { forwardRef } from 'react'
 
 import { Drawer as DrawerPrimitive } from 'vaul'
 
-import { euclidSemiBold } from 'fonts'
 import { cn } from 'utils'
 
 const Drawer = ({
@@ -95,7 +94,6 @@ const DrawerTitle = forwardRef<
 			'text-xl font-semibold leading-none tracking-tight',
 			className
 		)}
-		style={euclidSemiBold.style}
 		{...props}
 	/>
 ))

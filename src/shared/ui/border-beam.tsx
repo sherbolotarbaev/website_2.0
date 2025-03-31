@@ -21,8 +21,8 @@ const BorderBeam: React.FC<BorderBeamProps> = ({
 	duration = 15,
 	anchor = 90,
 	borderWidth = 1,
-	colorFrom = '#ffaa40',
-	colorTo = '#9c40ff',
+	colorFrom = '#d79f1e',
+	colorTo = '#4c7894',
 	delay = 0,
 }) => {
 	return (

@@ -4,8 +4,7 @@ import type React from 'react'
 import { useEffect } from 'react'
 
 import { closeModal, ModalTypesEnum, openModal } from 'features/modal-slice'
-import { RootState } from 'lib/store'
-import { useDispatch, useSelector } from 'react-redux'
+import { useAppDispatch, useAppSelector } from 'lib/store'
 
 import BottomSheet from '../bottom.sheet'
 import { ContactButton } from './button'
@@ -14,8 +13,8 @@ import ContactForm from './form'
 import { socialMedia } from 'config/social-media'
 
 const ContactModal: React.FC = () => {
-	const dispatch = useDispatch()
-	const { isOpen, modalType } = useSelector((state: RootState) => state.modal)
+	const dispatch = useAppDispatch()
+	const { isOpen, modalType } = useAppSelector(state => state.modal)
 
 	useEffect(() => {
 		const checkHash = () => {

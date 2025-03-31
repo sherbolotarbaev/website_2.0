@@ -17,7 +17,7 @@ export default function BaseLayout({ children }: Readonly<BaseLayoutProps>) {
 			<ContactModal />
 
 			<Header />
-			<main className='mb-8'>{children}</main>
+			<main className='sm:mt-8 mb-8'>{children}</main>
 			<Footer />
 
 			<Toaster />

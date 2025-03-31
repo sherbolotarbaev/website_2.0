@@ -7,7 +7,6 @@ import { getBlogPosts } from 'lib/blog'
 import { getBase64 } from 'lib/blur-data-url'
 
 import { siteConfig } from 'config/site'
-import { euclidSemiBold } from 'fonts'
 
 export const metadata: Metadata = {
 	title: 'Blog',
@@ -39,10 +38,7 @@ export default async function Blog() {
 	return (
 		<>
 			<div className='container pt-8 pb-6 bg-background rounded-t-[32px] space-y-3'>
-				<h1
-					className='text-2xl font-semibold tracking-tight'
-					style={euclidSemiBold.style}
-				>
+				<h1 className='text-2xl font-semibold tracking-tight'>
 					Personal blog
 					<IndigoDot />
 				</h1>

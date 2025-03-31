@@ -17,7 +17,7 @@ export const projects: TProject[] = [
 		technologies: ['Node.js', 'TypeScript', 'Git'],
 	},
 	{
-		title: 'Fastest API with Deno 2.0 & Hono.js',
+		title: 'Fastest API (Deno 2.0)',
 		description:
 			'This project showcases a performant API built with Deno 2.0 and Hono.js.',
 		image: '/images/deno_honojs.png',

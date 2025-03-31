@@ -1,144 +1,59 @@
 'use client'
 
-// import Logo from 'shared/ui/logo'
-// import ModeToggle from 'ui/mode-toggle'
-// import NavLinks from './ui/nav-links'
-import Link from 'next/link'
-import { Dock, DockIcon, DockItem, DockLabel } from 'ui/dock'
-
-// import { useScrollVisibility } from 'hooks/use-scroll-visibility'
-import { ContactEnum } from 'config/contact'
-import { useTheme } from 'next-themes'
-import { usePathname } from 'next/navigation'
+import { ModalTypesEnum, openModal } from 'features/modal-slice'
+import { useAppDispatch } from 'lib/store'
+import type React from 'react'
 import { useMemo } from 'react'
-import { cn } from 'utils'
 
-import {
-	BookOpen,
-	HomeIcon,
-	Mail,
-	MessageCircle,
-	Sun,
-	SunMoon,
-} from 'lucide-react'
+import ExpandableTabs, { type TabItem } from 'ui/expandable-tabs'
 
-interface DockItem {
-	title: string
-	icon: React.ReactNode
-	href?: string
-	onClick?: () => void
-}
+import { PagesEnum } from 'config/pages'
 
-const DockIconWrapper = ({
-	icon,
-	isActive,
-}: {
-	icon: React.ReactNode
-	isActive?: boolean
-}) => (
-	<div className={cn('h-full w-full', isActive && 'text-white')}>{icon}</div>
-)
+import { Home, MessageCircle, Rss } from 'lucide-react'
 
-const Header = () => {
-	const { theme, setTheme } = useTheme()
-	const pathname = usePathname()
+const Header: React.FC = () => {
+	const dispatch = useAppDispatch()
 
-	const data = useMemo<DockItem[]>(
+	const handleContactClick = useMemo(
+		() => () => {
+			dispatch(openModal({ type: ModalTypesEnum.CONTACT }))
+		},
+		[dispatch]
+	)
+
+	const tabs = useMemo<TabItem[]>(
 		() => [
 			{
 				title: 'Home',
-				icon: <HomeIcon className='h-full w-full' />,
-				href: '/',
+				icon: Home,
+				href: PagesEnum.HOME,
+				'aria-label': 'Navigate to home page',
 			},
 			{
 				title: 'Blog',
-				icon: <BookOpen className='h-full w-full' />,
-				href: '/blog',
+				icon: Rss,
+				href: PagesEnum.BLOG,
+				'aria-label': 'Navigate to blog page',
 			},
+			{ type: 'separator' },
 			{
 				title: 'Contact',
-				icon: <MessageCircle className='h-full w-full' />,
+				icon: MessageCircle,
 				href: '#contact',
-				onClick: () => {
-					window.location.href = '#contact'
-				},
-			},
-			{
-				title: 'Email',
-				icon: <Mail className='h-full w-full' />,
-				href: ContactEnum.EMAIL,
-			},
-			{
-				title: 'Theme',
-				icon:
-					theme === 'dark' ? (
-						<Sun className='h-full w-full' />
-					) : (
-						<SunMoon className='h-full w-full' />
-					),
-				onClick: () => setTheme(theme === 'dark' ? 'light' : 'dark'),
+				onClick: handleContactClick,
+				'aria-label': 'Open contact modal',
 			},
 		],
-		[theme, setTheme]
+		[handleContactClick]
 	)
 
-	const isActive = (href?: string) => {
-		if (!href) return false
-		return href === '/' ? pathname === href : pathname.startsWith(href)
-	}
-
 	return (
-		// <header
-		// 	className={cn(
-		// 		'sticky top-0 left-0 right-0 z-40 w-full transition-all duration-300',
-		// 		isVisible ? 'translate-y-4' : '-translate-y-full'
-		// 	)}
-		// >
-		// 	<div className='h-16 container flex items-center'>
-		// 		<Logo />
-
-		// 		<NavLinks className='ml-4 flex flex-row' />
-
-		// 		<div className='flex flex-1 items-center justify-end'>
-		// 			<nav className='flex items-center gap-4'>
-		// 				<ModeToggle />
-		// 			</nav>
-		// 		</div>
-		// 	</div>
-		// </header>
-
-		<Dock className='fixed z-50 bottom-8 left-1/2 -translate-x-1/2 items-end pb-3 shadow-xl'>
-			{data.map((item, idx) => {
-				const dockItem = (
-					<DockItem
-						key={idx}
-						className={cn(
-							'aspect-square rounded-full bg-background',
-							isActive(item.href) && 'bg-indigo-500 text-white'
-						)}
-						onClick={item.onClick}
-					>
-						<DockLabel>{item.title}</DockLabel>
-						<DockIcon>
-							<DockIconWrapper
-								icon={item.icon}
-								isActive={isActive(item.href)}
-							/>
-						</DockIcon>
-					</DockItem>
-				)
-
-				if (item.href) {
-					return (
-						<Link key={idx} href={item.href} passHref>
-							{dockItem}
-						</Link>
-					)
-				}
-
-				return dockItem
-			})}
-		</Dock>
+		<header className='fixed bottom-0 z-50 w-full sm:sticky sm:top-4 sm:flex sm:justify-center'>
+			<ExpandableTabs
+				tabs={tabs}
+				className='rounded-t-2xl rounded-b-none p-2 sm:p-1.5 sm:rounded-2xl flex justify-center'
+			/>
+		</header>
 	)
 }
 

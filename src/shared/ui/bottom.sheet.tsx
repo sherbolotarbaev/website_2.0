@@ -4,15 +4,13 @@ import React from 'react'
 
 import { closeModal } from 'features/modal-slice'
 import { useMediaQuery } from 'hooks/use-media-query'
-import { useDispatch } from 'react-redux'
+import { useAppDispatch } from 'lib/store'
 
 import IndigoDot from 'shared/ui/indigo-dot'
 import { Button } from 'ui/button'
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from 'ui/dialog'
 import { Drawer, DrawerContent, DrawerHeader, DrawerTitle } from 'ui/drawer'
 import { ScrollArea } from 'ui/scroll-area'
-
-import { euclidMedium } from 'fonts'
 
 interface BottomSheetProps {
 	open?: boolean
@@ -30,7 +28,7 @@ const BottomSheet: React.FC<BottomSheetProps> = ({
 	title,
 }) => {
 	const isDesktop = useMediaQuery('(min-width: 768px)')
-	const dispatch = useDispatch()
+	const dispatch = useAppDispatch()
 	// const [snap, setSnap] = useState<number | string | null>(snapPoints[0])
 
 	if (isDesktop) {
@@ -40,7 +38,7 @@ const BottomSheet: React.FC<BottomSheetProps> = ({
 					<div className='flex flex-col max-h-[385px]'>
 						{title && (
 							<DialogHeader className='flex-shrink-0'>
-								<DialogTitle style={euclidMedium.style}>
+								<DialogTitle>
 									{title}
 									<IndigoDot />
 								</DialogTitle>
@@ -86,7 +84,7 @@ const BottomSheet: React.FC<BottomSheetProps> = ({
 								Cancel
 							</Button>
 
-							<DrawerTitle style={euclidMedium.style}>
+							<DrawerTitle>
 								{title}
 								<IndigoDot />
 							</DrawerTitle>

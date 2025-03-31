@@ -9,7 +9,7 @@ const Footer = () => {
 
 	return (
 		<footer className='w-full'>
-			<div className='w-full container flex h-24 flex-col gap-3'>
+			<div className='w-full container flex h-28 flex-col gap-3'>
 				<SocialMediaLinks />
 				<p className='text-sm font-medium'>
 					© {currentYear} Sherbolot Arbaev. All rights reserved.

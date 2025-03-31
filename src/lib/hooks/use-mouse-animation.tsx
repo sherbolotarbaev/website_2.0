@@ -1,9 +1,11 @@
 'use client'
 
 import { RefObject, useEffect, useRef } from 'react'
+import { useMediaQuery } from './use-media-query'
 
 function useMouseAnimation<T extends HTMLDivElement>(): RefObject<T | null> {
 	const elementRef = useRef<T>(null)
+	const isMobile = useMediaQuery('(max-width: 768px)')
 
 	useEffect(() => {
 		const handleMouseMove = (e: MouseEvent) => {
@@ -19,12 +21,16 @@ function useMouseAnimation<T extends HTMLDivElement>(): RefObject<T | null> {
 			elementRef.current.style.background = `radial-gradient(circle at var(--x) var(--y), transparent, rgba(99, 102, 241, 0.15) 0%, transparent 10%)`
 		}
 
-		document.addEventListener('mousemove', handleMouseMove)
+		if (!isMobile) {
+			document.addEventListener('mousemove', handleMouseMove)
+		}
 
 		return () => {
-			document.removeEventListener('mousemove', handleMouseMove)
+			if (!isMobile) {
+				document.removeEventListener('mousemove', handleMouseMove)
+			}
 		}
-	}, [])
+	}, [isMobile])
 
 	return elementRef
 }

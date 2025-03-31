@@ -7,7 +7,6 @@ import RotatingTextAnimation from 'shared/ui/rotating-text-animation'
 import SectionBadge from 'shared/ui/section-badge'
 
 import { ContactEnum } from 'config/contact'
-import { euclidSemiBold } from 'fonts'
 import { links } from './lib/links'
 
 import { Mail } from 'lucide-react'
@@ -23,10 +22,7 @@ const Hero: React.FC = () => {
 					</SectionBadge>
 				</Link>
 
-				<h1
-					className='text-3xl sm:text-4xl md:text-5xl tracking-tighter font-semibold'
-					style={euclidSemiBold.style}
-				>
+				<h1 className='text-3xl sm:text-4xl md:text-5xl tracking-tighter font-semibold'>
 					<span>Sher Arbaev</span>
 					<RotatingTextAnimation
 						words={[

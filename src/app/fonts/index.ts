@@ -1,21 +1,11 @@
-import localFont from 'next/font/local'
+import { IBM_Plex_Mono, IBM_Plex_Sans } from 'next/font/google'
 
-export const euclidMedium = localFont({
-	src: './Euclid Circular B Medium.ttf',
-	variable: '--font-euclid-medium',
+export const ibmPlexSans = IBM_Plex_Sans({
+	weight: ['400', '500', '600', '700'],
+	subsets: ['latin'],
 })
 
-export const euclidBold = localFont({
-	src: './Euclid Circular B Bold.ttf',
-	variable: '--font-euclid-bold',
-})
-
-export const euclidSemiBold = localFont({
-	src: './Euclid Circular B SemiBold.ttf',
-	variable: '--font-euclid-semibold',
-})
-
-export const euclidRegular = localFont({
-	src: './Euclid Circular B Regular.ttf',
-	variable: '--font-euclid-regular',
+export const ibmPlexMono = IBM_Plex_Mono({
+	weight: ['400', '500', '600', '700'],
+	subsets: ['latin'],
 })

@@ -1,4 +1,4 @@
-import '../globals.css'
+import './globals.css'
 
 import { siteConfig } from 'config/site'
 import type { Metadata, Viewport } from 'next'
@@ -7,6 +7,9 @@ import { Analytics } from '@vercel/analytics/react'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import TopLoadingBar from 'nextjs-toploader'
 import Providers from 'providers'
+
+import { ibmPlexMono, ibmPlexSans } from 'fonts'
+import { cn } from 'utils'
 
 export const metadata: Metadata = {
 	title: {
@@ -49,7 +52,13 @@ export default function RootLayout({
 	return (
 		<>
 			<html lang='en' suppressHydrationWarning>
-				<body className='min-h-screen antialiased bg-background'>
+				<body
+					className={cn(
+						ibmPlexSans.className,
+						ibmPlexMono.className,
+						'min-h-screen antialiased bg-background text-sm md:text-base'
+					)}
+				>
 					<TopLoadingBar
 						color='rgb(79 70 229)'
 						showSpinner={false}

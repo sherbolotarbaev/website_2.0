@@ -1,5 +1,5 @@
 export enum PagesEnum {
 	HOME = '/',
 	BLOG = '/blog',
-	GUESTBOOK = '/guestbook',
+	// GUESTBOOK = '/guestbook',
 }

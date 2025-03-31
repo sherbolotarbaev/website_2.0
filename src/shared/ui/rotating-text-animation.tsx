@@ -29,7 +29,7 @@ const RotatingTextAnimation: React.FC<RotatingTextAnimationProps> = ({
 	}, [currentIndex, words])
 
 	return (
-		<span className='relative flex justify-start w-full overflow-hidden pt-1 pb-1 md:pb-2 md:pt-2'>
+		<span className='relative flex justify-start w-full overflow-hidden pt-0.5 pb-0.5 md:pb-1 md:pt-1'>
 			&nbsp;
 			{words.map((word, index) => (
 				<motion.span
@@ -49,7 +49,8 @@ const RotatingTextAnimation: React.FC<RotatingTextAnimationProps> = ({
 							  }
 					}
 				>
-					{word} <IndigoDot />
+					{word}
+					<IndigoDot />
 				</motion.span>
 			))}
 		</span>

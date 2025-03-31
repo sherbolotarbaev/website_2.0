@@ -2,7 +2,7 @@
 
 import { VariantProps } from 'class-variance-authority'
 import { ModalTypesEnum, openModal } from 'features/modal-slice'
-import { useDispatch } from 'react-redux'
+import { useAppDispatch } from 'lib/store'
 
 import { Button, buttonVariants } from 'ui/button'
 
@@ -22,7 +22,7 @@ const ContactSubmitButton: React.FC<ContactButtonProps> = ({
 	icon,
 	...props
 }) => {
-	const dispatch = useDispatch()
+	const dispatch = useAppDispatch()
 
 	const handleOpenModal = () => {
 		dispatch(

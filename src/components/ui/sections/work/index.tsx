@@ -16,8 +16,6 @@ import {
 	type TExperience,
 } from './lib/experiences'
 
-import { euclidMedium, euclidSemiBold } from 'fonts'
-
 const Work: React.FC = () => {
 	const ref = useRef(null)
 	const isInView = useInView(ref, { once: true, amount: 0.1 })
@@ -26,7 +24,6 @@ const Work: React.FC = () => {
 		<section ref={ref} className='space-y-3'>
 			<motion.h1
 				className='text-2xl font-semibold tracking-tight'
-				style={euclidSemiBold.style}
 				initial={{ opacity: 0, y: 20 }}
 				animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
 				transition={{ duration: 0.5 }}
@@ -111,12 +108,7 @@ const Experience: React.FC<TExperience> = ({
 							)}
 
 							<div className='leading-relaxed mb-1'>
-								<h3
-									className='tracking-tight font-medium'
-									style={euclidMedium.style}
-								>
-									{title}
-								</h3>
+								<h3 className='tracking-tight font-medium'>{title}</h3>
 
 								<span className='text-sm text-muted-foreground'>
 									{period.startDate} - {period.endDate} · {period.duration}
