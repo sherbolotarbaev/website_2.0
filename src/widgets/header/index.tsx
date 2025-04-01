@@ -39,7 +39,7 @@ const Header: React.FC = () => {
 			{
 				title: 'Contact',
 				icon: MessageCircle,
-				href: '#contact',
+				// href: '#contact',
 				onClick: handleContactClick,
 				'aria-label': 'Open contact modal',
 			},
@@ -51,7 +51,7 @@ const Header: React.FC = () => {
 		<header className='fixed bottom-0 z-50 w-full sm:sticky sm:top-4 sm:flex sm:justify-center'>
 			<ExpandableTabs
 				tabs={tabs}
-				className='rounded-t-2xl rounded-b-none p-2 sm:p-1.5 sm:rounded-2xl flex justify-center'
+				className='rounded-t-2xl rounded-b-none py-4 sm:p-1.5 sm:rounded-2xl flex justify-center'
 			/>
 		</header>
 	)

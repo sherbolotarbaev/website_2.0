@@ -1,7 +1,6 @@
 'use client'
 
 import { AnimatePresence, motion, Variants } from 'framer-motion'
-import { useMediaQuery } from 'hooks/use-media-query'
 import { useOnClickOutside } from 'hooks/use-on-click-outside'
 import { usePathname } from 'next/navigation'
 import type React from 'react'
@@ -91,7 +90,6 @@ const ExpandableTabs: React.FC<ExpandableTabsProps> = memo(
 		const pathname = usePathname()
 		const [selected, setSelected] = useState<number | null>(null)
 		const outsideClickRef = useRef<HTMLDivElement>(null)
-		const isMobile = useMediaQuery('(max-width: 768px)')
 
 		const handleClickOutside = useCallback(() => {
 			setSelected(null)
@@ -128,8 +126,9 @@ const ExpandableTabs: React.FC<ExpandableTabsProps> = memo(
 						animate='animate'
 						custom={isActive}
 						onClick={() => {
-							handleSelect(index)
-							tab.onClick?.()
+							if (tab.onClick) {
+								tab.onClick()
+							} else handleSelect(index)
 						}}
 						transition={transition}
 						whileHover={HOVER_SCALE_ANIMATION}
@@ -143,7 +142,7 @@ const ExpandableTabs: React.FC<ExpandableTabsProps> = memo(
 						aria-label={ariaLabel}
 						aria-current={isActive ? 'page' : undefined}
 					>
-						<Icon size={isMobile ? 20 : 23} aria-hidden='true' />
+						<Icon size={23} aria-hidden='true' />
 						<AnimatePresence initial={false}>
 							{isActive && (
 								<motion.span
