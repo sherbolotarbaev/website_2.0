@@ -5,7 +5,7 @@ import { useMediaQuery } from 'hooks/use-media-query'
 import { useOnClickOutside } from 'hooks/use-on-click-outside'
 import { usePathname } from 'next/navigation'
 import type React from 'react'
-import { memo, useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import { memo, useCallback, useMemo, useRef, useState } from 'react'
 
 import Link from 'next/link'
 
@@ -32,13 +32,6 @@ interface Separator {
 }
 
 export type TabItem = Tab | Separator
-
-interface ExpandableTabsProps {
-	tabs: TabItem[]
-	className?: string
-	activeColor?: string
-	onChange?: (index: number | null) => void
-}
 
 const ANIMATIONS = {
 	spring: {
@@ -120,13 +113,13 @@ const MobileTab: React.FC<TabProps> = memo(
 						: 'text-muted-foreground active:text-foreground'
 				)}
 				aria-label={ariaLabel}
+				aria-current={isActive ? 'page' : undefined}
 			>
 				{isActive && (
 					<motion.div
 						layoutId='activeTab'
 						className='absolute -top-[1px] w-7 h-0.5 bg-primary rounded-xl'
 						transition={ANIMATIONS.spring}
-						style={{ transform: 'translateX(50%)' }}
 					/>
 				)}
 				<Icon aria-hidden='true' />
@@ -188,22 +181,26 @@ const DesktopTab: React.FC<TabProps> = memo(
 
 DesktopTab.displayName = 'DesktopTab'
 
-const ExpandableTabs: React.FC<ExpandableTabsProps> = memo(
-	({ tabs, className, activeColor = 'text-primary', onChange }) => {
+interface ExpandableNavTabsProps {
+	tabs: TabItem[]
+	className?: string
+	activeColor?: string
+	onChange?: (index: number | null) => void
+	enableMobile?: boolean
+}
+
+const ExpandableNavTabs: React.FC<ExpandableNavTabsProps> = memo(
+	({
+		tabs,
+		className,
+		activeColor = 'text-primary',
+		onChange,
+		enableMobile = true,
+	}) => {
 		const pathname = usePathname()
 		const [selected, setSelected] = useState<number | null>(null)
-		const [isLoaded, setIsLoaded] = useState(false)
 		const outsideClickRef = useRef<HTMLDivElement>(null)
-		const isMobile = useMediaQuery('(max-width: 768px)')
-
-		useEffect(() => {
-			// Set a small timeout to ensure all styles and animations are properly loaded
-			const timer = setTimeout(() => {
-				setIsLoaded(true)
-			}, 100)
-
-			return () => clearTimeout(timer)
-		}, [])
+		const isMobile = enableMobile ? useMediaQuery('(max-width: 768px)') : false
 
 		const handleClickOutside = useCallback(() => {
 			setSelected(null)
@@ -262,12 +259,8 @@ const ExpandableTabs: React.FC<ExpandableTabsProps> = memo(
 			[tabs, renderTab]
 		)
 
-		if (!isLoaded) {
-			return null
-		}
-
 		return (
-			<div
+			<nav
 				ref={outsideClickRef}
 				className={cn(
 					'relative flex items-center gap-2 rounded-2xl border border-zinc-200 dark:border-zinc-800 py-1.5 bg-background dark:bg-zinc-900 shadow-lg p-1.5',
@@ -276,14 +269,14 @@ const ExpandableTabs: React.FC<ExpandableTabsProps> = memo(
 					className
 				)}
 				role='navigation'
-				aria-label='Main navigation'
+				aria-label={isMobile ? 'Mobile navigation' : 'Desktop navigation'}
 			>
 				{renderedTabs}
-			</div>
+			</nav>
 		)
 	}
 )
 
-ExpandableTabs.displayName = 'ExpandableTabs'
+ExpandableNavTabs.displayName = 'ExpandableNavTabs'
 
-export default ExpandableTabs
+export default ExpandableNavTabs

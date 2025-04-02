@@ -6,7 +6,7 @@ import { useTheme } from 'next-themes'
 import type React from 'react'
 import { useMemo } from 'react'
 
-import ExpandableTabs, { type TabItem } from 'ui/expandable-tabs'
+import ExpandableNavTabs, { type TabItem } from './ui/expandable-nav-tabs'
 
 import { PagesEnum } from 'config/pages'
 
@@ -63,7 +63,7 @@ const Header: React.FC = () => {
 
 	return (
 		<header className='fixed bottom-2 w-full max-w-sm sm:max-w-none left-1/2 z-50 -translate-x-1/2 sm:left-auto sm:translate-x-0 sm:sticky sm:top-4 sm:flex sm:justify-center'>
-			<ExpandableTabs tabs={tabs} />
+			<ExpandableNavTabs tabs={tabs} />
 		</header>
 	)
 }
