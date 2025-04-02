@@ -46,11 +46,13 @@ const Header: React.FC = () => {
 			},
 			{ type: 'separator' },
 			{
+				title: 'Contact',
 				icon: MessageCircle,
 				onClick: handleContactClick,
 				'aria-label': 'Open contact modal',
 			},
 			{
+				title: theme === 'dark' ? 'Light' : 'Dark',
 				icon: theme === 'dark' ? Sun : Moon,
 				onClick: handleThemeChange,
 				'aria-label': 'Change theme',
@@ -60,11 +62,8 @@ const Header: React.FC = () => {
 	)
 
 	return (
-		<header className='fixed bottom-0 z-50 w-full sm:sticky sm:top-4 sm:flex sm:justify-center'>
-			<ExpandableTabs
-				tabs={tabs}
-				className='rounded-t-2xl rounded-b-none border-t sm:border border-zinc-200 dark:border-zinc-800 sm:rounded-b-2xl py-2 sm:py-1.5 flex justify-center w-full sm:w-auto'
-			/>
+		<header className='fixed bottom-2 w-full max-w-sm sm:max-w-none left-1/2 z-50 -translate-x-1/2 sm:left-auto sm:translate-x-0 sm:sticky sm:top-4 sm:flex sm:justify-center'>
+			<ExpandableTabs tabs={tabs} />
 		</header>
 	)
 }

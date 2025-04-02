@@ -1,17 +1,17 @@
 'use client'
 
 import { AnimatePresence, motion, type Variants } from 'framer-motion'
+import { useMediaQuery } from 'hooks/use-media-query'
 import { useOnClickOutside } from 'hooks/use-on-click-outside'
 import { usePathname } from 'next/navigation'
 import type React from 'react'
-import { memo, useCallback, useMemo, useRef, useState } from 'react'
+import { memo, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 
 import Link from 'next/link'
 
 import { cn } from 'utils'
 
 import type { LucideIcon } from 'lucide-react'
-import { useMediaQuery } from '~/lib/hooks/use-media-query'
 
 interface Tab {
 	title?: string
@@ -40,22 +40,32 @@ interface ExpandableTabsProps {
 	onChange?: (index: number | null) => void
 }
 
-const SPRING_ANIMATION = {
-	type: 'spring',
-	stiffness: 300,
-	damping: 20,
+const ANIMATIONS = {
+	spring: {
+		type: 'spring',
+		stiffness: 300,
+		damping: 20,
+	} as const,
+	hover: {
+		scale: 1.05,
+		transition: {
+			type: 'spring',
+			stiffness: 300,
+			damping: 20,
+		},
+	} as const,
+	tap: {
+		scale: 0.95,
+	} as const,
+	transition: {
+		delay: 0.1,
+		type: 'spring',
+		bounce: 0,
+		duration: 0.6,
+	},
 } as const
 
-const HOVER_SCALE_ANIMATION = {
-	scale: 1.05,
-	transition: SPRING_ANIMATION,
-} as const
-
-const TAP_SCALE_ANIMATION = {
-	scale: 0.95,
-} as const
-
-const buttonVariants = {
+const BUTTON_VARIANTS = {
 	initial: {
 		gap: 0,
 		paddingLeft: '.5rem',
@@ -68,15 +78,13 @@ const buttonVariants = {
 	}),
 } satisfies Variants
 
-const spanVariants = {
+const SPAN_VARIANTS = {
 	initial: { width: 0, opacity: 0 },
 	animate: { width: 'auto', opacity: 1 },
 	exit: { width: 0, opacity: 0 },
 } satisfies Variants
 
-const transition = { delay: 0.1, type: 'spring', bounce: 0, duration: 0.6 }
-
-const Separator = memo(() => (
+const Separator: React.FC = memo(() => (
 	<div
 		className='mx-1 h-[24px] w-[1.2px] bg-border'
 		aria-hidden='true'
@@ -86,12 +94,116 @@ const Separator = memo(() => (
 
 Separator.displayName = 'Separator'
 
+interface TabProps {
+	tab: Tab
+	isActive: boolean
+	activeColor: string
+	onSelect: () => void
+}
+
+const MobileTab: React.FC<TabProps> = memo(
+	({ tab, isActive, activeColor, onSelect }) => {
+		const Icon = tab.icon
+		const ariaLabel = tab['aria-label'] || tab.title
+
+		return (
+			<motion.button
+				onClick={() => {
+					if (tab.onClick) {
+						tab.onClick()
+					} else onSelect()
+				}}
+				className={cn(
+					'relative flex flex-col w-14 items-center justify-center rounded-xl px-3 pt-2.5 pb-1 transition-colors duration-300 [&_svg]:pointer-events-none [&_svg]:size- [&_svg]:shrink-0',
+					isActive
+						? activeColor
+						: 'text-muted-foreground active:text-foreground'
+				)}
+				aria-label={ariaLabel}
+			>
+				{isActive && (
+					<motion.div
+						layoutId='activeTab'
+						className='absolute -top-[1px] w-7 h-0.5 bg-primary rounded-xl'
+						transition={ANIMATIONS.spring}
+						style={{ transform: 'translateX(50%)' }}
+					/>
+				)}
+				<Icon aria-hidden='true' />
+				<span className='text-[0.6rem] tracking-tight'>{tab.title}</span>
+			</motion.button>
+		)
+	}
+)
+
+MobileTab.displayName = 'MobileTab'
+
+const DesktopTab: React.FC<TabProps> = memo(
+	({ tab, isActive, activeColor, onSelect }) => {
+		const Icon = tab.icon
+		const ariaLabel = tab['aria-label'] || tab.title
+
+		return (
+			<motion.button
+				variants={BUTTON_VARIANTS}
+				initial={false}
+				animate='animate'
+				custom={isActive}
+				onClick={() => {
+					if (tab.onClick) {
+						tab.onClick()
+					} else onSelect()
+				}}
+				transition={ANIMATIONS.transition}
+				whileHover={ANIMATIONS.hover}
+				whileTap={ANIMATIONS.tap}
+				className={cn(
+					'flex justify-center items-center rounded-xl px-4 py-2 text-md font-medium transition-colors duration-300 [&_svg]:pointer-events-none [&_svg]:size-6 [&_svg]:shrink-0',
+					isActive
+						? cn('bg-accent', activeColor)
+						: 'text-muted-foreground hover:bg-accent hover:text-foreground active:bg-accent active:text-foreground'
+				)}
+				aria-label={ariaLabel}
+				aria-current={isActive ? 'page' : undefined}
+			>
+				<Icon aria-hidden='true' />
+				<AnimatePresence initial={false}>
+					{isActive && tab.title && (
+						<motion.span
+							variants={SPAN_VARIANTS}
+							initial='initial'
+							animate='animate'
+							exit='exit'
+							transition={ANIMATIONS.transition}
+							className='overflow-hidden'
+						>
+							{tab.title}
+						</motion.span>
+					)}
+				</AnimatePresence>
+			</motion.button>
+		)
+	}
+)
+
+DesktopTab.displayName = 'DesktopTab'
+
 const ExpandableTabs: React.FC<ExpandableTabsProps> = memo(
 	({ tabs, className, activeColor = 'text-primary', onChange }) => {
 		const pathname = usePathname()
 		const [selected, setSelected] = useState<number | null>(null)
+		const [isLoaded, setIsLoaded] = useState(false)
 		const outsideClickRef = useRef<HTMLDivElement>(null)
 		const isMobile = useMediaQuery('(max-width: 768px)')
+
+		useEffect(() => {
+			// Set a small timeout to ensure all styles and animations are properly loaded
+			const timer = setTimeout(() => {
+				setIsLoaded(true)
+			}, 100)
+
+			return () => clearTimeout(timer)
+		}, [])
 
 		const handleClickOutside = useCallback(() => {
 			setSelected(null)
@@ -110,70 +222,33 @@ const ExpandableTabs: React.FC<ExpandableTabsProps> = memo(
 
 		const renderTab = useCallback(
 			(tab: Tab, index: number) => {
-				const isActive =
+				const isActive = Boolean(
 					selected === index ||
-					(tab.href &&
-						(tab.href === '/'
-							? pathname === tab.href
-							: pathname.startsWith(tab.href)))
-
-				const Icon = tab.icon
-				const ariaLabel = tab['aria-label'] || tab.title
-
-				const Tab = (
-					<motion.button
-						key={tab.title || tab.icon.name}
-						variants={!isMobile ? buttonVariants : undefined}
-						initial={false}
-						animate='animate'
-						custom={isActive}
-						onClick={() => {
-							if (tab.onClick) {
-								tab.onClick()
-							} else handleSelect(index)
-						}}
-						transition={!isMobile ? transition : undefined}
-						whileHover={HOVER_SCALE_ANIMATION}
-						whileTap={TAP_SCALE_ANIMATION}
-						className={cn(
-							'relative flex w-14 sm:w-auto justify-center items-center flex-col sm:flex-row rounded-xl p-3 sm:px-4 sm:py-2 text-md font-medium transition-colors duration-300 [&_svg]:pointer-events-none [&_svg]:size-6 [&_svg]:shrink-0',
-							isActive
-								? cn('bg-accent', activeColor)
-								: 'text-muted-foreground sm:hover:bg-accent sm:hover:text-foreground active:bg-accent active:text-foreground'
-						)}
-						aria-label={ariaLabel}
-						aria-current={isActive ? 'page' : undefined}
-					>
-						<Icon aria-hidden='true' />
-
-						<AnimatePresence initial={false}>
-							{isActive && !isMobile && tab.title && (
-								<motion.span
-									variants={spanVariants}
-									initial='initial'
-									animate='animate'
-									exit='exit'
-									transition={transition}
-									className='overflow-hidden'
-								>
-									{tab.title}
-								</motion.span>
-							)}
-						</AnimatePresence>
-					</motion.button>
+						(tab.href &&
+							(tab.href === '/'
+								? pathname === tab.href
+								: pathname.startsWith(tab.href)))
 				)
+
+				const TabComponent = isMobile ? MobileTab : DesktopTab
+				const tabProps = {
+					tab,
+					isActive,
+					activeColor,
+					onSelect: () => handleSelect(index),
+				}
 
 				if (tab.href) {
 					return (
 						<Link href={tab.href} key={tab.title} passHref>
-							{Tab}
+							<TabComponent {...tabProps} />
 						</Link>
 					)
 				}
 
-				return Tab
+				return <TabComponent key={tab.title || tab.icon.name} {...tabProps} />
 			},
-			[selected, pathname, handleSelect, activeColor]
+			[selected, pathname, handleSelect, activeColor, isMobile]
 		)
 
 		const renderedTabs = useMemo(
@@ -187,11 +262,17 @@ const ExpandableTabs: React.FC<ExpandableTabsProps> = memo(
 			[tabs, renderTab]
 		)
 
+		if (!isLoaded) {
+			return null
+		}
+
 		return (
 			<div
 				ref={outsideClickRef}
 				className={cn(
-					'flex flex-wrap items-center gap-2 rounded-2xl bg-background/80 dark:bg-zinc-900/80 backdrop-blur-[2.5rem] shadow-lg p-1.5',
+					'relative flex items-center gap-2 rounded-2xl border border-zinc-200 dark:border-zinc-800 py-1.5 bg-background dark:bg-zinc-900 shadow-lg p-1.5',
+					isMobile &&
+						'justify-around border-0 border-t px-2 py-0 rounded-3xl shadow-[0_4px_30px_rgba(0,0,0,1)]',
 					className
 				)}
 				role='navigation'
