@@ -5,6 +5,7 @@ import RainbowButton from 'shared/ui/button/rainbow'
 import { ContactSubmitButton as ContactButton } from 'shared/ui/contact/button'
 import RotatingTextAnimation from 'shared/ui/rotating-text-animation'
 import SectionBadge from 'shared/ui/section-badge'
+import { HoverPeek } from 'ui/link-preview'
 
 import { ContactEnum } from 'config/contact'
 import { links } from './lib/links'
@@ -65,11 +66,13 @@ interface HeroLinkProps {
 
 const HeroLink: React.FC<HeroLinkProps> = ({ href, children }) => {
 	return (
-		<Link
-			href={href}
-			className='font-semibold underline decoration-muted-foreground/50 hover:decoration-muted-foreground underline-offset-2'
-		>
-			{children}
-		</Link>
+		<HoverPeek url={href}>
+			<Link
+				href={href}
+				className='font-semibold underline decoration-muted-foreground/50 hover:decoration-muted-foreground underline-offset-2'
+			>
+				{children}
+			</Link>
+		</HoverPeek>
 	)
 }

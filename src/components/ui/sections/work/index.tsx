@@ -8,6 +8,7 @@ import Link from 'next/link'
 import ImageThumbnail from 'shared/ui/image.thumbnail'
 import IndigoDot from 'shared/ui/indigo-dot'
 import { Badge } from 'ui/badge'
+import { HoverPeek } from 'ui/link-preview'
 import { Separator } from 'ui/separator'
 
 import {
@@ -65,13 +66,15 @@ const Experience: React.FC<TExperience> = ({
 			transition={{ duration: 0.5 }}
 		>
 			<div className='mb-3'>
-				<Link
-					href={url}
-					target='_blank'
-					className='text-lg font-semibold tracking-tight mb-1 underline decoration-muted-foreground/50 hover:decoration-muted-foreground underline-offset-2'
-				>
-					{company}
-				</Link>
+				<HoverPeek url={url}>
+					<Link
+						href={url}
+						target='_blank'
+						className='text-lg font-semibold tracking-tight mb-1 underline decoration-muted-foreground/50 hover:decoration-muted-foreground underline-offset-2'
+					>
+						{company}
+					</Link>
+				</HoverPeek>
 
 				<div className='flex flex-col'>
 					<span className='text-sm text-muted-foreground'>

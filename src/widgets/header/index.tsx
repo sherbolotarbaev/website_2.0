@@ -35,6 +35,7 @@ const Header: React.FC = () => {
 			{
 				title: 'Home',
 				icon: Home,
+				// iconFilled: Home
 				href: PagesEnum.HOME,
 				'aria-label': 'Navigate to home page',
 			},

@@ -16,6 +16,7 @@ import type { LucideIcon } from 'lucide-react'
 interface Tab {
 	title?: string
 	icon: LucideIcon
+	iconFilled?: LucideIcon
 	type?: never
 	href?: string
 	onClick?: () => void
@@ -26,6 +27,7 @@ interface Separator {
 	type: 'separator'
 	title?: never
 	icon?: never
+	iconFilled?: never
 	href?: never
 	onClick?: never
 	'aria-label'?: never
@@ -96,7 +98,7 @@ interface TabProps {
 
 const MobileTab: React.FC<TabProps> = memo(
 	({ tab, isActive, activeColor, onSelect }) => {
-		const Icon = tab.icon
+		const Icon = isActive && tab.iconFilled ? tab.iconFilled : tab.icon
 		const ariaLabel = tab['aria-label'] || tab.title
 
 		return (

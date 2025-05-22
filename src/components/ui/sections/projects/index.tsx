@@ -18,6 +18,7 @@ import {
 	CardTitle,
 } from 'ui/card'
 import { GlowingEffect } from 'ui/glowing-effect'
+import { HoverPeek } from 'ui/link-preview'
 
 import { cn } from 'utils'
 import { projects, type TProject } from './lib/projects'
@@ -151,14 +152,16 @@ const ProjectButton: React.FC<ProjectButtonProps> = ({
 			)}
 			asChild
 		>
-			<Link
-				href={href}
-				target='_blank'
-				rel='noopener noreferrer'
-				aria-label={ariaLabel}
-			>
-				{children}
-			</Link>
+			<HoverPeek url={href}>
+				<Link
+					href={href}
+					target='_blank'
+					rel='noopener noreferrer'
+					aria-label={ariaLabel}
+				>
+					{children}
+				</Link>
+			</HoverPeek>
 		</Button>
 	)
 }
