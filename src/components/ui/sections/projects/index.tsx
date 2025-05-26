@@ -5,8 +5,9 @@ import type React from 'react'
 import { useRef } from 'react'
 
 import Link from 'next/link'
+import Dot from 'shared/ui/dot'
 import ImageThumbnail from 'shared/ui/image.thumbnail'
-import IndigoDot from 'shared/ui/indigo-dot'
+import BlurText from 'ui/animated-blur-text'
 import { Badge } from 'ui/badge'
 import { Button } from 'ui/button'
 import {
@@ -26,20 +27,18 @@ import { projects, type TProject } from './lib/projects'
 import { ExternalLink, Github } from 'lucide-react'
 
 const Projects: React.FC = () => {
-	const ref = useRef(null)
-	const isInView = useInView(ref, { once: true, amount: 0.1 })
-
 	return (
-		<section ref={ref} className='space-y-8'>
-			<motion.h1
-				className='text-2xl font-semibold tracking-tight'
-				initial={{ opacity: 0, y: 20 }}
-				animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-				transition={{ duration: 0.5 }}
-			>
-				Projects
-				<IndigoDot />
-			</motion.h1>
+		<section className='space-y-8'>
+			<h2 className='flex items-center gap-1 text-xl sm:text-2xl font-semibold tracking-tight'>
+				<BlurText
+					text='Projects'
+					delay={150}
+					animateBy='words'
+					direction='top'
+				/>
+				<Dot />
+			</h2>
+
 			<div className='grid grid-cols-1 gap-6 md:grid-cols-2'>
 				{projects.map((project, index) => (
 					<ProjectCard key={index} {...project} index={index} />

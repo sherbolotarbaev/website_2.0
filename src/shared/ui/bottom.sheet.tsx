@@ -6,7 +6,7 @@ import { closeModal } from 'features/modal-slice'
 import { useMediaQuery } from 'hooks/use-media-query'
 import { useAppDispatch } from 'lib/store'
 
-import IndigoDot from 'shared/ui/indigo-dot'
+import Dot from 'shared/ui/dot'
 import { Button } from 'ui/button'
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from 'ui/dialog'
 import { Drawer, DrawerContent, DrawerHeader, DrawerTitle } from 'ui/drawer'
@@ -40,7 +40,7 @@ const BottomSheet: React.FC<BottomSheetProps> = ({
 							<DialogHeader className='flex-shrink-0'>
 								<DialogTitle>
 									{title}
-									<IndigoDot />
+									<Dot />
 								</DialogTitle>
 							</DialogHeader>
 						)}
@@ -86,7 +86,7 @@ const BottomSheet: React.FC<BottomSheetProps> = ({
 
 							<DrawerTitle>
 								{title}
-								<IndigoDot />
+								<Dot />
 							</DrawerTitle>
 
 							<div className='w-12' />

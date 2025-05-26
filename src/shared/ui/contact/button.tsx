@@ -33,7 +33,7 @@ const ContactSubmitButton: React.FC<ContactButtonProps> = ({
 	}
 
 	return (
-		<Button variant='cool' onClick={handleOpenModal} {...props}>
+		<Button onClick={handleOpenModal} {...props}>
 			{icon ? icon : <MessageCircle />} {text}
 		</Button>
 	)
@@ -48,14 +48,13 @@ const ContactButton: React.FC<ContactButtonProps> = ({
 	if (link) {
 		return (
 			<Link href={link} target='_blank' passHref>
-				<Button
-					size='lg'
-					className='w-full py-6 px-4 border-0 justify-start gap-3 text-base rounded-none hover:bg-muted-foreground/10'
-					{...props}
-				>
-					<div className='bg-background dark:bg-muted p-1 rounded-sm'>
-						{icon || <Globe className='text-muted-foreground' />}
-					</div>
+				<Button size='lg' variant='outline' {...props}>
+					{icon || (
+						<div className='bg-background dark:bg-muted p-1 rounded-sm'>
+							<Globe className='text-muted-foreground' />
+						</div>
+					)}
+
 					{text}
 				</Button>
 			</Link>
@@ -63,7 +62,7 @@ const ContactButton: React.FC<ContactButtonProps> = ({
 	}
 
 	return (
-		<Button size='lg' className='rounded-xl' {...props}>
+		<Button variant='outline' {...props}>
 			{icon} {text}
 		</Button>
 	)

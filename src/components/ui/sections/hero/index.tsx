@@ -1,10 +1,10 @@
 import type React from 'react'
 
 import Link from 'next/link'
-import RainbowButton from 'shared/ui/button/rainbow'
-import { ContactSubmitButton as ContactButton } from 'shared/ui/contact/button'
+import { ContactButton, ContactSubmitButton } from 'shared/ui/contact/button'
 import RotatingTextAnimation from 'shared/ui/rotating-text-animation'
-import SectionBadge from 'shared/ui/section-badge'
+import SectionBadge, { StarIcon } from 'shared/ui/section-badge'
+import BlurText from 'ui/animated-blur-text'
 import { HoverPeek } from 'ui/link-preview'
 
 import { ContactEnum } from 'config/contact'
@@ -17,14 +17,21 @@ const Hero: React.FC = () => {
 		<section className='space-y-6'>
 			<div className='space-y-4'>
 				<Link href='/cv/sherbolot-arbaev.pdf' target='_blank' passHref>
-					<SectionBadge className='w-fit flex items-center gap-1'>
-						Open to Opportunities{' '}
-						<span className='text-indigo-500 font-normal'>• Read CV</span>
-					</SectionBadge>
+					<SectionBadge
+						className='w-fit flex items-center gap-1'
+						text='Open to Opportunities'
+						icon={<StarIcon />}
+					></SectionBadge>
 				</Link>
 
 				<h1 className='text-3xl sm:text-4xl md:text-5xl tracking-tighter font-semibold'>
-					<span>Sher Arbaev</span>
+					<BlurText
+						text='Sher Arbaev'
+						delay={150}
+						animateBy='words'
+						direction='top'
+					/>
+
 					<RotatingTextAnimation
 						words={[
 							'NodeJS Developer',
@@ -45,13 +52,8 @@ const Hero: React.FC = () => {
 			</div>
 
 			<div className='flex items-center gap-2'>
-				<ContactButton size='lg' />
-
-				<Link href={ContactEnum.EMAIL} passHref>
-					<RainbowButton size='lg'>
-						<Mail /> Email
-					</RainbowButton>
-				</Link>
+				<ContactSubmitButton size='lg' />
+				<ContactButton size='lg' link={ContactEnum.EMAIL} icon={<Mail />} />
 			</div>
 		</section>
 	)

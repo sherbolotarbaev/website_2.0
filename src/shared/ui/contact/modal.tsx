@@ -67,6 +67,7 @@ const ContactModal: React.FC = () => {
 						key={index}
 						text={name}
 						variant='outline'
+						className='w-full py-6 px-4 border-0 justify-start gap-3 text-base rounded-none hover:bg-muted-foreground/10'
 						link={href}
 					/>
 				))}

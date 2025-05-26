@@ -8,7 +8,7 @@ import { SpeedInsights } from '@vercel/speed-insights/next'
 import TopLoadingBar from 'nextjs-toploader'
 import Providers from 'providers'
 
-import { ibmPlexMono, ibmPlexSans } from 'fonts'
+import { geistMono, geistSans } from 'fonts'
 import { cn } from 'utils'
 
 export const metadata: Metadata = {
@@ -54,8 +54,8 @@ export default function RootLayout({
 			<html lang='en' suppressHydrationWarning>
 				<body
 					className={cn(
-						ibmPlexSans.className,
-						ibmPlexMono.className,
+						geistMono.className,
+						geistSans.className,
 						'min-h-screen antialiased bg-background text-sm md:text-base'
 					)}
 				>

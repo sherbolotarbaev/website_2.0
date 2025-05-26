@@ -109,7 +109,7 @@ const MobileTab: React.FC<TabProps> = memo(
 					} else onSelect()
 				}}
 				className={cn(
-					'relative flex flex-col w-14 items-center justify-center rounded-xl px-3 pt-2.5 pb-1 transition-colors duration-300 [&_svg]:pointer-events-none [&_svg]:size- [&_svg]:shrink-0',
+					'relative flex flex-col w-14 items-center justify-center rounded-xl px-3 pt-2.5 pb-1 transition-colors duration-300 [&_svg]:pointer-events-none [&_svg]:size-7 [&_svg]:shrink-0',
 					isActive
 						? activeColor
 						: 'text-muted-foreground active:text-foreground'
@@ -153,7 +153,7 @@ const DesktopTab: React.FC<TabProps> = memo(
 				whileHover={ANIMATIONS.hover}
 				whileTap={ANIMATIONS.tap}
 				className={cn(
-					'flex justify-center items-center rounded-xl px-4 py-2 text-md font-medium transition-colors duration-300 [&_svg]:pointer-events-none [&_svg]:size-6 [&_svg]:shrink-0',
+					'flex justify-center items-center rounded-full px-4 py-2 text-sm font-medium transition-colors duration-300 [&_svg]:pointer-events-none [&_svg]:size-5 [&_svg]:shrink-0',
 					isActive
 						? cn('bg-accent', activeColor)
 						: 'text-muted-foreground hover:bg-accent hover:text-foreground active:bg-accent active:text-foreground'
@@ -265,7 +265,7 @@ const ExpandableNavTabs: React.FC<ExpandableNavTabsProps> = memo(
 			<nav
 				ref={outsideClickRef}
 				className={cn(
-					'relative flex items-center gap-2 rounded-2xl border border-zinc-200 dark:border-zinc-800 py-1.5 bg-background dark:bg-zinc-900 shadow-lg p-1.5',
+					'relative flex items-center gap-2 rounded-full border border-zinc-200 dark:border-zinc-800 py-1.5 bg-background dark:bg-zinc-900 shadow-lg p-1.5',
 					isMobile &&
 						'justify-around border-0 border-t px-2 py-0 rounded-3xl shadow-[0_4px_30px_rgba(0,0,0,1)]',
 					className

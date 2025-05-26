@@ -5,8 +5,9 @@ import type React from 'react'
 import { Fragment, useRef } from 'react'
 
 import Link from 'next/link'
+import Dot from 'shared/ui/dot'
 import ImageThumbnail from 'shared/ui/image.thumbnail'
-import IndigoDot from 'shared/ui/indigo-dot'
+import BlurText from 'ui/animated-blur-text'
 import { Badge } from 'ui/badge'
 import { HoverPeek } from 'ui/link-preview'
 import { Separator } from 'ui/separator'
@@ -18,20 +19,17 @@ import {
 } from './lib/experiences'
 
 const Work: React.FC = () => {
-	const ref = useRef(null)
-	const isInView = useInView(ref, { once: true, amount: 0.1 })
-
 	return (
-		<section ref={ref} className='space-y-3'>
-			<motion.h1
-				className='text-2xl font-semibold tracking-tight'
-				initial={{ opacity: 0, y: 20 }}
-				animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-				transition={{ duration: 0.5 }}
-			>
-				Experience
-				<IndigoDot />
-			</motion.h1>
+		<section className='space-y-3'>
+			<h2 className='flex items-center gap-1 text-xl sm:text-2xl font-semibold tracking-tight'>
+				<BlurText
+					text='Experience'
+					delay={150}
+					animateBy='words'
+					direction='top'
+				/>
+				<Dot />
+			</h2>
 
 			<div className='flex flex-col'>
 				{formatExperiences(experiences).map((props, index) => (

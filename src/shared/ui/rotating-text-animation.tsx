@@ -4,7 +4,7 @@ import { motion } from 'framer-motion'
 import type React from 'react'
 import { useEffect, useState } from 'react'
 
-import IndigoDot from './indigo-dot'
+import Dot from './dot'
 
 interface RotatingTextAnimationProps {
 	words: string[]
@@ -50,7 +50,7 @@ const RotatingTextAnimation: React.FC<RotatingTextAnimationProps> = ({
 					}
 				>
 					{word}
-					<IndigoDot />
+					<Dot />
 				</motion.span>
 			))}
 		</span>

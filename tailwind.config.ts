@@ -95,10 +95,21 @@ export default {
 					'0%': { 'background-position': '0%' },
 					'100%': { 'background-position': '200%' },
 				},
+				highlight: {
+					'0%': { backgroundColor: 'transparent' },
+					'100%': { backgroundColor: 'var(--highlight)' },
+				},
+				flash: {
+					'0%': { backgroundColor: 'hsl(var(--card))' },
+					'50%': { backgroundColor: 'var(--highlight)' },
+					'100%': { backgroundColor: 'hsl(var(--card))' },
+				},
 			},
 			animation: {
 				'border-beam': 'border-beam calc(var(--duration)*1s) infinite linear',
 				rainbow: 'rainbow var(--speed, 2s) infinite linear',
+				highlight: 'highlight 0.6s ease forwards',
+				flash: 'flash 0.6s ease forwards',
 			},
 		},
 	},
